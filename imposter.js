@@ -1,1127 +1,290 @@
-const IMPOSTER_DATA = {
-  alltag: [
-    { word: 'Zahnbürste',    hint: 'Bürsten' },
-    { word: 'Kühlschrank',    hint: 'Frischhalten' },
-    { word: 'Wecker',          hint: 'Aufwachen' },
-    { word: 'Einkaufstasche',  hint: 'Tragen' },
-    { word: 'Schlüssel',       hint: 'Öffnen' },
-    { word: 'Kaffeetasse',     hint: 'Heiß' },
-    { word: 'Haustür',         hint: 'Eingang' },
-    { word: 'Briefkasten',     hint: 'Post' },
-    { word: 'Regenschirm',     hint: 'Nass' },
-    { word: 'Lichtschalter',   hint: 'Wand' },
-    { word: 'Handtuch',        hint: 'Trocknen' },
-    { word: 'Spülmaschine',    hint: 'Geschirr' },
-    { word: 'Mülleimer',       hint: 'Abfall' },
-    { word: 'Fernbedienung',   hint: 'Klicken' },
-    { word: 'Kopfkissen',      hint: 'Schlafen' },
-    { word: 'Geldbörse',       hint: 'Bezahlen' },
-    { word: 'Fahrradhelm',     hint: 'Schutz' },
-    { word: 'Joghurt',         hint: 'Milch' },
-    { word: 'Waschmaschine',   hint: 'Drehen' },
-    { word: 'Hausschuhe',      hint: 'Drinnen' },
-    { word: 'Klopapier',       hint: 'Bad' },
-    { word: 'Balkon',          hint: 'Draußen' },
-    { word: 'Parkplatz',       hint: 'Auto' },
-    { word: 'Supermarkt',      hint: 'Einkaufen' },
-    { word: 'Bushaltestelle',  hint: 'Warten' },
-    { word: 'Rezept',          hint: 'Kochen' },
-    { word: 'Trinkflasche',    hint: 'Wasser' },
-    { word: 'Lunchbox',        hint: 'Mittag' },
-    { word: 'Terminkalender',  hint: 'Planen' },
-    { word: 'Handy',           hint: 'Tippen' },
-    { word: 'Brotdose',        hint: 'Schule' },
-    { word: 'Kaffeemaschine',  hint: 'Morgen' },
-    { word: 'Toaster',         hint: 'Knusprig' },
-    { word: 'Mikrowelle',      hint: 'Aufwärmen' },
-    { word: 'Schneidebrett',   hint: 'Messer' },
-    { word: 'Pfanne',          hint: 'Braten' },
-    { word: 'Kochtopf',        hint: 'Kochen' },
-    { word: 'Gewürze',         hint: 'Würzen' },
-    { word: 'Tiefkühlpizza',   hint: 'Eingefroren' },
-    { word: 'Apfelsaft',       hint: 'Obst' },
-    { word: 'Fahrrad',         hint: 'Radeln' },
-    { word: 'Tankstelle',      hint: 'Benzin' },
-    { word: 'Bahnsteig',       hint: 'Zug' },
-    { word: 'Navi',            hint: 'Richtung' },
-    { word: 'Koffer',          hint: 'Reise' },
-    { word: 'Rucksack',        hint: 'Rücken' },
-    { word: 'Laptop',          hint: 'Tippen' },
-    { word: 'Drucker',         hint: 'Papier' },
-    { word: 'Kugelschreiber',  hint: 'Schreiben' },
-    { word: 'Haftnotiz',       hint: 'Kleben' },
-    { word: 'Feierabend',      hint: 'Schluss' },
-    { word: 'Krankenhaus',     hint: 'Krank' },
-    { word: 'Apotheke',        hint: 'Medikamente' },
-    { word: 'Post',            hint: 'Pakete' },
-    { word: 'Bank',            hint: 'Geld' },
-    { word: 'Sofa',            hint: 'Sitzen' },
-    { word: 'Schreibtisch',    hint: 'Arbeiten' },
-    { word: 'Regal',           hint: 'Bücher' },
-    { word: 'Badewanne',       hint: 'Baden' },
-    { word: 'Dusche',          hint: 'Waschen' },
-    { word: 'Spiegel',         hint: 'Spiegeln' },
-    { word: 'Vorhang',         hint: 'Fenster' },
-    { word: 'Teppich',         hint: 'Boden' },
-    { word: 'Blumentopf',      hint: 'Pflanze' },
-    { word: 'Nachttisch',      hint: 'Bett' },
-    { word: 'Spielkarten',     hint: 'Mischen' },
-    { word: 'Brettspiel',      hint: 'Spielen' },
-    { word: 'Kopfhörer',       hint: 'Musik' },
-    { word: 'Fernseher',       hint: 'Schauen' },
-    { word: 'Buch',            hint: 'Lesen' },
-    { word: 'Kino',            hint: 'Film' },
-    { word: 'Restaurant',      hint: 'Essen' },
-    { word: 'Café',            hint: 'Kaffee' },
-    { word: 'Einkaufszentrum', hint: 'Shoppen' },
-    { word: 'Sonnencreme',     hint: 'Sonne' },
-    { word: 'Gummistiefel',    hint: 'Regen' },
-    { word: 'Thermometer',     hint: 'Messen' },
-    { word: 'Pflaster',        hint: 'Wunde' },
-    { word: 'Brille',          hint: 'Sehen' },
-    { word: 'Sportschuhe',     hint: 'Laufen' },
-    { word: 'Fitnessstudio',   hint: 'Muskeln' },
-    { word: 'Spaziergang',     hint: 'Gehen' },
-    { word: 'Mülltrennung',    hint: 'Recyceln' },
-    { word: 'Gartenschlauch',  hint: 'Gießen' },
-    { word: 'Gartenmöbel',     hint: 'Terrasse' },
-    { word: 'Arzttermin',      hint: 'Warten' },
-    { word: 'Tablette',        hint: 'Schlucken' },
-    { word: 'Zeitschrift',     hint: 'Blättern' },
-    { word: 'Konferenzraum',   hint: 'Meeting' },
-    { word: 'Stempel',         hint: 'Abdruck' },
-    { word: 'Autoparkschein',  hint: 'Parkuhr' },
-    { word: 'Haltestelle',     hint: 'Bus' }
-  ],
-
-  tiere: [
-    { word: 'Elefant',         hint: 'Groß' },
-    { word: 'Giraffe',         hint: 'Hals' },
-    { word: 'Löwe',            hint: 'Mähne' },
-    { word: 'Pinguin',         hint: 'Eis' },
-    { word: 'Delfin',          hint: 'Springen' },
-    { word: 'Krokodil',        hint: 'Schnappen' },
-    { word: 'Gorilla',         hint: 'Klettern' },
-    { word: 'Zebra',           hint: 'Streifen' },
-    { word: 'Koala',           hint: 'Schlafen' },
-    { word: 'Känguru',         hint: 'Hüpfen' },
-    { word: 'Flamingo',        hint: 'Rosa' },
-    { word: 'Hai',             hint: 'Flosse' },
-    { word: 'Oktopus',         hint: 'Arme' },
-    { word: 'Schildkröte',     hint: 'Panzer' },
-    { word: 'Papagei',         hint: 'Sprechen' },
-    { word: 'Pferd',           hint: 'Reiten' },
-    { word: 'Kuh',             hint: 'Milch' },
-    { word: 'Schwein',         hint: 'Schlamm' },
-    { word: 'Schaf',           hint: 'Wolle' },
-    { word: 'Ziege',           hint: 'Meckern' },
-    { word: 'Huhn',            hint: 'Ei' },
-    { word: 'Ente',            hint: 'Quaken' },
-    { word: 'Hund',            hint: 'Bellen' },
-    { word: 'Katze',           hint: 'Schnurren' },
-    { word: 'Hase',            hint: 'Hoppeln' },
-    { word: 'Hamster',         hint: 'Backen' },
-    { word: 'Meerschweinchen', hint: 'Quietschen' },
-    { word: 'Goldfisch',       hint: 'Aquarium' },
-    { word: 'Adler',           hint: 'Fliegen' },
-    { word: 'Eule',            hint: 'Nacht' },
-    { word: 'Schwan',          hint: 'Weiß' },
-    { word: 'Storch',          hint: 'Baby' },
-    { word: 'Specht',          hint: 'Klopfen' },
-    { word: 'Schmetterling',   hint: 'Flügel' },
-    { word: 'Biene',           hint: 'Honig' },
-    { word: 'Ameise',          hint: 'Tragen' },
-    { word: 'Spinne',          hint: 'Netz' },
-    { word: 'Frosch',          hint: 'Quaken' },
-    { word: 'Schlange',        hint: 'Züngeln' },
-    { word: 'Eidechse',        hint: 'Schwanz' },
-    { word: 'Chamäleon',       hint: 'Farbe' },
-    { word: 'Igel',            hint: 'Stacheln' },
-    { word: 'Maulwurf',        hint: 'Graben' },
-    { word: 'Fuchs',           hint: 'Schlau' },
-    { word: 'Wolf',            hint: 'Heulen' },
-    { word: 'Bär',             hint: 'Honig' },
-    { word: 'Reh',             hint: 'Wald' },
-    { word: 'Wildschwein',     hint: 'Hauer' },
-    { word: 'Dachs',           hint: 'Streifen' },
-    { word: 'Biber',           hint: 'Dämme' },
-    { word: 'Otter',           hint: 'Schwimmen' },
-    { word: 'Seehund',         hint: 'Klatschen' },
-    { word: 'Walross',         hint: 'Zähne' },
-    { word: 'Eisbär',          hint: 'Arktis' },
-    { word: 'Polarfuchs',      hint: 'Weiß' },
-    { word: 'Rentier',         hint: 'Weihnachten' },
-    { word: 'Nashorn',         hint: 'Horn' },
-    { word: 'Flusspferd',      hint: 'Wasser' },
-    { word: 'Gepard',          hint: 'Schnell' },
-    { word: 'Leopard',         hint: 'Flecken' },
-    { word: 'Tiger',           hint: 'Streifen' },
-    { word: 'Puma',            hint: 'Springen' },
-    { word: 'Luchs',           hint: 'Pinselohren' },
-    { word: 'Kamel',           hint: 'Höcker' },
-    { word: 'Lama',            hint: 'Spucken' },
-    { word: 'Alpaka',          hint: 'Wolle' },
-    { word: 'Strauß',          hint: 'Laufen' },
-    { word: 'Pelikan',         hint: 'Schnabel' },
-    { word: 'Tukan',           hint: 'Bunt' },
-    { word: 'Kolibri',         hint: 'Klein' },
-    { word: 'Karpfen',         hint: 'Teich' },
-    { word: 'Lachs',           hint: 'Springen' },
-    { word: 'Wal',             hint: 'Riesig' },
-    { word: 'Tintenfisch',     hint: 'Tinte' },
-    { word: 'Seepferdchen',    hint: 'Aufrecht' },
-    { word: 'Krabbe',          hint: 'Seitlich' },
-    { word: 'Hummer',          hint: 'Rot' },
-    { word: 'Qualle',          hint: 'Durchsichtig' },
-    { word: 'Muschel',         hint: 'Strand' },
-    { word: 'Nashornkäfer',    hint: 'Gehörnt' },
-    { word: 'Marienkäfer',     hint: 'Punkte' },
-    { word: 'Libelle',         hint: 'Leuchten' },
-    { word: 'Grille',          hint: 'Zirpen' },
-    { word: 'Schnecke',        hint: 'Haus' },
-    { word: 'Regenwurm',       hint: 'Erde' },
-    { word: 'Fledermaus',      hint: 'Echolot' },
-    { word: 'Orang-Utan',      hint: 'Rot' },
-    { word: 'Schimpanse',      hint: 'Werkzeug' },
-    { word: 'Erdmännchen',     hint: 'Aufrecht' },
-    { word: 'Tapir',           hint: 'Rüssel' },
-    { word: 'Axolotl',         hint: 'Kiemen' },
-    { word: 'Koi',             hint: 'Bunt' }
-  ],
-
-  sehenswuerdigkeiten: [
-    { word: 'Eiffelturm',          hint: 'Eisen' },
-    { word: 'Kolosseum',           hint: 'Gladiatoren' },
-    { word: 'Chinesische Mauer',   hint: 'Lang' },
-    { word: 'Taj Mahal',           hint: 'Marmor' },
-    { word: 'Alhambra',            hint: 'Mosaik' },
-    { word: 'Machu Picchu',        hint: 'Berge' },
-    { word: 'Pyramiden',           hint: 'Wüste' },
-    { word: 'Akropolis',           hint: 'Hügel' },
-    { word: 'Stonehenge',          hint: 'Steine' },
-    { word: 'Big Ben',             hint: 'Tick' },
-    { word: 'Freiheitsstatue',     hint: 'Fackel' },
-    { word: 'Golden Gate',         hint: 'Brücke' },
-    { word: 'Burj Khalifa',        hint: 'Höchste' },
-    { word: 'Sagrada Familia',     hint: 'Baustelle' },
-    { word: 'Vatikan',             hint: 'Papst' },
-    { word: 'Notre-Dame',          hint: 'Feuer' },
-    { word: 'Louvre',              hint: 'Gemälde' },
-    { word: 'Brandenburger Tor',   hint: 'Berlin' },
-    { word: 'Neuschwanstein',      hint: 'Märchen' },
-    { word: 'Reichstag',           hint: 'Glas' },
-    { word: 'Kölner Dom',          hint: 'Spitzen' },
-    { word: 'Frauenkirche',        hint: 'München' },
-    { word: 'Schwarzwald',         hint: 'Kirsch' },
-    { word: 'Zugspitze',           hint: 'Gipfel' },
-    { word: 'Heidelberger Schloss',hint: 'Ruine' },
-    { word: 'Sylt',                hint: 'Insel' },
-    { word: 'Bodensee',            hint: 'Grenze' },
-    { word: 'Rheinfall',           hint: 'Wasserfall' },
-    { word: 'Matterhorn',          hint: 'Spitz' },
-    { word: 'Jungfrau',            hint: 'Gletscher' },
-    { word: 'Wiener Staatsoper',   hint: 'Oper' },
-    { word: 'Schönbrunn',          hint: 'Kaiser' },
-    { word: 'Prater',              hint: 'Riesenrad' },
-    { word: 'Pantheon',            hint: 'Kuppel' },
-    { word: 'Petersdom',           hint: 'Vatikan' },
-    { word: 'Trevi-Brunnen',       hint: 'Münze' },
-    { word: 'Schiefer Turm Pisa',  hint: 'Schief' },
-    { word: 'Venedig',             hint: 'Gondel' },
-    { word: 'Santorini',           hint: 'Blau' },
-    { word: 'Parthenon',           hint: 'Säulen' },
-    { word: 'Hagia Sophia',        hint: 'Kuppel' },
-    { word: 'Topkapi-Palast',      hint: 'Sultan' },
-    { word: 'Petra',               hint: 'Fels' },
-    { word: 'Angkor Wat',          hint: 'Tempel' },
-    { word: 'Fuji',                hint: 'Vulkan' },
-    { word: 'Verbotene Stadt',     hint: 'Kaiser' },
-    { word: 'Potala-Palast',       hint: 'Tibet' },
-    { word: 'Sydney Opera',        hint: 'Segel' },
-    { word: 'Ayers Rock',          hint: 'Rot' },
-    { word: 'Niagara',             hint: 'Wasserfall' },
-    { word: 'Grand Canyon',        hint: 'Tief' },
-    { word: 'Yellowstone',         hint: 'Geysir' },
-    { word: 'Times Square',        hint: 'Reklame' },
-    { word: 'Central Park',        hint: 'Stadtpark' },
-    { word: 'Empire State',        hint: 'Wolkenkratzer' },
-    { word: 'Buckingham Palast',   hint: 'Königin' },
-    { word: 'Tower Bridge',        hint: 'Klappen' },
-    { word: 'London Eye',          hint: 'Riesenrad' },
-    { word: 'Disneyland',          hint: 'Mäuse' },
-    { word: 'Versailles',          hint: 'Garten' },
-    { word: 'Moulin Rouge',        hint: 'Rot' },
-    { word: 'Arc de Triomphe',     hint: 'Bogen' },
-    { word: 'Atomium',             hint: 'Atom' },
-    { word: 'Windmühlen',          hint: 'Holland' },
-    { word: 'Kilimandscharo',      hint: 'Afrika' },
-    { word: 'Serengeti',           hint: 'Safari' },
-    { word: 'Kapstadt',            hint: 'Küste' },
-    { word: 'Amazon',              hint: 'Dschungel' },
-    { word: 'Iguazu',              hint: 'Wasserfälle' },
-    { word: 'Galapagos',           hint: 'Inseln' },
-    { word: 'Christusstatue',      hint: 'Rio' },
-    { word: 'Chichen Itza',        hint: 'Maya' },
-    { word: 'Teotihuacan',         hint: 'Azteken' },
-    { word: 'Hallstatt',           hint: 'Salz' },
-    { word: 'Plitvice',            hint: 'Seen' },
-    { word: 'Dubrovnik',           hint: 'Mauern' },
-    { word: 'Cinque Terre',        hint: 'Farbig' },
-    { word: 'Loch Ness',           hint: 'Monster' },
-    { word: 'Nordkap',             hint: 'Ende' }
-  ],
-
-  essen: [
-    { word: 'Lasagne',        hint: 'Schichten' },
-    { word: 'Sushi',          hint: 'Rollen' },
-    { word: 'Tiramisu',       hint: 'Kaffee' },
-    { word: 'Fondue',         hint: 'Schmelzen' },
-    { word: 'Döner',          hint: 'Drehen' },
-    { word: 'Schnitzel',      hint: 'Klopfen' },
-    { word: 'Brötchen',       hint: 'Aufschnitt' },
-    { word: 'Croissant',      hint: 'Butter' },
-    { word: 'Guacamole',      hint: 'Avocado' },
-    { word: 'Hummus',         hint: 'Kichererbsen' },
-    { word: 'Tacos',          hint: 'Mexiko' },
-    { word: 'Burger',         hint: 'Fleisch' },
-    { word: 'Pommes',         hint: 'Frittiert' },
-    { word: 'Pizza',          hint: 'Ofen' },
-    { word: 'Pasta',          hint: 'Nudeln' },
-    { word: 'Risotto',        hint: 'Reis' },
-    { word: 'Paella',         hint: 'Safran' },
-    { word: 'Tapas',          hint: 'Spanien' },
-    { word: 'Ramen',          hint: 'Brühe' },
-    { word: 'Dim Sum',        hint: 'Dämpfen' },
-    { word: 'Currywurst',     hint: 'Sauce' },
-    { word: 'Bratwurst',      hint: 'Grillen' },
-    { word: 'Leberkäse',      hint: 'Bayern' },
-    { word: 'Weißwurst',      hint: 'Süß' },
-    { word: 'Knödel',         hint: 'Rund' },
-    { word: 'Sauerkraut',     hint: 'Säuerlich' },
-    { word: 'Bretzel',        hint: 'Salz' },
-    { word: 'Pflaumenkuchen', hint: 'Blech' },
-    { word: 'Schwarzwälder',  hint: 'Kirschen' },
-    { word: 'Apfelstrudel',   hint: 'Wien' },
-    { word: 'Kaiserschmarrn', hint: 'Zerrissen' },
-    { word: 'Palatschinke',   hint: 'Dünn' },
-    { word: 'Waffel',         hint: 'Gitter' },
-    { word: 'Pancakes',       hint: 'Stapeln' },
-    { word: 'Smoothie',       hint: 'Mixen' },
-    { word: 'Limonade',       hint: 'Zitronen' },
-    { word: 'Eiskaffee',      hint: 'Kalt' },
-    { word: 'Milchshake',     hint: 'Eis' },
-    { word: 'Espresso',       hint: 'Klein' },
-    { word: 'Cappuccino',     hint: 'Schaum' },
-    { word: 'Latte Macchiato',hint: 'Schichten' },
-    { word: 'Tee',            hint: 'Aufgießen' },
-    { word: 'Glühwein',       hint: 'Winter' },
-    { word: 'Sangria',        hint: 'Wein' },
-    { word: 'Mojito',         hint: 'Minze' },
-    { word: 'Marmelade',      hint: 'Einkochen' },
-    { word: 'Nutella',        hint: 'Aufstreichen' },
-    { word: 'Honig',          hint: 'Biene' },
-    { word: 'Käsefondue',     hint: 'Schweiz' },
-    { word: 'Raclette',       hint: 'Schmelzen' },
-    { word: 'Grillplatte',    hint: 'Kohle' },
-    { word: 'Buffet',         hint: 'Auswahl' },
-    { word: 'Suppe',          hint: 'Schlurfen' },
-    { word: 'Salat',          hint: 'Grün' },
-    { word: 'Steak',          hint: 'Blutig' },
-    { word: 'Garnelen',       hint: 'Schalen' },
-    { word: 'Tofu',           hint: 'Soja' },
-    { word: 'Falafel',        hint: 'Frittiert' },
-    { word: 'Couscous',       hint: 'Nordafrika' },
-    { word: 'Quinoa',         hint: 'Südamerika' },
-    { word: 'Avocado',        hint: 'Kern' },
-    { word: 'Mango',          hint: 'Tropisch' },
-    { word: 'Ananas',         hint: 'Stachelig' },
-    { word: 'Wassermelone',   hint: 'Kerne' },
-    { word: 'Erdbeere',       hint: 'Rot' },
-    { word: 'Granatapfel',    hint: 'Körner' },
-    { word: 'Kokos',          hint: 'Palme' },
-    { word: 'Macaron',        hint: 'Farbe' },
-    { word: 'Eclair',         hint: 'Creme' },
-    { word: 'Muffin',         hint: 'Papier' },
-    { word: 'Brownie',        hint: 'Schokolade' },
-    { word: 'Cheesecake',     hint: 'Käse' },
-    { word: 'Sorbet',         hint: 'Gefroren' },
-    { word: 'Chips',          hint: 'Knabbern' },
-    { word: 'Popcorn',        hint: 'Kino' },
-    { word: 'Gummibärchen',   hint: 'Gummi' },
-    { word: 'Schokolade',     hint: 'Kakao' },
-    { word: 'Karamell',       hint: 'Verbrennen' },
-    { word: 'Marzipan',       hint: 'Mandeln' },
-    { word: 'Lebkuchen',      hint: 'Weihnachten' },
-    { word: 'Plätzchen',      hint: 'Backen' },
-    { word: 'Donut',          hint: 'Loch' },
-    { word: 'Bagel',          hint: 'Ring' },
-    { word: 'Wrap',           hint: 'Einrollen' }
-  ],
-
-  sport: [
-    { word: 'Elfmeter',          hint: 'Strafe' },
-    { word: 'Freistoß',          hint: 'Mauer' },
-    { word: 'Dribbling',         hint: 'Ball' },
-    { word: 'Aufschlag',         hint: 'Tennis' },
-    { word: 'Slalom',            hint: 'Stangen' },
-    { word: 'Abseits',           hint: 'Linie' },
-    { word: 'Hattrick',          hint: 'Drei' },
-    { word: 'Schiedsrichter',    hint: 'Pfeifen' },
-    { word: 'Gelbe Karte',       hint: 'Warnung' },
-    { word: 'Rote Karte',        hint: 'Raus' },
-    { word: 'Eckball',           hint: 'Ecke' },
-    { word: 'Einwurf',           hint: 'Seitenlinie' },
-    { word: 'Kopfball',          hint: 'Stirn' },
-    { word: 'Fallrückzieher',    hint: 'Akrobatik' },
-    { word: 'Torwart',           hint: 'Hände' },
-    { word: 'Sprinter',          hint: 'Schnell' },
-    { word: 'Staffel',           hint: 'Stab' },
-    { word: 'Weitsprung',        hint: 'Grube' },
-    { word: 'Hochsprung',        hint: 'Latte' },
-    { word: 'Diskus',            hint: 'Werfen' },
-    { word: 'Speerwurf',         hint: 'Speer' },
-    { word: 'Hammerwerfen',      hint: 'Kreis' },
-    { word: 'Marathon',          hint: '42km' },
-    { word: 'Triathlon',         hint: 'Drei' },
-    { word: 'Schwimmen',         hint: 'Bahn' },
-    { word: 'Radsport',          hint: 'Pedale' },
-    { word: 'Rudern',            hint: 'Riemen' },
-    { word: 'Kanu',              hint: 'Paddel' },
-    { word: 'Surfen',            hint: 'Welle' },
-    { word: 'Tauchen',           hint: 'Flasche' },
-    { word: 'Klettern',          hint: 'Griffe' },
-    { word: 'Bouldern',          hint: 'Abstürzen' },
-    { word: 'Ski alpin',         hint: 'Piste' },
-    { word: 'Langlauf',          hint: 'Loipe' },
-    { word: 'Biathlon',          hint: 'Schießen' },
-    { word: 'Eiskunstlauf',      hint: 'Pirouette' },
-    { word: 'Eishockey',         hint: 'Scheibe' },
-    { word: 'Curling',           hint: 'Schrubben' },
-    { word: 'Bobsport',          hint: 'Kanal' },
-    { word: 'Rodeln',            hint: 'Hang' },
-    { word: 'Basketball',        hint: 'Korb' },
-    { word: 'Volleyball',        hint: 'Netz' },
-    { word: 'Handball',          hint: 'Tor' },
-    { word: 'Rugby',             hint: 'Oval' },
-    { word: 'American Football', hint: 'Helm' },
-    { word: 'Baseball',          hint: 'Schlagstock' },
-    { word: 'Cricket',           hint: 'England' },
-    { word: 'Golf',              hint: 'Loch' },
-    { word: 'Tennis',            hint: 'Netz' },
-    { word: 'Tischtennis',       hint: 'Platte' },
-    { word: 'Badminton',         hint: 'Feder' },
-    { word: 'Squash',            hint: 'Wand' },
-    { word: 'Boxen',             hint: 'Handschuhe' },
-    { word: 'Ringen',            hint: 'Matte' },
-    { word: 'Judo',              hint: 'Wurf' },
-    { word: 'Karate',            hint: 'Kata' },
-    { word: 'Taekwondo',         hint: 'Fuß' },
-    { word: 'Fechten',           hint: 'Klinge' },
-    { word: 'Bogenschießen',     hint: 'Pfeil' },
-    { word: 'Reiten',            hint: 'Sattel' },
-    { word: 'Turnen',            hint: 'Reck' },
-    { word: 'Trampolinspringen', hint: 'Federn' },
-    { word: 'Wasserball',        hint: 'Becken' },
-    { word: 'Leichtathletik',    hint: 'Stadion' },
-    { word: 'Crossfit',          hint: 'Intensiv' },
-    { word: 'Yoga',              hint: 'Dehnen' },
-    { word: 'Pilates',           hint: 'Rumpf' },
-    { word: 'Zumba',             hint: 'Tanzen' },
-    { word: 'Spinning',          hint: 'Rad' },
-    { word: 'Krafttraining',     hint: 'Hanteln' },
-    { word: 'Wandern',           hint: 'Berge' },
-    { word: 'Joggen',            hint: 'Schuhe' },
-    { word: 'Nordic Walking',    hint: 'Stöcke' },
-    { word: 'Inlineskaten',      hint: 'Rollen' },
-    { word: 'Skateboard',        hint: 'Tricks' },
-    { word: 'BMX',               hint: 'Sprung' },
-    { word: 'Motocross',         hint: 'Schlamm' },
-    { word: 'Formel 1',          hint: 'Rennstrecke' },
-    { word: 'Dart',              hint: 'Scheibe' },
-    { word: 'Billard',           hint: 'Queue' },
-    { word: 'Bowling',           hint: 'Kegel' },
-    { word: 'Minigolf',          hint: 'Hindernis' },
-    { word: 'Schach',            hint: 'König' },
-    { word: 'Tauziehen',         hint: 'Seil' }
-  ],
-
-  filme: [
-    { word: 'Cliffhanger',       hint: 'Spannung' },
-    { word: 'Trailer',           hint: 'Vorschau' },
-    { word: 'Staffel',           hint: 'Serie' },
-    { word: 'Regie',             hint: 'Klappe' },
-    { word: 'Soundtrack',        hint: 'Musik' },
-    { word: 'Blockbuster',       hint: 'Kasse' },
-    { word: 'Sequel',            hint: 'Fortsetzung' },
-    { word: 'Prequel',           hint: 'Vorher' },
-    { word: 'Reboot',            hint: 'Neustart' },
-    { word: 'Spinoff',           hint: 'Ableger' },
-    { word: 'Cameo',             hint: 'Kurzauftritt' },
-    { word: 'Stuntman',          hint: 'Sprung' },
-    { word: 'CGI',               hint: 'Computer' },
-    { word: 'Greenscreen',       hint: 'Hintergrund' },
-    { word: 'Oscar',             hint: 'Statue' },
-    { word: 'Regisseur',         hint: 'Klappe' },
-    { word: 'Drehbuch',          hint: 'Text' },
-    { word: 'Kulisse',           hint: 'Bühnenbild' },
-    { word: 'Kameramann',        hint: 'Linse' },
-    { word: 'Schnitt',           hint: 'Schere' },
-    { word: 'Premiere',          hint: 'Roter Teppich' },
-    { word: 'Streaming',         hint: 'Online' },
-    { word: 'Netflix',           hint: 'Abo' },
-    { word: 'Binge-Watching',    hint: 'Durchschauen' },
-    { word: 'Spoiler',           hint: 'Verderben' },
-    { word: 'Plot Twist',        hint: 'Überraschung' },
-    { word: 'Antagonist',        hint: 'Böse' },
-    { word: 'Protagonist',       hint: 'Held' },
-    { word: 'Actionfilm',        hint: 'Explosion' },
-    { word: 'Horrorfilm',        hint: 'Angst' },
-    { word: 'Komödie',           hint: 'Lachen' },
-    { word: 'Romanze',           hint: 'Liebe' },
-    { word: 'Thriller',          hint: 'Nervös' },
-    { word: 'Dokumentation',     hint: 'Wahr' },
-    { word: 'Animation',         hint: 'Gezeichnet' },
-    { word: 'Musical',           hint: 'Singen' },
-    { word: 'Western',           hint: 'Cowboys' },
-    { word: 'Science-Fiction',   hint: 'Zukunft' },
-    { word: 'Fantasy',           hint: 'Magie' },
-    { word: 'Krimi',             hint: 'Mörder' },
-    { word: 'Biopic',            hint: 'Lebensgeschichte' },
-    { word: 'Kurzfilm',          hint: 'Kurz' },
-    { word: 'Serienfinale',      hint: 'Ende' },
-    { word: 'Pilotfolge',        hint: 'Anfang' },
-    { word: 'Flashback',         hint: 'Rückblende' },
-    { word: 'Monolog',           hint: 'Allein' },
-    { word: 'Nahaufnahme',       hint: 'Gesicht' },
-    { word: 'Zeitlupe',          hint: 'Langsam' },
-    { word: 'Zeitraffer',        hint: 'Schnell' },
-    { word: 'Voiceover',         hint: 'Stimme' },
-    { word: 'Untertitel',        hint: 'Text' },
-    { word: 'Outtakes',          hint: 'Panne' },
-    { word: 'Fantheorie',        hint: 'Spekulation' },
-    { word: 'Easter Egg',        hint: 'Versteckt' },
-    { word: 'Remake',            hint: 'Nochmal' },
-    { word: 'Franchise',         hint: 'Universum' },
-    { word: 'Crossover',         hint: 'Treffen' },
-    { word: 'Miniserie',         hint: 'Kurz' },
-    { word: 'Late Night Show',   hint: 'Nacht' },
-    { word: 'Talkshow',          hint: 'Sofa' },
-    { word: 'Gameshow',          hint: 'Gewinnen' },
-    { word: 'Casting Show',      hint: 'Jury' },
-    { word: 'Soap Opera',        hint: 'Drama' },
-    { word: 'Anime',             hint: 'Japan' },
-    { word: 'Sitcom',            hint: 'Lachen' },
-    { word: 'Mockumentary',      hint: 'Falsch' },
-    { word: 'True Crime',        hint: 'Mord' },
-    { word: 'Krimiserie',        hint: 'Detektiv' },
-    { word: 'Zeitreise',         hint: 'Vergangenheit' },
-    { word: 'Roboter',           hint: 'Maschine' },
-    { word: 'Alien',             hint: 'Außerirdisch' },
-    { word: 'Zombie',            hint: 'Untot' },
-    { word: 'Superheld',         hint: 'Kräfte' },
-    { word: 'Vampir',            hint: 'Blut' },
-    { word: 'Detektiv',          hint: 'Lupe' }
-  ],
-
-  urlaub: [
-    { word: 'Handgepäck',        hint: 'Gewicht' },
-    { word: 'Sonnenbrand',       hint: 'Rot' },
-    { word: 'Hotelzimmer',       hint: 'Schlüsselkarte' },
-    { word: 'Jetlag',            hint: 'Müde' },
-    { word: 'Reisepass',         hint: 'Stempel' },
-    { word: 'Visum',             hint: 'Erlaubnis' },
-    { word: 'Flughafen',         hint: 'Terminal' },
-    { word: 'Check-in',          hint: 'Schalter' },
-    { word: 'Boarding',          hint: 'Einsteigen' },
-    { word: 'Sicherheitskontrolle', hint: 'Scanner' },
-    { word: 'Duty-Free',         hint: 'Steuerfrei' },
-    { word: 'Abfluggate',        hint: 'Warten' },
-    { word: 'Landung',           hint: 'Aufsetzen' },
-    { word: 'Gepäckband',        hint: 'Drehen' },
-    { word: 'Koffer',            hint: 'Rollen' },
-    { word: 'Reiseversicherung', hint: 'Schutz' },
-    { word: 'Buchungsbestätigung',hint: 'Email' },
-    { word: 'Reisebüro',         hint: 'Katalog' },
-    { word: 'All-inclusive',     hint: 'Alles' },
-    { word: 'Halbpension',       hint: 'Frühstück' },
-    { word: 'Strandliege',       hint: 'Reservieren' },
-    { word: 'Sonnenschirm',      hint: 'Schatten' },
-    { word: 'Sandburg',          hint: 'Strand' },
-    { word: 'Schnorcheln',       hint: 'Maske' },
-    { word: 'Wasserrutsche',     hint: 'Nass' },
-    { word: 'Poolbar',           hint: 'Wasser' },
-    { word: 'Buffet',            hint: 'Auswahl' },
-    { word: 'Ausflug',           hint: 'Bus' },
-    { word: 'Stadtführung',      hint: 'Guide' },
-    { word: 'Souvenirs',         hint: 'Mitbringen' },
-    { word: 'Postkarte',         hint: 'Grüße' },
-    { word: 'Währung',           hint: 'Wechseln' },
-    { word: 'Trinkgeld',         hint: 'Kellner' },
-    { word: 'Mietwagen',         hint: 'Kaution' },
-    { word: 'Tanken',            hint: 'Voll' },
-    { word: 'Autobahn',          hint: 'Rasen' },
-    { word: 'Rastplatz',         hint: 'Pause' },
-    { word: 'Fähre',             hint: 'Übersetzen' },
-    { word: 'Kreuzfahrt',        hint: 'Schiff' },
-    { word: 'Kabinenkoffer',     hint: 'Bett' },
-    { word: 'Landausflug',       hint: 'Hafen' },
-    { word: 'Zelten',            hint: 'Zelt' },
-    { word: 'Campingplatz',      hint: 'Stellplatz' },
-    { word: 'Schlafsack',        hint: 'Warm' },
-    { word: 'Wanderung',         hint: 'Gipfel' },
-    { word: 'Bergbahn',          hint: 'Gondel' },
-    { word: 'Skipass',           hint: 'Piste' },
-    { word: 'Après-Ski',         hint: 'Hütte' },
-    { word: 'Winterurlaub',      hint: 'Schnee' },
-    { word: 'Sommerurlaub',      hint: 'Sonne' },
-    { word: 'Stadtreise',        hint: 'Museum' },
-    { word: 'Rucksackreise',     hint: 'Hostel' },
-    { word: 'Backpacker',        hint: 'Günstig' },
-    { word: 'Luxusresort',       hint: 'Teuer' },
-    { word: 'Wellnesshotel',     hint: 'Spa' },
-    { word: 'Massagen',          hint: 'Entspannen' },
-    { word: 'Sauna',             hint: 'Heiß' },
-    { word: 'Reiseführer',       hint: 'Buch' },
-    { word: 'Offline-Karte',     hint: 'Roaming' },
-    { word: 'Adapter',           hint: 'Stecker' },
-    { word: 'Mückenschutz',      hint: 'Spray' },
-    { word: 'Reiseapotheke',     hint: 'Tabletten' },
-    { word: 'Reisekrankenheit',  hint: 'Übelkeit' },
-    { word: 'Zeitzone',          hint: 'Uhr' },
-    { word: 'Heimweh',           hint: 'Zuhause' },
-    { word: 'Urlaubsfotos',      hint: 'Kamera' },
-    { word: 'Selfie',            hint: 'Arm' },
-    { word: 'Rückreise',         hint: 'Heimflug' },
-    { word: 'Abreise',           hint: 'Koffer' },
-    { word: 'Anreise',           hint: 'Ankommen' },
-    { word: 'Pension',           hint: 'Familie' },
-    { word: 'Airbnb',            hint: 'Privat' },
-    { word: 'Hostel',            hint: 'Schlafsaal' },
-    { word: 'Jugendherberge',    hint: 'Günstig' },
-    { word: 'Stornierung',       hint: 'Absagen' },
-    { word: 'Umbuchung',         hint: 'Ändern' },
-    { word: 'Verspätung',        hint: 'Warten' },
-    { word: 'Streik',            hint: 'Flugausfall' },
-    { word: 'Überbuchung',       hint: 'Voll' },
-    { word: 'Upgrade',           hint: 'Besser' },
-    { word: 'Lounge',            hint: 'VIP' },
-    { word: 'Fensterplatz',      hint: 'Aussicht' },
-    { word: 'Mittelplatz',       hint: 'Eingeklemmt' },
-    { word: 'Turbulenzen',       hint: 'Wackeln' }
-  ],
-
-  berufe: [
-    { word: 'Feuerwehrmann',     hint: 'Löschen' },
-    { word: 'Polizist',          hint: 'Uniform' },
-    { word: 'Arzt',              hint: 'Stethoskop' },
-    { word: 'Krankenschwester',  hint: 'Pflege' },
-    { word: 'Lehrer',            hint: 'Kreide' },
-    { word: 'Köch',              hint: 'Mütze' },
-    { word: 'Bäcker',            hint: 'Mehl' },
-    { word: 'Zahnarzt',          hint: 'Bohrer' },
-    { word: 'Tierarzt',          hint: 'Tiere' },
-    { word: 'Anwalt',            hint: 'Gericht' },
-    { word: 'Richter',           hint: 'Hammer' },
-    { word: 'Pilot',             hint: 'Cockpit' },
-    { word: 'Stewardess',        hint: 'Flüge' },
-    { word: 'Kapitän',           hint: 'Schiff' },
-    { word: 'Taxifahrer',        hint: 'Meter' },
-    { word: 'Busfahrer',         hint: 'Linie' },
-    { word: 'Briefträger',       hint: 'Tasche' },
-    { word: 'Müllmann',          hint: 'Tonne' },
-    { word: 'Elektriker',        hint: 'Strom' },
-    { word: 'Klempner',          hint: 'Rohr' },
-    { word: 'Maler',             hint: 'Pinsel' },
-    { word: 'Schreiner',         hint: 'Holz' },
-    { word: 'Schlosser',         hint: 'Metall' },
-    { word: 'Mechaniker',        hint: 'Motor' },
-    { word: 'Architekt',         hint: 'Zeichnen' },
-    { word: 'Ingenieur',         hint: 'Konstruieren' },
-    { word: 'Programmierer',     hint: 'Code' },
-    { word: 'Designer',          hint: 'Kreativ' },
-    { word: 'Journalist',        hint: 'Artikel' },
-    { word: 'Fotograf',          hint: 'Kamera' },
-    { word: 'Schauspieler',      hint: 'Bühne' },
-    { word: 'Sänger',            hint: 'Mikrofon' },
-    { word: 'Tänzer',            hint: 'Bühne' },
-    { word: 'Musiker',           hint: 'Instrument' },
-    { word: 'Maler (Kunst)',     hint: 'Leinwand' },
-    { word: 'Schriftsteller',    hint: 'Roman' },
-    { word: 'Wissenschaftler',   hint: 'Labor' },
-    { word: 'Forscher',          hint: 'Entdecken' },
-    { word: 'Astronaut',         hint: 'Weltraum' },
-    { word: 'Matrose',           hint: 'Meer' },
-    { word: 'Soldat',            hint: 'Militär' },
-    { word: 'Diplomat',          hint: 'Botschaft' },
-    { word: 'Politiker',         hint: 'Wahl' },
-    { word: 'Bürgermeister',     hint: 'Stadt' },
-    { word: 'Pfarrer',           hint: 'Kirche' },
-    { word: 'Bibliothekar',      hint: 'Bücher' },
-    { word: 'Apotheker',         hint: 'Tabletten' },
-    { word: 'Optiker',           hint: 'Brille' },
-    { word: 'Friseur',           hint: 'Schere' },
-    { word: 'Kosmetiker',        hint: 'Make-up' },
-    { word: 'Physiotherapeut',   hint: 'Massage' },
-    { word: 'Psychologe',        hint: 'Couch' },
-    { word: 'Chirurg',           hint: 'Skalpell' },
-    { word: 'Röntgenarzt',       hint: 'Strahlen' },
-    { word: 'Rettungssanitäter', hint: 'Blaulicht' },
-    { word: 'Hebamme',           hint: 'Geburt' },
-    { word: 'Erzieher',          hint: 'Kinder' },
-    { word: 'Sozialarbeiter',    hint: 'Helfen' },
-    { word: 'Buchhalter',        hint: 'Zahlen' },
-    { word: 'Banker',            hint: 'Kredit' },
-    { word: 'Makler',            hint: 'Immobilien' },
-    { word: 'Versicherungsvertreter', hint: 'Schutz' },
-    { word: 'Kellner',           hint: 'Tablett' },
-    { word: 'Barkeeper',         hint: 'Cocktail' },
-    { word: 'Konditor',          hint: 'Torte' },
-    { word: 'Metzger',           hint: 'Fleisch' },
-    { word: 'Fischer',           hint: 'Netz' },
-    { word: 'Landwirt',          hint: 'Traktor' },
-    { word: 'Gärtner',           hint: 'Pflanzen' },
-    { word: 'Imker',             hint: 'Bienen' },
-    { word: 'Jäger',             hint: 'Wald' },
-    { word: 'Bergmann',          hint: 'Stollen' },
-    { word: 'Taucher',           hint: 'Flasche' },
-    { word: 'Stuntman',          hint: 'Gefahr' },
-    { word: 'Model',             hint: 'Laufsteg' },
-    { word: 'Moderator',         hint: 'Studio' },
-    { word: 'YouTuber',          hint: 'Kanal' },
-    { word: 'Influencer',        hint: 'Follower' },
-    { word: 'Spieleentwickler',  hint: 'Games' },
-    { word: 'Datenwissenschaftler', hint: 'Analyse' },
-    { word: 'Hacker',            hint: 'Code' },
-    { word: 'Detektiv',          hint: 'Lupe' },
-    { word: 'Kriminalbeamter',   hint: 'Spurensicherung' },
-    { word: 'Zollbeamter',       hint: 'Grenze' },
-    { word: 'Staatsanwalt',      hint: 'Klage' },
-    { word: 'Notar',             hint: 'Urkunde' }
-  ],
-
-  musik: [
-    { word: 'Gitarre',           hint: 'Saiten' },
-    { word: 'Schlagzeug',        hint: 'Stöcke' },
-    { word: 'Klavier',           hint: 'Tasten' },
-    { word: 'Geige',             hint: 'Bogen' },
-    { word: 'Trompete',          hint: 'Blasen' },
-    { word: 'Saxophon',          hint: 'Jazz' },
-    { word: 'Flöte',             hint: 'Flüstern' },
-    { word: 'Bassgitarre',       hint: 'Tief' },
-    { word: 'Keyboard',          hint: 'Tasten' },
-    { word: 'Synthesizer',       hint: 'Elektronisch' },
-    { word: 'Mikrofon',          hint: 'Singen' },
-    { word: 'Lautsprecher',      hint: 'Dröhnen' },
-    { word: 'Kopfhörer',         hint: 'Kabel' },
-    { word: 'Plattenspieler',    hint: 'Vinyl' },
-    { word: 'Mischpult',         hint: 'Regler' },
-    { word: 'Verstärker',        hint: 'Laut' },
-    { word: 'Bühne',             hint: 'Spotlight' },
-    { word: 'Konzert',           hint: 'Publikum' },
-    { word: 'Festival',          hint: 'Zelt' },
-    { word: 'Backstage',         hint: 'Hinter' },
-    { word: 'Tournee',           hint: 'Reisen' },
-    { word: 'Album',             hint: 'Songs' },
-    { word: 'Single',            hint: 'Hit' },
-    { word: 'Musikvideo',        hint: 'Drehen' },
-    { word: 'Refrain',           hint: 'Wiederholen' },
-    { word: 'Strophe',           hint: 'Text' },
-    { word: 'Takt',              hint: 'Zählen' },
-    { word: 'Melodie',           hint: 'Pfeifen' },
-    { word: 'Harmonie',          hint: 'Zusammen' },
-    { word: 'Rhythmus',          hint: 'Klopfen' },
-    { word: 'Beat',              hint: 'Pumpen' },
-    { word: 'Drop',              hint: 'Fallen' },
-    { word: 'Remix',             hint: 'Verändern' },
-    { word: 'Cover',             hint: 'Nachsingen' },
-    { word: 'Autotune',          hint: 'Stimme' },
-    { word: 'Playback',          hint: 'Lippensynchron' },
-    { word: 'Aufnahmestudio',    hint: 'Dämmen' },
-    { word: 'Produzent',         hint: 'Beats' },
-    { word: 'DJ',                hint: 'Platte' },
-    { word: 'Rapper',            hint: 'Flow' },
-    { word: 'Boyband',           hint: 'Gruppe' },
-    { word: 'Solist',            hint: 'Allein' },
-    { word: 'Chor',              hint: 'Viele' },
-    { word: 'Orchester',         hint: 'Dirigent' },
-    { word: 'Pop',               hint: 'Radio' },
-    { word: 'Rock',              hint: 'Laut' },
-    { word: 'Hip-Hop',           hint: 'Flow' },
-    { word: 'Jazz',              hint: 'Improvisation' },
-    { word: 'Klassik',           hint: 'Mozart' },
-    { word: 'Techno',            hint: 'Club' },
-    { word: 'Schlager',          hint: 'Deutschland' },
-    { word: 'Metal',             hint: 'Headbangen' },
-    { word: 'Reggae',            hint: 'Jamaika' },
-    { word: 'Soul',              hint: 'Gefühl' },
-    { word: 'Blues',             hint: 'Traurig' },
-    { word: 'Country',           hint: 'Cowboy' },
-    { word: 'Folk',              hint: 'Akustisch' },
-    { word: 'Indie',             hint: 'Unabhängig' },
-    { word: 'Oper',              hint: 'Sänger' },
-    { word: 'Ballade',           hint: 'Langsam' },
-    { word: 'Hymne',             hint: 'Stadion' },
-    { word: 'Karaoke',           hint: 'Liedtext' },
-    { word: 'Chartplatzierung',  hint: 'Nummer 1' },
-    { word: 'Streaming-Plattform', hint: 'Spotify' },
-    { word: 'Playlist',          hint: 'Sammlung' },
-    { word: 'Shuffle',           hint: 'Zufällig' },
-    { word: 'Headliner',         hint: 'Hauptact' },
-    { word: 'Vorband',           hint: 'Warm-up' },
-    { word: 'Soundcheck',        hint: 'Test' },
-    { word: 'Encore',            hint: 'Zugabe' },
-    { word: 'Fangesang',         hint: 'Stadion' },
-    { word: 'Crowdsurfen',       hint: 'Publikum' },
-    { word: 'Moshpit',           hint: 'Drängen' },
-    { word: 'Feuerzeug',         hint: 'Konzert' },
-    { word: 'Merchandise',       hint: 'T-Shirt' },
-    { word: 'Autogramm',         hint: 'Fan' },
-    { word: 'Grammy',            hint: 'Award' },
-    { word: 'Songwriting',       hint: 'Texten' },
-    { word: 'Sampling',          hint: 'Ausschnitt' },
-    { word: 'Bass',              hint: 'Tief' },
-    { word: 'Falsett',           hint: 'Hoch' },
-    { word: 'A-cappella',        hint: 'Ohne Musik' },
-    { word: 'Beatbox',           hint: 'Mund' }
-  ],
-
-  wissenschaft: [
-    { word: 'Schwarzes Loch',    hint: 'Sog' },
-    { word: 'DNA',               hint: 'Doppelhelix' },
-    { word: 'Atom',              hint: 'Klein' },
-    { word: 'Proton',            hint: 'Kern' },
-    { word: 'Elektron',          hint: 'Hülle' },
-    { word: 'Neutron',           hint: 'Neutral' },
-    { word: 'Molekül',           hint: 'Verbund' },
-    { word: 'Photosynthese',     hint: 'Pflanzen' },
-    { word: 'Evolution',         hint: 'Darwin' },
-    { word: 'Schwerkraft',       hint: 'Fallen' },
-    { word: 'Magnetismus',       hint: 'Anziehen' },
-    { word: 'Elektrizität',      hint: 'Strom' },
-    { word: 'Radioaktivität',    hint: 'Strahlung' },
-    { word: 'Isotop',            hint: 'Variante' },
-    { word: 'Quantenphysik',     hint: 'Schrödingers Katze' },
-    { word: 'Relativität',       hint: 'Einstein' },
-    { word: 'Lichtgeschwindigkeit', hint: 'Schnellste' },
-    { word: 'Urknall',           hint: 'Anfang' },
-    { word: 'Galaxie',           hint: 'Milchstraße' },
-    { word: 'Supernova',         hint: 'Explosion' },
-    { word: 'Neutronenstern',    hint: 'Dicht' },
-    { word: 'Teleskop',          hint: 'Sterne' },
-    { word: 'Mikroskop',         hint: 'Vergrößern' },
-    { word: 'Zelle',             hint: 'Baustein' },
-    { word: 'Mitose',            hint: 'Teilung' },
-    { word: 'Chromosom',         hint: 'Erbgut' },
-    { word: 'Gen',               hint: 'Vererbung' },
-    { word: 'Mutation',          hint: 'Veränderung' },
-    { word: 'Immunsystem',       hint: 'Abwehr' },
-    { word: 'Virus',             hint: 'Infizieren' },
-    { word: 'Bakterium',         hint: 'Einzeller' },
-    { word: 'Pilz',              hint: 'Sporen' },
-    { word: 'Ökosystem',         hint: 'Gleichgewicht' },
-    { word: 'Nahrungskette',     hint: 'Fresser' },
-    { word: 'Klimawandel',       hint: 'Erwärmung' },
-    { word: 'Treibhauseffekt',   hint: 'Gas' },
-    { word: 'Ozonschicht',       hint: 'UV-Schutz' },
-    { word: 'Vulkan',            hint: 'Lava' },
-    { word: 'Erdbeben',          hint: 'Beben' },
-    { word: 'Tsunami',           hint: 'Welle' },
-    { word: 'Kontinentaldrift',  hint: 'Platten' },
-    { word: 'Fossil',            hint: 'Versteinerung' },
-    { word: 'Dinosaurier',       hint: 'Ausgestorben' },
-    { word: 'Meteorit',          hint: 'Einschlag' },
-    { word: 'Mondphase',         hint: 'Vollmond' },
-    { word: 'Gezeiten',          hint: 'Mond' },
-    { word: 'Osmose',            hint: 'Membran' },
-    { word: 'Katalysator',       hint: 'Beschleuniger' },
-    { word: 'pH-Wert',           hint: 'Säure' },
-    { word: 'Destillation',      hint: 'Trennen' },
-    { word: 'Reaktion',          hint: 'Chemie' },
-    { word: 'Periodensystem',    hint: 'Elemente' },
-    { word: 'Kohlenstoff',       hint: 'Diamant' },
-    { word: 'Sauerstoff',        hint: 'Atmen' },
-    { word: 'Wasserstoff',       hint: 'Leicht' },
-    { word: 'Stickstoff',        hint: 'Luft' },
-    { word: 'Plasma',            hint: 'Vierter Zustand' },
-    { word: 'Thermodynamik',     hint: 'Wärme' },
-    { word: 'Entropie',          hint: 'Unordnung' },
-    { word: 'Impuls',            hint: 'Stoß' },
-    { word: 'Frequenz',          hint: 'Schwingungen' },
-    { word: 'Ultraschall',       hint: 'Hörbar' },
-    { word: 'Röntgenstrahlen',    hint: 'Knochen' },
-    { word: 'Laser',             hint: 'Lichtbündel' },
-    { word: 'Prisma',            hint: 'Regenbogen' },
-    { word: 'Spektrum',          hint: 'Farben' },
-    { word: 'Magnetfeld',        hint: 'Kompass' },
-    { word: 'Pol',               hint: 'Nord-Süd' },
-    { word: 'Supraleiter',       hint: 'Widerstandslos' },
-    { word: 'Neuron',            hint: 'Gehirn' },
-    { word: 'Synapse',           hint: 'Signal' },
-    { word: 'Hormon',            hint: 'Drüse' },
-    { word: 'Enzym',             hint: 'Helfer' },
-    { word: 'Protein',           hint: 'Baustöffe' },
-    { word: 'Aminossäure',       hint: 'Kette' },
-    { word: 'Zirkadian',         hint: 'Schlaf' },
-    { word: 'Plankton',          hint: 'Ozean' },
-    { word: 'Mykologie',         hint: 'Pilze' },
-    { word: 'Geologie',          hint: 'Gesteine' },
-    { word: 'Seismologie',       hint: 'Beben' },
-    { word: 'Astronomie',        hint: 'Sterne' },
-    { word: 'Astrophysik',       hint: 'Weltall' }
-  ],
-
-  technik: [
-    { word: 'Smartphone',        hint: 'Touchscreen' },
-    { word: 'Tablet',            hint: 'Flach' },
-    { word: 'Smartwatch',        hint: 'Handgelenk' },
-    { word: 'Laptop',            hint: 'Klappe' },
-    { word: 'Desktop-PC',        hint: 'Tower' },
-    { word: 'Grafikkarte',       hint: 'Pixel' },
-    { word: 'Prozessor',         hint: 'Takte' },
-    { word: 'Arbeitsspeicher',   hint: 'RAM' },
-    { word: 'Festplatte',        hint: 'Speichern' },
-    { word: 'SSD',               hint: 'Schnell' },
-    { word: 'USB-Stick',         hint: 'Stecken' },
-    { word: 'Bluetooth',         hint: 'Kabellos' },
-    { word: 'WLAN',              hint: 'Router' },
-    { word: 'Router',            hint: 'Internet' },
-    { word: 'Modem',             hint: 'DSL' },
-    { word: 'Firewall',          hint: 'Schutz' },
-    { word: 'Cloud',             hint: 'Online' },
-    { word: 'Server',            hint: 'Rechenzentrum' },
-    { word: 'Künstliche Intelligenz', hint: 'Lernen' },
-    { word: 'Algorithmus',       hint: 'Schritte' },
-    { word: 'Chatbot',           hint: 'Antworten' },
-    { word: 'Virtual Reality',   hint: 'Brille' },
-    { word: 'Augmented Reality', hint: 'Einblenden' },
-    { word: 'Drohne',            hint: 'Fliegen' },
-    { word: '3D-Drucker',        hint: 'Schichten' },
-    { word: 'Roboter',           hint: 'Programmiert' },
-    { word: 'Solaranlage',       hint: 'Dächer' },
-    { word: 'Windrad',           hint: 'Drehen' },
-    { word: 'Elektroauto',       hint: 'Laden' },
-    { word: 'Selbstfahrendes Auto', hint: 'Autopilot' },
-    { word: 'GPS',               hint: 'Satellit' },
-    { word: 'QR-Code',           hint: 'Scannen' },
-    { word: 'Barcode',           hint: 'Strich' },
-    { word: 'NFC',               hint: 'Bezahlen' },
-    { word: 'Fingerabdruckscanner', hint: 'Entsperren' },
-    { word: 'Gesichtserkennung', hint: 'Entsperren' },
-    { word: 'Sprachassistent',   hint: 'Hey Siri' },
-    { word: 'Smart Home',        hint: 'Vernetzt' },
-    { word: 'Smarte Glühbirne',  hint: 'App' },
-    { word: 'Sicherheitskamera', hint: 'Überwachen' },
-    { word: 'Powerbank',         hint: 'Aufladen' },
-    { word: 'Wireless Charging', hint: 'Pad' },
-    { word: 'TWS-Kopfhörer',     hint: 'Kabellos' },
-    { word: 'E-Reader',          hint: 'Lesen' },
-    { word: 'Spielekonsole',     hint: 'Controller' },
-    { word: 'Gaming-PC',         hint: 'RGB' },
-    { word: 'Streaming-Stick',   hint: 'HDMI' },
-    { word: 'Smart-TV',          hint: 'Apps' },
-    { word: 'Projektor',         hint: 'Leinwand' },
-    { word: 'Dashcam',           hint: 'Aufzeichnen' },
-    { word: 'Action-Cam',        hint: 'Helm' },
-    { word: 'Spiegelreflexkamera', hint: 'Objektiv' },
-    { word: 'Stativ',            hint: 'Ruhig' },
-    { word: 'Gimbal',            hint: 'Stabil' },
-    { word: 'Mikrofon (USB)',    hint: 'Podcast' },
-    { word: 'Greenscreen',       hint: 'Hintergrund' },
-    { word: 'Capture Card',      hint: 'Aufnehmen' },
-    { word: 'Monitor',           hint: 'Bildschirm' },
-    { word: 'Maus',              hint: 'Klicken' },
-    { word: 'Tastatur',          hint: 'Tippen' },
-    { word: 'Webcam',            hint: 'Video' },
-    { word: 'Netzwerkkabel',     hint: 'LAN' },
-    { word: 'Datenschutz',       hint: 'DSGVO' },
-    { word: 'Verschlüsselung',   hint: 'Sicher' },
-    { word: 'Two-Factor-Auth',   hint: 'Code' },
-    { word: 'Password-Manager',  hint: 'Tresor' },
-    { word: 'Dark Web',          hint: 'Versteckt' },
-    { word: 'VPN',               hint: 'Tunnel' },
-    { word: 'Open Source',       hint: 'Offen' },
-    { word: 'Betriebssystem',    hint: 'Windows' },
-    { word: 'App Store',         hint: 'Herunterladen' },
-    { word: 'Update',            hint: 'Neuer' },
-    { word: 'Bug',               hint: 'Fehler' },
-    { word: 'Patch',             hint: 'Reparieren' },
-    { word: 'Backup',            hint: 'Sichern' },
-    { word: 'Pixel',             hint: 'Bildpunkt' },
-    { word: 'Auflösung',         hint: '4K' },
-    { word: 'Refresh Rate',      hint: 'Hz' },
-    { word: 'Latenz',            hint: 'Verzögerung' },
-    { word: 'Bandbreite',        hint: 'Mbps' },
-    { word: 'Ping',              hint: 'ms' }
-  ]
-};
-
-let state = {
-  players: 4,
-  names: [],
-  gameMins: 3,
-  selectedCats: ['alltag'],
-  word: '',
-  hint: '',
-  imposterIndex: -1,
-  currentDealing: 0,
-  timerInterval: null,
-  timerSeconds: 0,
-  totalSeconds: 0,
-  hintEnabled: false
-};
-
-function renderNameInputs() {
-  const container = document.getElementById('name-inputs');
-  container.innerHTML = '';
-  for (let i = 0; i < state.players; i++) {
-    const row = document.createElement('div');
-    row.className = 'name-row';
-    row.innerHTML = `<label>Spieler ${i+1}</label><input type="text" id="name-${i}" placeholder="Name eingeben" maxlength="20" />`;
-    container.appendChild(row);
+// ========== IMPOSTER ==========
+const CATEGORIES = {
+  alltag: {
+    label: '🏠 Alltag',
+    words: ['Kühlschrank','Waschmaschine','Fernbedienung','Staubsauger','Mikrowelle',
+      'Bücherregal','Wecker','Briefkasten','Haustür','Badewanne','Duschvorhang',
+      'Spülmaschine','Toaster','Kaffeemaschine','Schreibtisch','Kleiderschrank',
+      'Fensterbank','Blumentopf','Treppengeländer','Türklingel','Garderobe',
+      'Fußmatte','Lichtschalter','Steckdose','Vorhang','Spiegel','Seife',
+      'Zahnnbürste','Handtuch','Bettdecke','Kissen','Nachttischlampe']
+  },
+  tiere: {
+    label: '🐾 Tiere',
+    words: ['Elefant','Giraffe','Pinguin','Delfin','Koalabär','Gorilla','Flamingo',
+      'Krokodil','Nashorn','Gepard','Panda','Fledermaus','Pfau','Seepferdchen',
+      'Oktopus','Axolotl','Chamäleon','Hammerhai','Leguan','Schnabeltier',
+      'Erdmännchen','Wombat','Lama','Qualle','Glühwürmchen','Libelle']
+  },
+  sehenswuerdigkeiten: {
+    label: '🏙️ Sehenswürdigkeiten',
+    words: ['Eiffelturm','Big Ben','Kolosseum','Taj Mahal','Freiheitsstatue',
+      'Brandenburger Tor','Chinesische Mauer','Machu Picchu','Stonehenge',
+      'Akropolis','Burj Khalifa','Sydney Opera House','Sagrada Família',
+      'Niagara Falls','Mount Rushmore','Neuschwanstein','Louvre','Vatikan',
+      'Alhambra','Angkor Wat','Petra','Chichen Itza','Pyramiden von Gizeh',
+      'Golden Gate Bridge','Tower Bridge','Trevi-Brunnen']
+  },
+  essen: {
+    label: '🍕 Essen & Trinken',
+    words: ['Pizza','Sushi','Hamburger','Eis','Donut','Brezel','Spaghetti','Pommes',
+      'Waffel','Croissant','Taco','Hot Dog','Schnitzel','Currywurst','Erdbeere',
+      'Wassermelone','Ananas','Avocado','Käse','Schokolade','Gummibär','Ramen',
+      'Gyros','Cheesecake','Latte Macchiato','Bubble Tea','Smoothie']
+  },
+  sport: {
+    label: '⚽ Sport',
+    words: ['Fußball','Tennis','Basketball','Schwimmen','Boxen','Skifahren','Surfen',
+      'Klettern','Golf','Baseball','Volleyball','Tischtennis','Badminton',
+      'Turnen','Leichtathletik','Radfahren','Eishockey','Rugby','Sumo',
+      'Curling','Bogenschießen','Triathlon','Breakdance','Reiten']
+  },
+  filme: {
+    label: '🎬 Filme & Serien',
+    words: ['Titanic','Star Wars','Jurassic Park','Der König der Löwen','Frozen',
+      'Spider-Man','Iron Man','Shrek','Toy Story','Findet Nemo','Moana','Avatar',
+      'The Dark Knight','Forrest Gump','Matrix','Pulp Fiction','Inception',
+      'Interstellar','Harry Potter','Herr der Ringe','Breaking Bad',
+      'Game of Thrones','Stranger Things','The Office','Friends']
+  },
+  urlaub: {
+    label: '✈️ Urlaub & Reisen',
+    words: ['Mallorca','Maldiven','New York','Paris','Tokyo','Dubai','Bali',
+      'Barcelona','Rom','Amsterdam','London','Sydney','Malediven','Safari',
+      'Kreuzfahrt','Camping','Skiurlaub','Strandurlaub','Städtereise',
+      'Rucksackreisen','Alpen','Karibik','Teneriffa','Kreta']
+  },
+  berufe: {
+    label: '🛠️ Berufe & Jobs',
+    words: ['Feuerwehrmann','Astronaut','Zauberer','Pirat','Ninja','Detektiv',
+      'Koch','Arzt','Lehrer','Pilot','Taucher','Clown','Schatzsucher',
+      'Superheld','Roboter','Rockstar','Influencer','Streamer','YouTuber',
+      'Tierarzt','Bestatter','Tausendsassa','Zirkusdirektor']
+  },
+  musik: {
+    label: '🎸 Musik & Bands',
+    words: ['Beatles','Rammstein','ABBA','Queen','Metallica','Coldplay','BTS',
+      'Billie Eilish','Taylor Swift','Eminem','Michael Jackson','Elvis',
+      'Mozart','Beethoven','Ed Sheeran','Adele','Drake','Kanye West',
+      'The Weeknd','Dua Lipa','Imagine Dragons','Linkin Park','Nirvana',
+      'AC/DC','Rolling Stones','Pink Floyd','David Bowie']
+  },
+  wissenschaft: {
+    label: '🔬 Wissenschaft & Natur',
+    words: ['Schwarzes Loch','Vulkan','Tsunami','Regenbogen','Blitz','Tornado',
+      'Aurora Borealis','Komet','Asteroid','DNA','Atom','Quanten','Fotosynthese',
+      'Gravitation','Elektrizität','Magnet','Laser','Klonen','KI','Robotik',
+      'Impfstoff','Penicillin','Röntgenstrahlen','Radioaktivität']
+  },
+  technik: {
+    label: '📱 Technik & Gadgets',
+    words: ['Smartphone','Laptop','Smartwatch','Drohne','VR-Brille','3D-Drucker',
+      'Alexa','Siri','ChatGPT','Bitcoin','NFT','TikTok','Instagram','YouTube',
+      'Netflix','Spotify','Tesla','Roboterstaub­sauger','Smartfridge',
+      'Dashcam','Action-Kamera','Gaming-PC','Mechanische Tastatur','RGB-Maus']
+  },
+  fortnite: {
+    label: '🎮 Fortnite',
+    words: ['Tilted Towers','Loot Lake','Pleasant Park','Salty Springs','Dusty Divot',
+      'Retail Row','Lazy Lake','The Mothership','Jonesy','Peely','Fishstick',
+      'Meowscles','Midas','Drift','Raven','Ghoul Trooper','Black Knight',
+      'Skull Trooper','Battle Bus','Chug Jug','Slurp Juice','Launch Pad',
+      'Port-a-Fort','Pump Shotgun','Minigun','Rocket Launcher','Storm',
+      'Victory Royale','Building','Zero Point','Omni Sword','Chapter 1',
+      'Creative Mode','The Mandalorian','Master Chief','Travis Scott']
+  },
+  brawlstars: {
+    label: '🌟 Brawl Stars',
+    words: ['Shelly','Colt','Bull','Brock','El Primo','Barley','Poco','Rosa',
+      'Jessie','Dynamike','Tick','8-Bit','Rico','Darryl','Penny','Carl',
+      'Jacky','Gus','Bo','Emz','Stu','Piper','Pam','Frank','Bibi','Bea',
+      'Nani','Edgar','Griff','Grom','Bonnie','Gale','Colette','Belle',
+      'Ash','Lola','Sam','Mandy','Maisie','Hank','Pearl','Angelo','Berry',
+      'Gem Grab','Showdown','Brawl Ball','Heist','Bounty','Hot Zone',
+      'Starr Park','Trophy Road','Power League','Club League']
+  },
+  spicy: {
+    label: '🌶️ Spicy (18+)',
+    words: ['Dildo','Vibrator','Striptease','Lap Dance','Kondom','One-Night-Stand',
+      'Sextape','Orgie','Fetisch','BDSM','Handschellen','Whirlpool','Fremdgehen',
+      'Po klatschen','Stripper','Erotikkino','Sexspielzeug','Dirty Talk',
+      'Aufreißen','Lovense','Ficken','Nacktbaden','Swinger-Club','Nutte']
   }
-  state.names.forEach((n, i) => { const el = document.getElementById('name-'+i); if (el) el.value = n; });
+};
+
+let imposterState = {
+  players: [], playerCount: 4, activeCats: ['alltag'],
+  gameTime: 3, timerInterval: null, timerLeft: 0,
+  currentPlayer: 0, word: '', imposterIndex: -1,
+  hint: false, hintWord: '', cat: ''
+};
+
+const HINTS = {
+  alltag: ['Haushalt','zu Hause','Zuhause'],
+  tiere: ['Tier','Natur','Wildtier'],
+  sehenswuerdigkeiten: ['Reise','Tourismus','Wahrzeichen'],
+  essen: ['Essen','Trinken','Genuss'],
+  sport: ['Sport','Bewegung','Fitness'],
+  filme: ['Unterhaltung','Kino','Serie'],
+  urlaub: ['Urlaub','Reisen','Fernweh'],
+  berufe: ['Arbeit','Beruf','Job'],
+  musik: ['Musik','Band','Klang'],
+  wissenschaft: ['Wissenschaft','Natur','Forschung'],
+  technik: ['Technik','Digital','Gadget'],
+  fortnite: ['Videospiel','Shooter','Battle Royale'],
+  brawlstars: ['Videospiel','Mobile Game','Brawler'],
+  spicy: ['Erwachsene','18+','Spaß']
+};
+
+function toggleCat(key) {
+  const selected = imposterState.activeCats;
+  if (selected.includes(key)) {
+    if (selected.length > 1) imposterState.activeCats = selected.filter(c => c !== key);
+    else return;
+  } else {
+    if (selected.length < 3) imposterState.activeCats.push(key);
+    else { imposterState.activeCats.shift(); imposterState.activeCats.push(key); }
+  }
+  Object.keys(CATEGORIES).forEach(k => {
+    const el = document.getElementById('cat-' + k);
+    if (el) el.checked = imposterState.activeCats.includes(k);
+  });
 }
 
-function changeCount(delta) {
-  state.players = Math.max(3, Math.min(12, state.players + delta));
-  document.getElementById('player-count').textContent = state.players;
+function changeTime(d) {
+  imposterState.gameTime = Math.max(1, Math.min(10, imposterState.gameTime + d));
+  document.getElementById('game-time').textContent = imposterState.gameTime;
+}
+
+function changeCount(d) {
+  imposterState.playerCount = Math.max(3, Math.min(15, imposterState.playerCount + d));
+  document.getElementById('player-count').textContent = imposterState.playerCount;
   renderNameInputs();
 }
 
-function changeTime(delta) {
-  state.gameMins = Math.max(1, Math.min(15, state.gameMins + delta));
-  document.getElementById('game-time').textContent = state.gameMins;
-}
-
-function toggleCat(cat) {
-  const cb = document.getElementById('cat-' + cat);
-  if (cb.checked) {
-    if (state.selectedCats.length >= 3) { cb.checked = false; return; }
-    if (!state.selectedCats.includes(cat)) state.selectedCats.push(cat);
-  } else {
-    if (state.selectedCats.length <= 1) { cb.checked = true; return; }
-    state.selectedCats = state.selectedCats.filter(c => c !== cat);
+function renderNameInputs() {
+  const box = document.getElementById('name-inputs');
+  if (!box) return;
+  box.innerHTML = '';
+  for (let i = 0; i < imposterState.playerCount; i++) {
+    const prev = imposterState.players[i] || '';
+    box.innerHTML += `<div class="name-row"><label>Spieler ${i+1}</label>
+      <input type="text" placeholder="Name" maxlength="16" value="${prev}"
+        oninput="imposterState.players[${i}]=this.value" /></div>`;
   }
 }
 
 function startImposter() {
-  state.names = [];
-  for (let i = 0; i < state.players; i++) {
-    const el = document.getElementById('name-' + i);
-    state.names.push(el && el.value.trim() ? el.value.trim() : 'Spieler ' + (i+1));
+  const names = [];
+  for (let i = 0; i < imposterState.playerCount; i++) {
+    const inp = document.querySelectorAll('#name-inputs input')[i];
+    names.push(inp && inp.value.trim() ? inp.value.trim() : 'Spieler '+(i+1));
   }
-  state.hintEnabled = document.getElementById('hint-toggle').checked;
-  let pool = [];
-  state.selectedCats.forEach(cat => { pool = pool.concat(IMPOSTER_DATA[cat]); });
-  const entry = pool[Math.floor(Math.random() * pool.length)];
-  state.word = entry.word;
-  state.hint = entry.hint;
-  state.imposterIndex = Math.floor(Math.random() * state.players);
-  state.currentDealing = 0;
-  show('imposter-deal'); hide('imposter-setup'); hide('imposter-play'); hide('imposter-reveal');
+  imposterState.players = names;
+
+  const pool = imposterState.activeCats.flatMap(k => CATEGORIES[k].words);
+  imposterState.word = pool[Math.floor(Math.random() * pool.length)];
+  imposterState.cat = imposterState.activeCats[Math.floor(Math.random() * imposterState.activeCats.length)];
+  imposterState.imposterIndex = Math.floor(Math.random() * imposterState.playerCount);
+  imposterState.hint = document.getElementById('hint-toggle').checked;
+  const hintPool = HINTS[imposterState.cat] || ['?'];
+  imposterState.hintWord = hintPool[Math.floor(Math.random() * hintPool.length)];
+  imposterState.currentPlayer = 0;
+
+  document.getElementById('imposter-setup').classList.add('hidden');
+  document.getElementById('imposter-deal').classList.remove('hidden');
   showDealWaiting();
 }
 
 function showDealWaiting() {
-  document.getElementById('deal-player-name').textContent = state.names[state.currentDealing];
-  show('deal-waiting'); hide('deal-card');
+  document.getElementById('deal-waiting').classList.remove('hidden');
+  document.getElementById('deal-card').classList.add('hidden');
+  document.getElementById('deal-player-name').textContent = imposterState.players[imposterState.currentPlayer];
 }
 
 function showCard() {
-  const i = state.currentDealing;
-  const isImposter = i === state.imposterIndex;
+  const i = imposterState.currentPlayer;
+  const isImposter = i === imposterState.imposterIndex;
+  document.getElementById('deal-waiting').classList.add('hidden');
+  document.getElementById('deal-card').classList.remove('hidden');
   const card = document.getElementById('player-card');
   const roleEl = document.getElementById('card-role');
   const wordEl = document.getElementById('card-word');
   const hintEl = document.getElementById('card-hint');
   const catEl  = document.getElementById('card-cat');
+  card.className = 'card' + (isImposter ? ' imposter-card' : '');
   if (isImposter) {
-    card.className = 'card imposter-card';
-    roleEl.textContent = '🕵️ Du bist der Imposter!';
+    roleEl.textContent = '🕵️ Du bist der IMPOSTER!';
     wordEl.textContent = '???';
-    catEl.textContent  = state.selectedCats.map(c => catLabel(c)).join(', ');
-    if (state.hintEnabled) { hintEl.innerHTML = '💡 Tipp: <span>' + state.hint + '</span>'; hintEl.classList.remove('hidden'); }
-    else hintEl.classList.add('hidden');
+    if (imposterState.hint) {
+      hintEl.classList.remove('hidden');
+      hintEl.innerHTML = `Tipp: <span>${imposterState.hintWord}</span>`;
+    } else { hintEl.classList.add('hidden'); }
+    catEl.textContent = '';
   } else {
-    card.className = 'card';
-    roleEl.textContent = '✅ Kein Imposter';
-    wordEl.textContent = state.word;
-    catEl.textContent  = state.selectedCats.map(c => catLabel(c)).join(', ');
+    roleEl.textContent = '✅ Du bist ein normaler Spieler';
+    wordEl.textContent = imposterState.word;
     hintEl.classList.add('hidden');
+    catEl.textContent = CATEGORIES[imposterState.cat]?.label || '';
   }
-  hide('deal-waiting'); show('deal-card');
-}
-
-function catLabel(cat) {
-  return {
-    alltag: 'Alltag',
-    tiere: 'Tiere',
-    sehenswuerdigkeiten: 'Sehensw.',
-    essen: 'Essen & Trinken',
-    sport: 'Sport',
-    filme: 'Filme & Serien',
-    urlaub: 'Urlaub & Reisen',
-    berufe: 'Berufe & Jobs',
-    musik: 'Musik & Bands',
-    wissenschaft: 'Wissenschaft & Natur',
-    technik: 'Technik & Gadgets'
-  }[cat] || cat;
 }
 
 function nextPlayer() {
-  state.currentDealing++;
-  if (state.currentDealing >= state.players) startPlayPhase();
-  else showDealWaiting();
+  imposterState.currentPlayer++;
+  if (imposterState.currentPlayer >= imposterState.playerCount) {
+    document.getElementById('imposter-deal').classList.add('hidden');
+    document.getElementById('imposter-play').classList.remove('hidden');
+    startGameTimer();
+  } else {
+    showDealWaiting();
+  }
 }
 
-function startPlayPhase() {
-  hide('imposter-deal'); show('imposter-play');
-  state.totalSeconds = state.gameMins * 60;
-  state.timerSeconds = state.totalSeconds;
-  updateTimerDisplay();
-  clearInterval(state.timerInterval);
-  state.timerInterval = setInterval(() => {
-    state.timerSeconds--; updateTimerDisplay();
-    if (state.timerSeconds <= 0) { clearInterval(state.timerInterval); revealImposter(); }
-  }, 1000);
-}
-
-function updateTimerDisplay() {
-  const s = state.timerSeconds;
-  const mins = String(Math.floor(s/60)).padStart(2,'0');
-  const secs = String(s%60).padStart(2,'0');
-  const textEl = document.getElementById('timer-text');
-  textEl.textContent = mins+':'+secs;
-  if (s<=30) textEl.classList.add('urgent'); else textEl.classList.remove('urgent');
-  const circ = 2*Math.PI*54;
-  document.getElementById('timer-ring').style.strokeDashoffset = circ*(1-Math.max(0,s/state.totalSeconds));
+function startGameTimer() {
+  const total = imposterState.gameTime * 60;
+  imposterState.timerLeft = total;
   const ring = document.getElementById('timer-ring');
-  if (s<=30) ring.classList.add('urgent'); else ring.classList.remove('urgent');
+  const text = document.getElementById('timer-text');
+  const circ = 339.3;
+  clearInterval(imposterState.timerInterval);
+  function tick() {
+    const mins = Math.floor(imposterState.timerLeft / 60);
+    const secs = imposterState.timerLeft % 60;
+    text.textContent = `${mins}:${secs.toString().padStart(2,'0')}`;
+    const pct = imposterState.timerLeft / total;
+    ring.style.strokeDashoffset = circ * (1 - pct);
+    if (pct < 0.25) { ring.classList.add('urgent'); text.classList.add('urgent'); }
+    if (imposterState.timerLeft <= 0) { clearInterval(imposterState.timerInterval); text.textContent = '0:00'; return; }
+    imposterState.timerLeft--;
+  }
+  tick();
+  imposterState.timerInterval = setInterval(tick, 1000);
 }
 
 function revealImposter() {
-  clearInterval(state.timerInterval);
-  hide('imposter-play'); show('imposter-reveal');
-  document.getElementById('reveal-word').textContent = state.word;
-  document.getElementById('reveal-imposter').textContent = '🕵️ ' + state.names[state.imposterIndex];
+  clearInterval(imposterState.timerInterval);
+  document.getElementById('imposter-play').classList.add('hidden');
+  document.getElementById('imposter-reveal').classList.remove('hidden');
+  document.getElementById('reveal-word').textContent = imposterState.word;
+  document.getElementById('reveal-imposter').textContent = imposterState.players[imposterState.imposterIndex];
   const list = document.getElementById('reveal-players-list');
   list.innerHTML = '';
-  state.names.forEach((name, i) => {
-    const row = document.createElement('div');
-    const isImp = i === state.imposterIndex;
-    row.className = 'player-row' + (isImp ? ' is-imposter' : '');
-    row.innerHTML = `<span class="player-name">${name}</span><span class="player-tag ${isImp?'imposter-tag':''}'">${isImp?'🕵️ Imposter':'✅ Unschuldig'}</span>`;
-    list.appendChild(row);
+  imposterState.players.forEach((name, i) => {
+    const isImp = i === imposterState.imposterIndex;
+    list.innerHTML += `<div class="player-row${isImp?' is-imposter':''}">
+      <span class="player-name">${name}</span>
+      <span class="player-tag${isImp?' imposter-tag':''}">${isImp?'🕵️ Imposter':'✅ Normal'}</span>
+    </div>`;
   });
 }
 
 function resetImposter() {
-  clearInterval(state.timerInterval);
-  hide('imposter-deal'); hide('imposter-play'); hide('imposter-reveal');
-  show('imposter-setup'); renderNameInputs();
+  clearInterval(imposterState.timerInterval);
+  ['imposter-deal','imposter-play','imposter-reveal'].forEach(id => document.getElementById(id).classList.add('hidden'));
+  document.getElementById('imposter-setup').classList.remove('hidden');
+  renderNameInputs();
 }
 
-function show(id) { document.getElementById(id).classList.remove('hidden'); }
-function hide(id) { document.getElementById(id).classList.add('hidden'); }
-
-document.addEventListener('DOMContentLoaded', renderNameInputs);
+document.addEventListener('DOMContentLoaded', () => {
+  renderNameInputs();
+});

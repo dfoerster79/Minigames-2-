@@ -46,6 +46,27 @@ const WBI_CATS = {
       'Turnen','Leichtathletik','Radfahren','Eishockey','Rugby','Fechten',
       'Sumo','Curling','Bogenschießen','Triathlon','Breakdance']
   },
+  fortnite: {
+    label: '🎮 Fortnite',
+    words: ['Tilted Towers','Loot Lake','Pleasant Park','Salty Springs','Dusty Divot',
+      'Retail Row','Lazy Lake','The Mothership','Jonesy','Peely','Fishstick','Meowscles',
+      'Midas','The Mandalorian','Master Chief','Ariana Grande','Travis Scott',
+      'Drift','Raven','Ghoul Trooper','Black Knight','Skull Trooper','Ikonik',
+      'Battle Bus','Chug Jug','Slurp Juice','Launch Pad','Port-a-Fort',
+      'Pump Shotgun','Minigun','Rocket Launcher','Storm','Victory Royale',
+      'Building','Edit Course','Creative Mode','Chapter 1','Zero Point','Omni Sword']
+  },
+  brawlstars: {
+    label: '🌟 Brawl Stars',
+    words: ['Shelly','Colt','Bull','Brock','El Primo','Barley','Poco','Rosa',
+      'Jessie','Dynamike','Tick','8-Bit','Rico','Darryl','Penny','Carl',
+      'Jacky','Gus','Bo','Emz','Stu','Piper','Pam','Frank','Bibi','Bea',
+      'Nani','Edgar','Griff','Grom','Bonnie','Gale','Colette','Belle',
+      'Ash','Lola','Sam','Mandy','Maisie','Hank','Pearl','Larry & Lawrie',
+      'Angelo','Berry','Clancy','Moe','Juju','Melodie','Lily','Draco',
+      'Gem Grab','Showdown','Brawl Ball','Heist','Bounty','Hot Zone',
+      'Siege','Trophy Road','Power League','Club League','Starr Park']
+  },
   spicy: {
     label: '🌶️ Spicy (18+)',
     words: ['Dildo','Vibrator','Striptease','Lap Dance','Kondom','Nackt','One-Night-Stand',
@@ -73,7 +94,6 @@ let wbi = {
   playerName: '',
 };
 
-// ---- SETUP ----
 function wbiInit() {
   wbiRenderCats();
   wbiUpdateTimerDisplay();
@@ -86,7 +106,13 @@ function wbiRenderCats() {
   Object.entries(WBI_CATS).forEach(([key, cat]) => {
     const checked = wbi.activeCats.includes(key) ? 'checked' : '';
     const isSpicy = key === 'spicy';
-    box.innerHTML += `<label class="cat-check${isSpicy ? ' cat-check-spicy' : ''}">
+    const isFortnite = key === 'fortnite';
+    const isBrawl = key === 'brawlstars';
+    let extra = '';
+    if (isSpicy) extra = ' cat-check-spicy';
+    if (isFortnite) extra = ' cat-check-fortnite';
+    if (isBrawl) extra = ' cat-check-brawl';
+    box.innerHTML += `<label class="cat-check${extra}">
       <input type="checkbox" ${checked} onchange="wbiToggleCat('${key}')" />
       <span>${cat.label}</span>
     </label>`;
@@ -111,7 +137,6 @@ function wbiUpdateTimerDisplay() {
   if (el) el.textContent = wbi.timerSec + 's';
 }
 
-// ---- BUILD POOL ----
 function wbiBuildPool() {
   let pool = wbi.activeCats.flatMap(k => WBI_CATS[k].words);
   for (let i = pool.length - 1; i > 0; i--) {
@@ -121,7 +146,6 @@ function wbiBuildPool() {
   return pool;
 }
 
-// ---- START ----
 function startWBI() {
   const nameEl = document.getElementById('wbi-player-name');
   wbi.playerName = nameEl ? (nameEl.value.trim() || 'Spieler') : 'Spieler';
@@ -134,8 +158,6 @@ function startWBI() {
   document.getElementById('wbi-setup').classList.add('hidden');
   document.getElementById('wbi-result').classList.add('hidden');
   document.getElementById('wbi-game').classList.remove('hidden');
-
-  // Show countdown screen first
   document.getElementById('wbi-countdown-wrap').classList.remove('hidden');
   document.getElementById('wbi-splash-center').classList.add('hidden');
   document.getElementById('wbi-manual-btns').classList.add('hidden');
@@ -144,18 +166,16 @@ function startWBI() {
   wbiStartCountdown();
 }
 
-// ---- COUNTDOWN ----
 function wbiStartCountdown() {
   let count = 3;
   const numEl = document.getElementById('wbi-countdown-num');
   numEl.textContent = count;
-
   wbi.countdownInterval = setInterval(() => {
     count--;
     if (count > 0) {
       numEl.textContent = count;
       numEl.classList.remove('wbi-cd-pop');
-      void numEl.offsetWidth; // reflow
+      void numEl.offsetWidth;
       numEl.classList.add('wbi-cd-pop');
     } else {
       clearInterval(wbi.countdownInterval);
@@ -167,42 +187,31 @@ function wbiStartCountdown() {
 function wbiLaunchGame() {
   wbi.state = 'playing';
   wbi.timerLeft = wbi.timerSec;
-
   document.getElementById('wbi-countdown-wrap').classList.add('hidden');
   document.getElementById('wbi-splash-center').classList.remove('hidden');
   document.getElementById('wbi-game-timer-bar').classList.remove('hidden');
-
   wbiRequestGyro();
   wbiNextTerm();
   wbiStartTimer();
 }
 
-// ---- NEXT TERM ----
 function wbiNextTerm() {
   if (wbi.poolIndex >= wbi.pool.length) wbi.pool = wbiBuildPool(), wbi.poolIndex = 0;
   wbi.currentTerm = wbi.pool[wbi.poolIndex++];
   wbi.tiltLock = false;
-
   const termEl = document.getElementById('wbi-splash-term');
   const overlay = document.getElementById('wbi-tilt-overlay');
   if (termEl) termEl.textContent = wbi.currentTerm;
-  if (overlay) {
-    overlay.className = 'wbi-tilt-overlay';
-    overlay.textContent = '';
-  }
+  if (overlay) { overlay.className = 'wbi-tilt-overlay'; overlay.textContent = ''; }
 }
 
-// ---- TIMER ----
 function wbiStartTimer() {
   clearInterval(wbi.timerInterval);
   wbiRenderTimer();
   wbi.timerInterval = setInterval(() => {
     wbi.timerLeft--;
     wbiRenderTimer();
-    if (wbi.timerLeft <= 0) {
-      clearInterval(wbi.timerInterval);
-      wbiEndGame();
-    }
+    if (wbi.timerLeft <= 0) { clearInterval(wbi.timerInterval); wbiEndGame(); }
   }, 1000);
 }
 
@@ -213,15 +222,12 @@ function wbiRenderTimer() {
   el.className = 'wbi-game-timer-val' + (wbi.timerLeft <= 10 ? ' urgent' : '');
 }
 
-// ---- GYROSCOPE ----
 function wbiRequestGyro() {
   if (typeof DeviceOrientationEvent !== 'undefined' &&
       typeof DeviceOrientationEvent.requestPermission === 'function') {
     DeviceOrientationEvent.requestPermission()
-      .then(state => {
-        if (state === 'granted') wbiAttachGyro();
-        else wbiFallbackButtons();
-      }).catch(() => wbiFallbackButtons());
+      .then(state => { if (state === 'granted') wbiAttachGyro(); else wbiFallbackButtons(); })
+      .catch(() => wbiFallbackButtons());
   } else if (window.DeviceOrientationEvent) {
     wbiAttachGyro();
   } else {
@@ -244,18 +250,14 @@ function wbiHandleTilt(e) {
   if (wbi.state !== 'playing' || wbi.tiltLock) return;
   const beta = e.beta;
   if (beta === null) return;
-  if (beta < -20) {
-    wbiCorrect();
-  } else if (beta > 50) {
-    wbiSkip();
-  }
+  if (beta < -20) wbiCorrect();
+  else if (beta > 50) wbiSkip();
 }
 
 function wbiDetachGyro() {
   window.removeEventListener('deviceorientation', wbiHandleTilt);
 }
 
-// ---- RICHTIG / SKIP ----
 function wbiCorrect() {
   if (wbi.state !== 'playing') return;
   wbi.tiltLock = true;
@@ -281,7 +283,6 @@ function wbiShowOverlay(icon, type, term) {
   overlay.innerHTML = `<span class="wbi-overlay-icon">${icon}</span><span class="wbi-overlay-term">${term}</span>`;
 }
 
-// ---- END ----
 function wbiEndGame() {
   wbi.state = 'result';
   wbiDetachGyro();
@@ -292,7 +293,6 @@ function wbiEndGame() {
   document.getElementById('wbi-result-name').textContent = wbi.playerName;
 }
 
-// ---- RESET ----
 function resetWBI() {
   clearInterval(wbi.timerInterval);
   clearInterval(wbi.countdownInterval);
