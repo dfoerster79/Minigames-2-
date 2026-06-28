@@ -2,6 +2,7 @@
 const WBI_CATS = {
   personen: {
     label: '🎭 Personen',
+    emoji: '🎭',
     words: ['Albert Einstein','Napoleon Bonaparte','Cleopatra','Mozart','Leonardo da Vinci',
       'Marie Curie','Shakespeare','Beethoven','Columbus','Gandhi','Harry Potter',
       'Sherlock Holmes','Superman','Batman','SpongeBob','Mickey Mouse','Darth Vader',
@@ -11,6 +12,7 @@ const WBI_CATS = {
   },
   tiere: {
     label: '🐾 Tiere',
+    emoji: '🐾',
     words: ['Elefant','Giraffe','Pinguin','Delfin','Koalabär','Gorilla','Flamingo',
       'Krokodil','Nashorn','Gepard','Panda','Polarfuchs','Chamäleon','Oktopus',
       'Axolotl','Qualle','Fledermaus','Pfau','Seepferdchen','Mantarochen',
@@ -19,6 +21,7 @@ const WBI_CATS = {
   },
   berufe: {
     label: '🛠️ Berufe',
+    emoji: '🛠️',
     words: ['Feuerwehrmann','Astronaut','Zauberer','Pirat','Ritter','Ninja','Cowboy',
       'Detektiv','Koch','Arzt','Lehrer','Pilot','Taucher','Clown','Zirkusdirektor',
       'Schatzsucher','Superheld','Roboter','Zeitreisender','Meerjungfrau',
@@ -26,13 +29,15 @@ const WBI_CATS = {
   },
   essen: {
     label: '🍕 Essen',
+    emoji: '🍕',
     words: ['Pizza','Sushi','Hamburger','Eis','Donut','Brezel','Spaghetti','Pommes',
       'Waffel','Croissant','Taco','Hot Dog','Schnitzel','Currywurst','Erdbeere',
       'Wassermelone','Ananas','Avocado','Banane','Kiwi','Broccoli','Tomate',
       'Käse','Schokolade','Gummibär','Ramen','Gyros','Pulled Pork','Cheesecake']
   },
   filme: {
-    label: '🎬 Filme & Serien',
+    label: '🎬 Filme',
+    emoji: '🎬',
     words: ['Titanic','Star Wars','Jurassic Park','Der König der Löwen','Frozen',
       'Spider-Man','Iron Man','Captain America','Thor','Hulk','Shrek','Toy Story',
       'Findet Nemo','Moana','Coco','Up','WALL-E','Ratatouille','Die Incredibles',
@@ -41,6 +46,7 @@ const WBI_CATS = {
   },
   sport: {
     label: '⚽ Sport',
+    emoji: '⚽',
     words: ['Fußball','Tennis','Basketball','Schwimmen','Boxen','Skifahren','Surfen',
       'Klettern','Golf','Baseball','Volleyball','Tischtennis','Badminton','Reiten',
       'Turnen','Leichtathletik','Radfahren','Eishockey','Rugby','Fechten',
@@ -48,6 +54,7 @@ const WBI_CATS = {
   },
   fortnite: {
     label: '🎮 Fortnite',
+    emoji: '🎮',
     words: ['Tilted Towers','Loot Lake','Pleasant Park','Salty Springs','Dusty Divot',
       'Retail Row','Lazy Lake','The Mothership','Jonesy','Peely','Fishstick','Meowscles',
       'Midas','The Mandalorian','Master Chief','Ariana Grande','Travis Scott',
@@ -58,6 +65,7 @@ const WBI_CATS = {
   },
   brawlstars: {
     label: '🌟 Brawl Stars',
+    emoji: '🌟',
     words: ['Shelly','Colt','Bull','Brock','El Primo','Barley','Poco','Rosa',
       'Jessie','Dynamike','Tick','8-Bit','Rico','Darryl','Penny','Carl',
       'Jacky','Gus','Bo','Emz','Stu','Piper','Pam','Frank','Bibi','Bea',
@@ -68,7 +76,8 @@ const WBI_CATS = {
       'Siege','Trophy Road','Power League','Club League','Starr Park']
   },
   spicy: {
-    label: '🌶️ Spicy (18+)',
+    label: '🌶️ Spicy 18+',
+    emoji: '🌶️',
     words: ['Dildo','Vibrator','Striptease','Lap Dance','Kondom','Nackt','One-Night-Stand',
       'Sextape','Orgie','Fetisch','BDSM','Handschellen','Whirlpool','Sauna nackt',
       'Fremdgehen','Schmusen','Po klatschen','Nutte','Stripper','Erotikkino',
@@ -104,26 +113,32 @@ function wbiRenderCats() {
   if (!box) return;
   box.innerHTML = '';
   Object.entries(WBI_CATS).forEach(([key, cat]) => {
-    const checked = wbi.activeCats.includes(key) ? 'checked' : '';
-    const isSpicy = key === 'spicy';
-    const isFortnite = key === 'fortnite';
-    const isBrawl = key === 'brawlstars';
-    let extra = '';
-    if (isSpicy) extra = ' cat-check-spicy';
-    if (isFortnite) extra = ' cat-check-fortnite';
-    if (isBrawl) extra = ' cat-check-brawl';
-    box.innerHTML += `<label class="cat-check${extra}">
-      <input type="checkbox" ${checked} onchange="wbiToggleCat('${key}')" />
-      <span>${cat.label}</span>
-    </label>`;
+    const isActive = wbi.activeCats.includes(key);
+    const label = document.createElement('label');
+    label.className = 'splash-cat-card' + (isActive ? ' active-cat' : '');
+    label.dataset.cat = key;
+    label.innerHTML = `
+      <input type="checkbox" ${isActive ? 'checked' : ''} onchange="wbiToggleCat('${key}', this)" />
+      <span class="scc-emoji">${cat.emoji}</span>
+      <span class="scc-label">${cat.label.replace(/^[^\s]+\s/, '')}</span>
+    `;
+    box.appendChild(label);
   });
 }
 
-function wbiToggleCat(key) {
+function wbiToggleCat(key, el) {
+  const label = el ? el.closest('label') : null;
   if (wbi.activeCats.includes(key)) {
-    if (wbi.activeCats.length > 1) wbi.activeCats = wbi.activeCats.filter(c => c !== key);
+    if (wbi.activeCats.length > 1) {
+      wbi.activeCats = wbi.activeCats.filter(c => c !== key);
+      if (label) label.classList.remove('active-cat');
+    } else {
+      // prevent unchecking last
+      if (el) el.checked = true;
+    }
   } else {
     wbi.activeCats.push(key);
+    if (label) label.classList.add('active-cat');
   }
 }
 

@@ -128,7 +128,9 @@ html, body { height: 100%; font-family: -apple-system, BlinkMacSystemFont, 'Sego
 .ww-role-name { font-weight: 700; font-size: .95rem; }
 .ww-role-desc { font-size: .75rem; color: #8080a0; }
 .ww-role-counter { display: flex; align-items: center; gap: 8px; }
-.ww-role-counter .cnt-btn { width: 32px; height: 32px; font-size: 1.1rem; }
+/* Fix: Werwolf counter buttons must be visible on dark background */
+.ww-role-counter .cnt-btn { width: 32px; height: 32px; font-size: 1.1rem; background: #3a3a5c; color: #fff; border: 1px solid rgba(255,255,255,.15); }
+.ww-role-counter .cnt-btn:active { background: #7c3aed; }
 .ww-role-counter span { min-width: 24px; text-align: center; font-size: 1.1rem; font-weight: 800; }
 .ww-info-card { background: linear-gradient(135deg,rgba(124,58,237,.15),rgba(219,39,119,.1)); border: 1.5px solid rgba(124,58,237,.3); }
 .ww-info-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,.06); }
@@ -165,13 +167,14 @@ html, body { height: 100%; font-family: -apple-system, BlinkMacSystemFont, 'Sego
 .ww-status-name.dead { opacity: .5; text-decoration: line-through; }
 .ww-status-role { font-size: .8rem; color: #8080a0; }
 
-/* ===== CATEGORY GRID ===== */
+/* ===== CATEGORY GRID (shared by all games) ===== */
 .splash-cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
 .splash-cat-card { display: flex; flex-direction: column; align-items: center; justify-content: center; background: #0f0f1a; border-radius: 14px; padding: 12px 6px; cursor: pointer; border: 2px solid transparent; transition: .2s; text-align: center; user-select: none; }
 .splash-cat-card input { display: none; }
 .splash-cat-card.active-cat, .splash-cat-card:has(input:checked) { border-color: #7c3aed; background: rgba(124,58,237,.15); }
 .scc-emoji { font-size: 1.5rem; margin-bottom: 4px; }
 .scc-label { font-size: .7rem; font-weight: 700; color: #a0a0c0; }
+.splash-cat-card.active-cat .scc-label,
 .splash-cat-card:has(input:checked) .scc-label { color: #a78bfa; }
 
 /* ===== TIC TAC TOE ===== */
