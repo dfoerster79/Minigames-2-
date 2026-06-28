@@ -99,6 +99,7 @@
           <label class="cat-check"><input type="checkbox" id="cat-musik" onchange="toggleCat('musik')" /><span>🎸 Musik &amp; Bands</span></label>
           <label class="cat-check"><input type="checkbox" id="cat-wissenschaft" onchange="toggleCat('wissenschaft')" /><span>🔬 Wissenschaft &amp; Natur</span></label>
           <label class="cat-check"><input type="checkbox" id="cat-technik" onchange="toggleCat('technik')" /><span>📱 Technik &amp; Gadgets</span></label>
+          <label class="cat-check cat-check-spicy"><input type="checkbox" id="cat-spicy" onchange="toggleCat('spicy')" /><span>🌶️ Spicy (18+)</span></label>
         </div>
       </div>
       <div class="section-card">
@@ -294,7 +295,6 @@
       <h2>❌⭕ Tic Tac Toe</h2>
       <div></div>
     </div>
-
     <div id="ttt-setup">
       <div class="section-card">
         <div class="section-title">Spielfeldgröße</div>
@@ -310,7 +310,6 @@
       </div>
       <button class="btn-primary" onclick="startTTT()">Spiel starten 🎮</button>
     </div>
-
     <div id="ttt-game" class="hidden">
       <div class="ttt-scoreboard">
         <div class="ttt-score-box ttt-score-x" id="ttt-score-x-box">
@@ -326,10 +325,8 @@
           <div class="ttt-score-num ttt-score-o-num" id="ttt-score-o">0</div>
         </div>
       </div>
-
       <div class="ttt-status" id="ttt-status">Spieler X ist dran</div>
       <div class="ttt-board" id="ttt-board"></div>
-
       <div class="ttt-result hidden" id="ttt-result">
         <div class="ttt-result-emoji" id="ttt-result-emoji">🎉</div>
         <div class="ttt-result-text" id="ttt-result-text"></div>
@@ -337,7 +334,6 @@
         <button class="btn-ghost" onclick="showTTTSetup()">⚙️ Einstellungen</button>
         <button class="btn-ghost" onclick="showHome()">🏠 Hauptmenü</button>
       </div>
-
       <button class="btn-ghost" style="margin-top:12px" onclick="showHome()">🏠 Hauptmenü</button>
     </div>
   </div>
@@ -388,14 +384,22 @@
     <!-- GAME (Splash-Ansicht) -->
     <div id="wbi-game" class="hidden wbi-game-fullscreen">
 
-      <!-- Timer oben -->
-      <div class="wbi-game-timer-bar">
+      <!-- COUNTDOWN -->
+      <div id="wbi-countdown-wrap" class="wbi-countdown-wrap">
+        <div class="wbi-countdown-emoji">📱</div>
+        <div class="wbi-countdown-instruction">Handy jetzt an<br>deine <strong>Stirn halten!</strong></div>
+        <div class="wbi-countdown-hint">Display zeigt nach außen</div>
+        <div class="wbi-countdown-num wbi-cd-pop" id="wbi-countdown-num">3</div>
+      </div>
+
+      <!-- Timer + Score (hidden during countdown) -->
+      <div class="wbi-game-timer-bar hidden" id="wbi-game-timer-bar">
         <div class="wbi-game-timer-val" id="wbi-game-timer">60s</div>
         <div class="wbi-score-inline">✅ <span id="wbi-score-val">0</span></div>
       </div>
 
-      <!-- Zentraler Begriff -->
-      <div class="wbi-splash-center">
+      <!-- Zentraler Begriff (hidden during countdown) -->
+      <div class="wbi-splash-center hidden" id="wbi-splash-center">
         <div class="wbi-splash-term" id="wbi-splash-term">Begriff</div>
       </div>
 
