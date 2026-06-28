@@ -1,22 +1,35 @@
 // ========== WERWOLF ==========
 const ROLLEN = [
-  { name: 'Werwolf',      emoji: '🐺', desc: 'Du bist ein Werwolf! Jede Nacht wählst du mit den anderen Werwölfen ein Opfer. Bleib tagsüber unerkannt!', team: 'wolf', power: false },
-  { name: 'Dorfbewohner', emoji: '🗓️', desc: 'Du bist ein normaler Dorfbewohner. Finde die Werwölfe und votä sie raus!', team: 'village', power: false },
-  { name: 'Seherin',      emoji: '🔮', desc: 'Jede Nacht darfst du die Rolle eines Spielers aufdecken. Nutze dein Wissen weise!', team: 'village', power: true },
-  { name: 'Hexe',         emoji: '🧛', desc: 'Du hast einen Heiltrank (rettet ein Opfer) und einen Gifttrank (tötet jemanden). Jeder Trank kann nur einmal eingesetzt werden.', team: 'village', power: true },
-  { name: 'Jäger',         emoji: '🎯', desc: 'Wenn du stirbst, darfst du sofort jemanden mit in den Tod reißen!', team: 'village', power: true },
-  { name: 'Amor',         emoji: '💘', desc: 'In der ersten Nacht verliebt du zwei Spieler. Wenn einer stirbt, stirbt auch der andere.', team: 'village', power: true },
-  { name: 'Dorfidiot',    emoji: '🤪', desc: 'Du wirst nie rausgevoted – wenn du enttarnt wirst, verlierst du nur dein Stimmrecht.', team: 'village', power: false },
-  { name: 'Hauptmann',    emoji: '🏅', desc: 'Deine Stimme zählt doppelt. Wenn du stirbst, bestimmst du deinen Nachfolger.', team: 'village', power: false },
+  { name: 'Werwolf',       emoji: '🐺', desc: 'Du bist ein Werwolf! Jede Nacht wählst du mit den anderen Werwölfen ein Opfer. Bleib tagsüber unerkannt!', team: 'wolf', power: false },
+  { name: 'Dorfbewohner',  emoji: '🧑‍🌾', desc: 'Du bist ein normaler Dorfbewohner. Diskutiere, beobachte und votä die Werwölfe raus!', team: 'village', power: false },
+  { name: 'Seherin',       emoji: '🔮', desc: 'Jede Nacht darfst du die Rolle eines Spielers aufdecken. Nutze dein Wissen weise – ohne dich zu verraten!', team: 'village', power: true },
+  { name: 'Hexe',          emoji: '🧝‍♀️', desc: 'Du hast einen Heiltrank (rettet das Nacht-Opfer) und einen Gifttrank (tötet jemanden). Jeder Trank kann nur einmal eingesetzt werden.', team: 'village', power: true },
+  { name: 'Amor',          emoji: '💘', desc: 'In der ersten Nacht verliebt du zwei Spieler. Wenn einer stirbt, stirbt auch der andere – selbst wenn einer ein Werwolf ist!', team: 'village', power: true },
+  { name: 'Jäger',          emoji: '🎯', desc: 'Wenn du stirbst, darfst du sofort jemanden mit in den Tod reißen. Dein letzter Schuss!', team: 'village', power: true },
+  { name: 'Dieb',          emoji: '🥷', desc: 'Zu Spielbeginn liegen 2 Zusatzkarten verdeckt. Du darfst eine nehmen und damit deine Rolle tauschen – auch gegen einen Werwolf!', team: 'village', power: true },
+  { name: 'Dorfmatratze',  emoji: '🛌', desc: 'Du bist die Dorfmatratze! Jeder weiß, wer du bist – du liegst allen auf der Tasche. Kannst du trotzdem überleben?', team: 'village', power: false },
+  { name: 'Bürgermeister', emoji: '🌿', desc: 'Du bist der Bürgermeister! Deine Stimme zählt doppelt bei der Abstimmung. Wenn du stirbst, bestimmst du heimlich deinen Nachfolger.', team: 'village', power: true },
 ];
 
 const WERWOLF_CONFIGS = [
-  { min: 5,  max: 6,  wolves: 1, special: [] },
-  { min: 7,  max: 8,  wolves: 2, special: ['Seherin'] },
-  { min: 9,  max: 10, wolves: 2, special: ['Seherin', 'Hexe'] },
-  { min: 11, max: 12, wolves: 3, special: ['Seherin', 'Hexe', 'Jäger'] },
-  { min: 13, max: 15, wolves: 3, special: ['Seherin', 'Hexe', 'Jäger', 'Amor'] },
-  { min: 16, max: 20, wolves: 4, special: ['Seherin', 'Hexe', 'Jäger', 'Amor', 'Dorfidiot'] },
+  { min: 5,  max: 6,  wolves: 1 },
+  { min: 7,  max: 8,  wolves: 2 },
+  { min: 9,  max: 10, wolves: 2 },
+  { min: 11, max: 12, wolves: 3 },
+  { min: 13, max: 15, wolves: 3 },
+  { min: 16, max: 20, wolves: 4 },
+];
+
+// Alle wählbaren Sonderrollen (Dorfbewohner & Werwolf sind immer dabei)
+const SONDER_ROLLEN = [
+  { key: 'seherin',      name: 'Seherin',       emoji: '🔮', default: true },
+  { key: 'hexe',         name: 'Hexe',          emoji: '🧝‍♀️', default: false },
+  { key: 'amor',         name: 'Amor',          emoji: '💘', default: false },
+  { key: 'jaeger',       name: 'Jäger',          emoji: '🎯', default: false },
+  { key: 'dieb',         name: 'Dieb',          emoji: '🥷', default: false },
+  { key: 'dorfmatratze', name: 'Dorfmatratze',  emoji: '🛌', default: false },
+  // Extra
+  { key: 'buergermeister', name: 'Bürgermeister', emoji: '🌿', default: false, extra: true },
 ];
 
 let werwolfState = {
@@ -24,7 +37,7 @@ let werwolfState = {
   names: [],
   assignedRoles: [],
   currentDealing: 0,
-  customRoles: { seherin: true, hexe: false, jaeger: false, amor: false, dorfidiot: false, hauptmann: false },
+  customRoles: Object.fromEntries(SONDER_ROLLEN.map(r => [r.key, r.default])),
   timerInterval: null
 };
 
@@ -50,8 +63,11 @@ function changeWWCount(delta) {
 function updateWerwolfRollenInfo() {
   const n = werwolfState.players;
   const cfg = WERWOLF_CONFIGS.find(c => n >= c.min && n <= c.max) || WERWOLF_CONFIGS[WERWOLF_CONFIGS.length-1];
+  // Count active special roles (excl. bürgermeister as it's an overlay role)
+  const activeSpecials = SONDER_ROLLEN.filter(r => !r.extra && werwolfState.customRoles[r.key]).length;
   document.getElementById('ww-wolf-count').textContent = cfg.wolves;
   document.getElementById('ww-village-count').textContent = n - cfg.wolves;
+  document.getElementById('ww-special-count').textContent = Math.min(activeSpecials, n - cfg.wolves);
 }
 
 function buildRollenPool() {
@@ -60,16 +76,21 @@ function buildRollenPool() {
   let pool = [];
   // Wolves
   for (let i = 0; i < cfg.wolves; i++) pool.push('Werwolf');
-  // Special roles (based on checkboxes)
-  const specials = ['Seherin','Hexe','J\u00e4ger','Amor','Dorfidiot','Hauptmann'];
-  const keys = ['seherin','hexe','jaeger','amor','dorfidiot','hauptmann'];
-  keys.forEach((k, idx) => {
-    if (werwolfState.customRoles[k]) pool.push(specials[idx]);
+  // Special roles (not bürgermeister – that is an extra overlay)
+  SONDER_ROLLEN.filter(r => !r.extra && werwolfState.customRoles[r.key]).forEach(r => {
+    pool.push(r.name);
   });
+  // Bürgermeister as extra: replaces one Dorfbewohner slot if active
+  const hasBM = werwolfState.customRoles['buergermeister'];
   // Fill rest with Dorfbewohner
   while (pool.length < n) pool.push('Dorfbewohner');
-  // Trim if too many specials
+  // Trim if over
   if (pool.length > n) pool = pool.slice(0, n);
+  // Replace one Dorfbewohner with Bürgermeister if active
+  if (hasBM) {
+    const idx = pool.lastIndexOf('Dorfbewohner');
+    if (idx !== -1) pool[idx] = 'Bürgermeister';
+  }
   // Shuffle
   for (let i = pool.length-1; i > 0; i--) {
     const j = Math.floor(Math.random()*(i+1));
@@ -104,7 +125,7 @@ function wwShowDealWaiting() {
 function wwShowCard() {
   const i = werwolfState.currentDealing;
   const roleName = werwolfState.assignedRoles[i];
-  const rolle = ROLLEN.find(r => r.name === roleName) || { name: roleName, emoji: '❓', desc: '', team: 'village' };
+  const rolle = ROLLEN.find(r => r.name === roleName) || { name: roleName, emoji: '❓', desc: '', team: 'village', power: false };
   const card = document.getElementById('ww-player-card');
   card.className = 'card ' + (rolle.team === 'wolf' ? 'imposter-card' : (rolle.power ? 'power-card' : ''));
   document.getElementById('ww-card-emoji').textContent = rolle.emoji;
@@ -127,27 +148,21 @@ function wwShowOverview() {
     const roleName = werwolfState.assignedRoles[i];
     const rolle = ROLLEN.find(r => r.name === roleName) || { emoji: '❓', team: 'village', power: false };
     const row = document.createElement('div');
-    row.className = 'player-row';
-    row.innerHTML = `<span class="player-name">${rolle.emoji} ${name}</span><span class="player-tag">${roleName}</span>`;
+    row.className = 'player-row' + (rolle.team === 'wolf' ? ' is-imposter' : '');
+    row.innerHTML = `<span class="player-name">${rolle.emoji} ${name}</span><span class="player-tag ${rolle.team === 'wolf' ? 'imposter-tag' : ''}">${roleName}</span>`;
     list.appendChild(row);
   });
-  // Role summary
   const counts = {};
   werwolfState.assignedRoles.forEach(r => counts[r] = (counts[r]||0)+1);
   const summary = document.getElementById('ww-role-summary');
   summary.innerHTML = Object.entries(counts).map(([r,c]) => {
     const ro = ROLLEN.find(x => x.name===r);
-    return `<span class="role-badge ${ro && ro.team==='wolf'?'wolf-badge':ro&&ro.power?'power-badge':''}'">${ro?ro.emoji:'❓'} ${r}${c>1?' ×'+c:''}</span>`;
+    return `<span class="role-badge ${ro && ro.team==='wolf' ? 'wolf-badge' : ro && ro.power ? 'power-badge' : ''}">${ro ? ro.emoji : '❓'} ${r}${c>1 ? ' ×'+c : ''}</span>`;
   }).join('');
 }
 
-function wwShowGuide() {
-  wwShow('werwolf-guide'); wwHide('werwolf-overview');
-}
-
-function wwBackToOverview() {
-  wwShow('werwolf-overview'); wwHide('werwolf-guide');
-}
+function wwShowGuide() { wwShow('werwolf-guide'); wwHide('werwolf-overview'); }
+function wwBackToOverview() { wwShow('werwolf-overview'); wwHide('werwolf-guide'); }
 
 function resetWerwolf() {
   wwShow('werwolf-setup'); wwHide('werwolf-deal'); wwHide('werwolf-overview'); wwHide('werwolf-guide');

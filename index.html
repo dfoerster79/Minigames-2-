@@ -15,7 +15,6 @@
       <button class="install-close" onclick="closeInstallPopup()">&#x2715;</button>
       <div class="install-icon">🎮</div>
       <h3>Als App installieren</h3>
-      <!-- iOS -->
       <div id="install-ios" class="hidden">
         <p>Tippe auf <strong>📤 Teilen</strong> und wähle dann<br><strong>"Zum Home-Bildschirm"</strong></p>
         <div class="install-steps">
@@ -24,7 +23,6 @@
           <div class="install-step"><span>3</span> Tippe oben rechts auf „Hinzufügen“</div>
         </div>
       </div>
-      <!-- Android -->
       <div id="install-android" class="hidden">
         <p>Installiere die App für das beste Spielerlebnis!</p>
         <button class="btn-primary install-android-btn" onclick="triggerAndroidInstall()">➕ Zum Homebildschirm hinzufügen</button>
@@ -42,18 +40,12 @@
     <div class="game-list">
       <button class="game-btn" onclick="showGame('imposter')">
         <span class="game-btn-icon">🕵️</span>
-        <div class="game-btn-text">
-          <strong>Imposter</strong>
-          <span>Finde den Imposter!</span>
-        </div>
+        <div class="game-btn-text"><strong>Imposter</strong><span>Finde den Imposter!</span></div>
         <span class="arrow">›</span>
       </button>
       <button class="game-btn" onclick="showGame('werwolf')">
         <span class="game-btn-icon">🐺</span>
-        <div class="game-btn-text">
-          <strong>Werwolf</strong>
-          <span>Wer ist der Werwolf?</span>
-        </div>
+        <div class="game-btn-text"><strong>Werwolf</strong><span>Wer ist der Werwolf?</span></div>
         <span class="arrow">›</span>
       </button>
     </div>
@@ -170,21 +162,34 @@
         <div></div>
       </div>
 
+      <!-- Sonderrollen -->
       <div class="section-card">
-        <div class="section-title">Sonderrollen aktivieren</div>
+        <div class="section-title">Sonderrollen</div>
         <div class="cat-checks">
           <label class="cat-check"><input type="checkbox" id="ww-role-seherin" checked onchange="toggleWWRole('seherin')" /><span>🔮 Seherin</span></label>
-          <label class="cat-check"><input type="checkbox" id="ww-role-hexe" onchange="toggleWWRole('hexe')" /><span>🧛 Hexe</span></label>
-          <label class="cat-check"><input type="checkbox" id="ww-role-jaeger" onchange="toggleWWRole('jaeger')" /><span>🎯 Jäger</span></label>
+          <label class="cat-check"><input type="checkbox" id="ww-role-hexe" onchange="toggleWWRole('hexe')" /><span>🧝‍♀️ Hexe</span></label>
           <label class="cat-check"><input type="checkbox" id="ww-role-amor" onchange="toggleWWRole('amor')" /><span>💘 Amor</span></label>
-          <label class="cat-check"><input type="checkbox" id="ww-role-dorfidiot" onchange="toggleWWRole('dorfidiot')" /><span>🤪 Dorfidiot</span></label>
-          <label class="cat-check"><input type="checkbox" id="ww-role-hauptmann" onchange="toggleWWRole('hauptmann')" /><span>🏅 Hauptmann</span></label>
+          <label class="cat-check"><input type="checkbox" id="ww-role-jaeger" onchange="toggleWWRole('jaeger')" /><span>🎯 Jäger</span></label>
+          <label class="cat-check"><input type="checkbox" id="ww-role-dieb" onchange="toggleWWRole('dieb')" /><span>🥷 Dieb</span></label>
+          <label class="cat-check"><input type="checkbox" id="ww-role-dorfmatratze" onchange="toggleWWRole('dorfmatratze')" /><span>🛌 Dorfmatratze</span></label>
         </div>
       </div>
 
+      <!-- Bürgermeister als Extra -->
+      <div class="section-card bm-card">
+        <div class="section-title">Extra-Rolle</div>
+        <label class="cat-check bm-check">
+          <input type="checkbox" id="ww-role-buergermeister" onchange="toggleWWRole('buergermeister')" />
+          <span>🌿 Bürgermeister</span>
+        </label>
+        <p class="bm-hint">Ersetzt einen Dorfbewohner – Stimme zählt doppelt</p>
+      </div>
+
+      <!-- Info -->
       <div class="section-card ww-info-card">
         <div class="ww-info-row"><span>🐺 Werwölfe</span><span id="ww-wolf-count" class="ww-count wolf-count">1</span></div>
-        <div class="ww-info-row"><span>🗓️ Dorf</span><span id="ww-village-count" class="ww-count">5</span></div>
+        <div class="ww-info-row"><span>🧝 Sonderrollen</span><span id="ww-special-count" class="ww-count">1</span></div>
+        <div class="ww-info-row"><span>🧑‍🌾 Dorf</span><span id="ww-village-count" class="ww-count">5</span></div>
       </div>
 
       <div class="section-card">
@@ -218,7 +223,7 @@
       </div>
     </div>
 
-    <!-- OVERVIEW (Spielleiter-Ansicht) -->
+    <!-- OVERVIEW -->
     <div id="werwolf-overview" class="hidden">
       <div class="top-bar"><div></div><h2>Spielleiter 📋</h2><div></div></div>
       <div class="section-card">
@@ -248,23 +253,24 @@
             <li>Alle schließen die Augen</li>
             <li>🐺 <strong>Werwölfe</strong> öffnen Augen, wählen ein Opfer, schließen Augen</li>
             <li>🔮 <strong>Seherin</strong> öffnet Augen, zeigt auf eine Person &rarr; Spielleiter nickt/schüttelt</li>
-            <li>🧛 <strong>Hexe</strong> öffnet Augen, Spielleiter zeigt Opfer &rarr; Heiltrank? Gifttrank?</li>
+            <li>🧝‍♀️ <strong>Hexe</strong> öffnet Augen, Spielleiter zeigt Opfer &rarr; Heiltrank? Gifttrank?</li>
             <li>💘 <strong>Amor</strong> (Runde 1) zeigt 2 Verliebte</li>
+            <li>🥷 <strong>Dieb</strong> (Runde 1) schaut Zusatzkarten an, tauscht evtl. seine Rolle</li>
           </ol>
         </div>
         <div class="guide-section">
           <h3>☀️ Tag</h3>
           <ol>
-            <li>Spielleiter verkundigt Todes-Opfer</li>
+            <li>Spielleiter verkündigt Todes-Opfer</li>
             <li>Diskussion: Wer ist der Werwolf?</li>
             <li>Abstimmung – die Person mit den meisten Stimmen scheidet aus</li>
-            <li>Ausgeschiedener zeigt seine Rolle</li>
+            <li>Ausgeschiedener zeigt seine Rolle &rarr; 🎯 Jäger darf sofort schießen</li>
           </ol>
         </div>
         <div class="guide-section">
           <h3>🏆 Sieg</h3>
           <ul>
-            <li>🗓️ <strong>Dorf</strong> gewinnt, wenn alle Werwölfe tot sind</li>
+            <li>🧑‍🌾 <strong>Dorf</strong> gewinnt, wenn alle Werwölfe tot sind</li>
             <li>🐺 <strong>Werwölfe</strong> gewinnen, wenn sie die Mehrheit haben</li>
           </ul>
         </div>
@@ -272,11 +278,12 @@
           <h3>🎦 Sonderrollen</h3>
           <div class="roles-grid">
             <div class="role-info"><span>🔮</span><div><strong>Seherin</strong><br>Deckt jede Nacht eine Rolle auf</div></div>
-            <div class="role-info"><span>🧛</span><div><strong>Hexe</strong><br>1x Heilen, 1x Vergiften</div></div>
-            <div class="role-info"><span>🎯</span><div><strong>Jäger</strong><br>Nimmt jemanden mit in den Tod</div></div>
+            <div class="role-info"><span>🧝‍♀️</span><div><strong>Hexe</strong><br>1x Heilen, 1x Vergiften</div></div>
             <div class="role-info"><span>💘</span><div><strong>Amor</strong><br>Verknüpft 2 Spieler füreinander</div></div>
-            <div class="role-info"><span>🤪</span><div><strong>Dorfidiot</strong><br>Kann nicht rausgevoted werden</div></div>
-            <div class="role-info"><span>🏅</span><div><strong>Hauptmann</strong><br>Doppelte Stimme, bestimmt Nachfolger</div></div>
+            <div class="role-info"><span>🎯</span><div><strong>Jäger</strong><br>Nimmt jemanden mit in den Tod</div></div>
+            <div class="role-info"><span>🥷</span><div><strong>Dieb</strong><br>Tauscht Rolle mit Zusatzkarte (Runde 1)</div></div>
+            <div class="role-info"><span>🛌</span><div><strong>Dorfmatratze</strong><br>Jeder weiß wer du bist – überlebe!</div></div>
+            <div class="role-info"><span>🌿</span><div><strong>Bürgermeister</strong><br>Doppelte Stimme, bestimmt Nachfolger</div></div>
           </div>
         </div>
       </div>

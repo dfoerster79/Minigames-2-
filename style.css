@@ -142,6 +142,11 @@ body {
 .role-info div { color: #ccc; line-height: 1.4; }
 .role-info strong { color: #f0f0f0; }
 
+/* BÜRGERMEISTER EXTRA CARD */
+.bm-card { border: 1px solid #4f46e5 !important; background: #13122a !important; }
+.bm-check { margin-bottom: 8px; }
+.bm-hint { font-size: 0.78rem; color: #7c7aaa; margin-top: 6px; }
+
 /* INSTALL POPUP */
 .install-popup {
   position: fixed; inset: 0; z-index: 1000;
