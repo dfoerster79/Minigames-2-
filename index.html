@@ -107,6 +107,7 @@
       </div>
       <button class="btn-primary" onclick="startImposter()">Spiel starten 🚀</button>
     </div>
+
     <div id="imposter-deal" class="hidden">
       <div class="top-bar"><div></div><h2>Karten verteilen</h2><div></div></div>
       <div id="deal-waiting" class="center-content">
@@ -124,6 +125,7 @@
         <button class="btn-secondary" onclick="nextPlayer()">✅ Verstanden – weiter</button>
       </div>
     </div>
+
     <div id="imposter-play" class="hidden">
       <div class="top-bar"><div></div><h2>Spiel läuft 🎯</h2><div></div></div>
       <div class="timer-circle">
@@ -137,6 +139,7 @@
       <button class="btn-danger" onclick="revealImposter()">🕵️ Imposter aufdecken</button>
       <button class="btn-ghost" onclick="resetImposter()">↩ Neues Spiel</button>
     </div>
+
     <div id="imposter-reveal" class="hidden">
       <div class="top-bar"><div></div><h2>Auflösung 🎉</h2><div></div></div>
       <div class="reveal-card">
@@ -162,20 +165,18 @@
         <div></div>
       </div>
 
-      <!-- Sonderrollen -->
       <div class="section-card">
         <div class="section-title">Sonderrollen</div>
         <div class="cat-checks">
-          <label class="cat-check"><input type="checkbox" id="ww-role-seherin" checked onchange="toggleWWRole('seherin')" /><span>🔮 Seherin</span></label>
-          <label class="cat-check"><input type="checkbox" id="ww-role-hexe" onchange="toggleWWRole('hexe')" /><span>🧝‍♀️ Hexe</span></label>
-          <label class="cat-check"><input type="checkbox" id="ww-role-amor" onchange="toggleWWRole('amor')" /><span>💘 Amor</span></label>
-          <label class="cat-check"><input type="checkbox" id="ww-role-jaeger" onchange="toggleWWRole('jaeger')" /><span>🎯 Jäger</span></label>
-          <label class="cat-check"><input type="checkbox" id="ww-role-dieb" onchange="toggleWWRole('dieb')" /><span>🥷 Dieb</span></label>
+          <label class="cat-check"><input type="checkbox" id="ww-role-seherin"      onchange="toggleWWRole('seherin')"      /><span>🔮 Seherin</span></label>
+          <label class="cat-check"><input type="checkbox" id="ww-role-hexe"         checked onchange="toggleWWRole('hexe')"         /><span>🧝‍♀️ Hexe</span></label>
+          <label class="cat-check"><input type="checkbox" id="ww-role-amor"         checked onchange="toggleWWRole('amor')"         /><span>💘 Amor</span></label>
+          <label class="cat-check"><input type="checkbox" id="ww-role-jaeger"       onchange="toggleWWRole('jaeger')"       /><span>🎯 Jäger</span></label>
+          <label class="cat-check"><input type="checkbox" id="ww-role-dieb"         onchange="toggleWWRole('dieb')"         /><span>🥷 Dieb</span></label>
           <label class="cat-check"><input type="checkbox" id="ww-role-dorfmatratze" onchange="toggleWWRole('dorfmatratze')" /><span>🛌 Dorfmatratze</span></label>
         </div>
       </div>
 
-      <!-- Bürgermeister als Extra -->
       <div class="section-card bm-card">
         <div class="section-title">Extra-Rolle</div>
         <label class="cat-check bm-check">
@@ -185,11 +186,10 @@
         <p class="bm-hint">Ersetzt einen Dorfbewohner – Stimme zählt doppelt</p>
       </div>
 
-      <!-- Info -->
       <div class="section-card ww-info-card">
         <div class="ww-info-row"><span>🐺 Werwölfe</span><span id="ww-wolf-count" class="ww-count wolf-count">1</span></div>
-        <div class="ww-info-row"><span>🧝 Sonderrollen</span><span id="ww-special-count" class="ww-count">1</span></div>
-        <div class="ww-info-row"><span>🧑‍🌾 Dorf</span><span id="ww-village-count" class="ww-count">5</span></div>
+        <div class="ww-info-row"><span>✨ Sonderrollen</span><span id="ww-special-count" class="ww-count">2</span></div>
+        <div class="ww-info-row"><span>🧑‍🌾 Dorfbewohner</span><span id="ww-village-count" class="ww-count">3</span></div>
       </div>
 
       <div class="section-card">
@@ -205,25 +205,30 @@
       <button class="btn-primary" onclick="startWerwolf()">Rollen verteilen 🎭</button>
     </div>
 
-    <!-- DEAL -->
+    <!-- DEAL (identisch wie Imposter) -->
     <div id="werwolf-deal" class="hidden">
       <div class="top-bar"><div></div><h2>Rollen verteilen</h2><div></div></div>
+
+      <!-- Warten-Screen -->
       <div id="ww-deal-waiting" class="center-content">
         <div class="player-badge" id="ww-deal-player-name"></div>
-        <p class="deal-hint">Tippe auf den Button und schau dir deine Rolle an. Zeige sie niemand anderem!</p>
+        <p class="deal-hint">Tippe auf den Button und schau dir deine Rolle an.<br>Zeige sie <strong>niemand anderem</strong>!</p>
         <button class="btn-primary" onclick="wwShowCard()">👁️ Meine Rolle</button>
       </div>
+
+      <!-- Karten-Screen -->
       <div id="ww-deal-card" class="hidden">
         <div class="card" id="ww-player-card">
           <div class="ww-card-emoji" id="ww-card-emoji"></div>
-          <div class="card-role" id="ww-card-role"></div>
+          <div class="card-role" id="ww-card-sub"></div>
+          <div class="card-word" id="ww-card-role"></div>
           <div class="ww-card-desc" id="ww-card-desc"></div>
         </div>
         <button class="btn-secondary" onclick="wwNextPlayer()">✅ Verstanden – weiter</button>
       </div>
     </div>
 
-    <!-- OVERVIEW -->
+    <!-- OVERVIEW (Spielleiter) -->
     <div id="werwolf-overview" class="hidden">
       <div class="top-bar"><div></div><h2>Spielleiter 📋</h2><div></div></div>
       <div class="section-card">
