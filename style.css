@@ -10,7 +10,6 @@ html, body { height: 100%; font-family: -apple-system, BlinkMacSystemFont, 'Sego
 
 /* ===== HOME ===== */
 .home-header { text-align: center; padding: 28px 0 18px; }
-.home-logo { width: 72px; height: 72px; border-radius: 18px; margin-bottom: 10px; box-shadow: 0 4px 20px rgba(124,58,237,.4); }
 .home-header h1 { font-size: 1.9rem; font-weight: 900; background: linear-gradient(135deg,#a78bfa,#f472b6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
 .subtitle { color: #a0a0c0; font-size: .95rem; margin-top: 4px; }
 
@@ -28,6 +27,7 @@ html, body { height: 100%; font-family: -apple-system, BlinkMacSystemFont, 'Sego
 .splash-card-werwolf  { background: linear-gradient(145deg, #064e3b, #14532d); }
 .splash-card-ttt      { background: linear-gradient(145deg, #1e3a8a, #1d4ed8); }
 .splash-card-wbi      { background: linear-gradient(145deg, #6d28d9, #db2777); }
+.splash-card-wdl      { background: linear-gradient(145deg, #b45309, #d97706); }
 
 /* ===== TOP BAR ===== */
 .top-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; padding-top: 8px; }
@@ -173,11 +173,6 @@ html, body { height: 100%; font-family: -apple-system, BlinkMacSystemFont, 'Sego
 .scc-emoji { font-size: 1.5rem; margin-bottom: 4px; }
 .scc-label { font-size: .7rem; font-weight: 700; color: #a0a0c0; }
 .splash-cat-card:has(input:checked) .scc-label { color: #a78bfa; }
-.splash-cat-alltag  { } .splash-cat-tiere { } .splash-cat-sehenswuerdigkeiten { }
-.splash-cat-essen   { } .splash-cat-sport  { } .splash-cat-filme { }
-.splash-cat-urlaub  { } .splash-cat-berufe { } .splash-cat-musik { }
-.splash-cat-wissenschaft { } .splash-cat-technik { } .splash-cat-fortnite { }
-.splash-cat-brawl { } .splash-cat-spicy { }
 
 /* ===== TIC TAC TOE ===== */
 .ttt-board { display: grid; gap: 8px; margin: 16px auto; max-width: 340px; }
@@ -205,8 +200,6 @@ html, body { height: 100%; font-family: -apple-system, BlinkMacSystemFont, 'Sego
 .ttt-result-text { font-size: 1.4rem; font-weight: 900; }
 .ttt-size-btn { flex: 1; padding: 10px; background: #1a1a2e; border: 2px solid rgba(255,255,255,.1); border-radius: 12px; color: #a0a0c0; font-size: .9rem; font-weight: 700; cursor: pointer; transition: .2s; }
 .ttt-size-active { border-color: #7c3aed; color: #a78bfa; background: rgba(124,58,237,.15); }
-
-/* ===== TIC TAC TOE: DIFFICULTY ===== */
 .ttt-diff-row { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.07); }
 .ttt-diff-label { font-size: .8rem; font-weight: 700; color: #8080a0; text-transform: uppercase; letter-spacing: .07em; margin-bottom: 8px; }
 .ttt-diff-btns { display: flex; gap: 8px; }
@@ -240,3 +233,19 @@ html, body { height: 100%; font-family: -apple-system, BlinkMacSystemFont, 'Sego
 .wbi-ans-btn { flex: 1; padding: 18px 8px; border: none; border-radius: 16px; font-size: 1rem; font-weight: 800; cursor: pointer; }
 .wbi-ans-yes { background: linear-gradient(135deg,#059669,#34d399); color: #fff; }
 .wbi-ans-no  { background: linear-gradient(135deg,#dc2626,#f87171); color: #fff; }
+
+/* ===== WÜRDEST DU EHER ===== */
+.wdl-how-to { background: #1a1a2e; border-radius: 16px; padding: 16px; margin-bottom: 14px; display: flex; flex-direction: column; gap: 8px; }
+.wdl-top-info { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.wdl-cat-badge { background: linear-gradient(135deg,#b45309,#d97706); color: #fff; font-size: .75rem; font-weight: 800; padding: 4px 12px; border-radius: 20px; }
+.wdl-counter-wrap { font-size: .75rem; color: #8080a0; font-weight: 700; }
+.wdl-vs-label { text-align: center; font-size: 1rem; font-weight: 700; color: #a0a0c0; margin-bottom: 12px; letter-spacing: .05em; text-transform: uppercase; }
+.wdl-card { display: flex; flex-direction: column; gap: 0; background: #1a1a2e; border-radius: 20px; overflow: hidden; border: 1.5px solid rgba(255,255,255,.08); }
+.wdl-btn { width: 100%; padding: 22px 18px; border: none; background: transparent; color: #e0e0f0; font-size: 1rem; font-weight: 700; cursor: pointer; text-align: left; line-height: 1.5; transition: background .2s, transform .15s; }
+.wdl-btn-a { border-bottom: 1px solid rgba(255,255,255,.06); }
+.wdl-btn:active { transform: scale(.98); }
+.wdl-btn-chosen { background: linear-gradient(135deg, rgba(124,58,237,.3), rgba(219,39,119,.2)) !important; color: #fff !important; font-size: 1.05rem; }
+.wdl-btn-other  { opacity: .35; }
+.wdl-or-divider { display: flex; align-items: center; gap: 10px; padding: 0 18px; }
+.wdl-or-line { flex: 1; height: 1px; background: rgba(255,255,255,.08); }
+.wdl-or-text { font-size: .75rem; font-weight: 900; color: #6060a0; letter-spacing: .1em; }
