@@ -7,70 +7,135 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="app">
-    <div id="home-screen" class="screen active">
+<div id="app">
+
+  <!-- HOME -->
+  <div id="home-screen" class="screen active">
+    <div class="home-header">
       <h1>🎮 Minigames</h1>
-      <div class="game-cards">
-        <div class="game-card" onclick="showGame('imposter')">
-          <div class="game-icon">🕵️</div>
-          <h2>Imposter</h2>
-          <p>Finde den Imposter – oder sei du selbst einer!</p>
-        </div>
-      </div>
+      <p class="subtitle">Wähle ein Spiel</p>
     </div>
-
-    <div id="imposter-screen" class="screen">
-      <button class="back-btn" onclick="showHome()">← Zurück</button>
-      <h1>🕵️ Imposter</h1>
-
-      <div id="imposter-setup">
-        <h2>Einstellungen</h2>
-        <div class="form-group">
-          <label>Kategorie:</label>
-          <select id="category-select">
-            <option value="alltag">Alltag</option>
-          </select>
+    <div class="game-list">
+      <button class="game-btn" onclick="showGame('imposter')">
+        <span class="game-btn-icon">🕵️</span>
+        <div class="game-btn-text">
+          <strong>Imposter</strong>
+          <span>Finde den Imposter!</span>
         </div>
-        <div class="form-group">
-          <label>Anzahl Spieler:</label>
-          <div class="counter">
-            <button onclick="changeCount(-1)">−</button>
-            <span id="player-count">4</span>
-            <button onclick="changeCount(1)">+</button>
-          </div>
-        </div>
-        <button class="btn-primary" onclick="startImposter()">Spiel starten</button>
-      </div>
-
-      <div id="imposter-deal" class="hidden">
-        <div id="deal-waiting">
-          <h2>Karten verteilen</h2>
-          <p>Spieler <span id="current-player-num"></span> von <span id="total-players"></span></p>
-          <button class="btn-primary" onclick="showCard()">Meine Karte ansehen 👁️</button>
-        </div>
-        <div id="deal-card" class="hidden">
-          <div class="card" id="player-card">
-            <div class="card-label" id="card-role"></div>
-            <div class="card-word" id="card-word"></div>
-          </div>
-          <button class="btn-secondary" onclick="nextPlayer()">Karte verbergen & weiter</button>
-        </div>
-      </div>
-
-      <div id="imposter-play" class="hidden">
-        <h2>Spiel läuft! 🎯</h2>
-        <p class="hint">Alle beschreiben das Wort – der Imposter versucht mitzumachen ohne es zu kennen!</p>
-        <div class="word-reveal-box">
-          <p>Das Wort ist:</p>
-          <div class="big-word" id="play-word"></div>
-        </div>
-        <p class="small-hint">⚠️ Nur sichtbar für den Spielleiter / nach dem Spiel</p>
-        <button class="btn-danger" onclick="resetImposter()">Neues Spiel</button>
-      </div>
+        <span class="arrow">›</span>
+      </button>
     </div>
   </div>
 
-  <script src="imposter.js"></script>
-  <script src="app.js"></script>
+  <!-- IMPOSTER -->
+  <div id="imposter-screen" class="screen">
+
+    <!-- SETUP -->
+    <div id="imposter-setup">
+      <div class="top-bar">
+        <button class="icon-btn" onclick="showHome()">‹</button>
+        <h2>🕵️ Imposter</h2>
+        <div></div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-title">Kategorie</div>
+        <select id="category-select">
+          <option value="alltag">🏠 Alltag</option>
+        </select>
+      </div>
+
+      <div class="section-card">
+        <div class="section-title">Spielzeit (Minuten)</div>
+        <div class="counter">
+          <button class="cnt-btn" onclick="changeTime(-1)">−</button>
+          <span id="game-time">3</span>
+          <button class="cnt-btn" onclick="changeTime(1)">+</button>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-title">Spieler</div>
+        <div class="counter" style="margin-bottom:16px">
+          <button class="cnt-btn" onclick="changeCount(-1)">−</button>
+          <span id="player-count">4</span>
+          <button class="cnt-btn" onclick="changeCount(1)">+</button>
+        </div>
+        <div id="name-inputs"></div>
+      </div>
+
+      <button class="btn-primary" onclick="startImposter()">Spiel starten 🚀</button>
+    </div>
+
+    <!-- DEAL -->
+    <div id="imposter-deal" class="hidden">
+      <div class="top-bar">
+        <div></div>
+        <h2>Karten verteilen</h2>
+        <div></div>
+      </div>
+      <div id="deal-waiting" class="center-content">
+        <div class="player-badge" id="deal-player-name"></div>
+        <p class="deal-hint">Tippe auf den Button und schau dir deine Karte an. Zeige sie niemand anderem!</p>
+        <button class="btn-primary" onclick="showCard()">👁️ Meine Karte</button>
+      </div>
+      <div id="deal-card" class="hidden">
+        <div class="card" id="player-card">
+          <div class="card-role" id="card-role"></div>
+          <div class="card-word" id="card-word"></div>
+          <div class="card-cat" id="card-cat"></div>
+        </div>
+        <button class="btn-secondary" onclick="nextPlayer()">✅ Verstanden – weiter</button>
+      </div>
+    </div>
+
+    <!-- PLAY -->
+    <div id="imposter-play" class="hidden">
+      <div class="top-bar">
+        <div></div>
+        <h2>Spiel läuft 🎯</h2>
+        <div></div>
+      </div>
+
+      <div class="timer-circle" id="timer-circle">
+        <svg viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="54" class="timer-bg"/>
+          <circle cx="60" cy="60" r="54" class="timer-ring" id="timer-ring"
+            stroke-dasharray="339.3" stroke-dashoffset="0"/>
+        </svg>
+        <div class="timer-text" id="timer-text">--:--</div>
+      </div>
+
+      <p class="play-hint">Reihum beschreiben – der Imposter kennt das Wort nicht!</p>
+
+      <button class="btn-danger" onclick="revealImposter()">🕵️ Imposter aufdecken</button>
+      <button class="btn-ghost" onclick="resetImposter()">↩ Neues Spiel</button>
+    </div>
+
+    <!-- REVEAL -->
+    <div id="imposter-reveal" class="hidden">
+      <div class="top-bar">
+        <div></div>
+        <h2>Auflösung 🎉</h2>
+        <div></div>
+      </div>
+
+      <div class="reveal-card">
+        <div class="reveal-label">Das Wort war</div>
+        <div class="reveal-word" id="reveal-word"></div>
+        <div class="reveal-label" style="margin-top:24px">Der Imposter war</div>
+        <div class="reveal-imposter" id="reveal-imposter"></div>
+      </div>
+
+      <div class="players-list" id="reveal-players-list"></div>
+
+      <button class="btn-primary" onclick="resetImposter()">🔄 Nochmal spielen</button>
+      <button class="btn-ghost" onclick="showHome()">🏠 Hauptmenü</button>
+    </div>
+
+  </div>
+</div>
+<script src="imposter.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
