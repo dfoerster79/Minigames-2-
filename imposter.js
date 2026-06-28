@@ -87,7 +87,7 @@ const IMPOSTER_DATA = {
     { word: 'Gartenmöbel',     hint: 'Terrasse' },
     { word: 'Arzttermin',      hint: 'Warten' },
     { word: 'Tablette',        hint: 'Schlucken' },
-    { word: 'Zeitschrift',     hint: 'Blättern' },
+    { word: 'Zeitschrift',     hint: 'Blättern' },
     { word: 'Konferenzraum',   hint: 'Meeting' },
     { word: 'Stempel',         hint: 'Abdruck' },
     { word: 'Autoparkschein',  hint: 'Parkuhr' },
@@ -108,8 +108,8 @@ const IMPOSTER_DATA = {
     { word: 'Flamingo',        hint: 'Rosa' },
     { word: 'Hai',             hint: 'Flosse' },
     { word: 'Oktopus',         hint: 'Arme' },
-    { word: 'Schildkröte',     hint: 'Langsam' },
-    { word: 'Papagei',         hint: 'Reden' },
+    { word: 'Schildkröte',     hint: 'Panzer' },
+    { word: 'Papagei',         hint: 'Sprechen' },
     { word: 'Pferd',           hint: 'Reiten' },
     { word: 'Kuh',             hint: 'Milch' },
     { word: 'Schwein',         hint: 'Schlamm' },
@@ -123,8 +123,6 @@ const IMPOSTER_DATA = {
     { word: 'Hamster',         hint: 'Backen' },
     { word: 'Meerschweinchen', hint: 'Quietschen' },
     { word: 'Goldfisch',       hint: 'Aquarium' },
-    { word: 'Papagei',         hint: 'Sprechen' },
-    { word: 'Schildkröte',     hint: 'Panzer' },
     { word: 'Adler',           hint: 'Fliegen' },
     { word: 'Eule',            hint: 'Nacht' },
     { word: 'Schwan',          hint: 'Weiß' },
@@ -137,7 +135,7 @@ const IMPOSTER_DATA = {
     { word: 'Frosch',          hint: 'Quaken' },
     { word: 'Schlange',        hint: 'Züngeln' },
     { word: 'Eidechse',        hint: 'Schwanz' },
-    { word: 'Chamäläon',       hint: 'Farbe' },
+    { word: 'Chamäleön',       hint: 'Farbe' },
     { word: 'Igel',            hint: 'Stacheln' },
     { word: 'Maulwurf',        hint: 'Graben' },
     { word: 'Fuchs',           hint: 'Schlau' },
@@ -148,7 +146,7 @@ const IMPOSTER_DATA = {
     { word: 'Dachs',           hint: 'Streifen' },
     { word: 'Biber',           hint: 'Dämme' },
     { word: 'Otter',           hint: 'Schwimmen' },
-    { word: 'Seehünd',         hint: 'Klatschen' },
+    { word: 'Seehund',         hint: 'Klatschen' },
     { word: 'Walross',         hint: 'Zähne' },
     { word: 'Eisbär',          hint: 'Arktis' },
     { word: 'Polarfuchs',      hint: 'Weiß' },
@@ -208,32 +206,27 @@ const IMPOSTER_DATA = {
     { word: 'Sagrada Familia',    hint: 'Baustelle' },
     { word: 'Vatikan',            hint: 'Papst' },
     { word: 'Notre-Dame',         hint: 'Feuer' },
-    { word: 'Louvre',             hint: 'Mona Lisa' },
+    { word: 'Louvre',             hint: 'Gemälde' },
     { word: 'Brandenburger Tor',  hint: 'Berlin' },
     { word: 'Neuschwanstein',     hint: 'Märchen' },
-    { word: 'Oktoberfest',        hint: 'Bier' },
     { word: 'Reichstag',          hint: 'Glas' },
     { word: 'Kölner Dom',         hint: 'Spitzen' },
-    { word: 'Hamburger Speicherstadt', hint: 'Kanal' },
     { word: 'Frauenkirche',       hint: 'München' },
     { word: 'Schwarzwald',        hint: 'Kirsch' },
     { word: 'Zugspitze',          hint: 'Gipfel' },
-    { word: 'Heidelberger Schloss', hint: 'Ruine' },
+    { word: 'Heidelberger Schloss',hint: 'Ruine' },
     { word: 'Sylt',               hint: 'Insel' },
     { word: 'Bodensee',           hint: 'Grenze' },
-    { word: 'Rhön',               hint: 'Hochland' },
     { word: 'Rheinfall',          hint: 'Wasserfall' },
     { word: 'Matterhorn',         hint: 'Spitz' },
     { word: 'Jungfrau',           hint: 'Gletscher' },
     { word: 'Wiener Staatsoper',  hint: 'Oper' },
     { word: 'Schönbrunn',         hint: 'Kaiser' },
     { word: 'Prater',             hint: 'Riesenrad' },
-    { word: 'Sagrada Familia',    hint: 'Gaudi' },
-    { word: 'Colosseum',          hint: 'Arena' },
     { word: 'Pantheon',           hint: 'Kuppel' },
     { word: 'Petersdom',          hint: 'Vatikan' },
     { word: 'Trevi-Brunnen',      hint: 'Münze' },
-    { word: 'Pisa',               hint: 'Schief' },
+    { word: 'Schiefer Turm Pisa', hint: 'Schief' },
     { word: 'Venedig',            hint: 'Gondel' },
     { word: 'Santorini',          hint: 'Blau' },
     { word: 'Parthenon',          hint: 'Säulen' },
@@ -249,7 +242,7 @@ const IMPOSTER_DATA = {
     { word: 'Niagara',            hint: 'Wasserfall' },
     { word: 'Grand Canyon',       hint: 'Tief' },
     { word: 'Yellowstone',        hint: 'Geysir' },
-    { word: 'Times Square',       hint: 'Leuchtreklamen' },
+    { word: 'Times Square',       hint: 'Reklame' },
     { word: 'Central Park',       hint: 'Stadtpark' },
     { word: 'Empire State',       hint: 'Wolkenkratzer' },
     { word: 'Buckingham Palast',  hint: 'Königin' },
@@ -258,23 +251,15 @@ const IMPOSTER_DATA = {
     { word: 'Disneyland',         hint: 'Mäuse' },
     { word: 'Versailles',         hint: 'Garten' },
     { word: 'Moulin Rouge',       hint: 'Rot' },
-    { word: 'Montmartre',         hint: 'Künstler' },
-    { word: 'Sacré-Coeur',        hint: 'Hügel' },
     { word: 'Arc de Triomphe',    hint: 'Bogen' },
     { word: 'Atomium',            hint: 'Atom' },
-    { word: 'Manneken Pis',       hint: 'Klein' },
-    { word: 'Rijksmuseum',        hint: 'Rembrandt' },
     { word: 'Windmühlen',         hint: 'Holland' },
-    { word: 'Alhambra',           hint: 'Spanien' },
-    { word: 'Sagrada Familia',    hint: 'Unfertig' },
     { word: 'Kilimandscharo',     hint: 'Afrika' },
-    { word: 'Victoria-See',       hint: 'Groß' },
     { word: 'Serengeti',          hint: 'Safari' },
-    { word: 'Kapstadt',           hint: 'Küstenstadt' },
-    { word: 'Tafelsitz',          hint: 'Flach' },
+    { word: 'Kapstadt',           hint: 'Küste' },
     { word: 'Amazon',             hint: 'Dschungel' },
     { word: 'Iguazu',             hint: 'Wasserfälle' },
-    { word: 'Galapagos',          hint: 'Schildkröten' },
+    { word: 'Galapagos',          hint: 'Inseln' },
     { word: 'Christusstatue',     hint: 'Rio' },
     { word: 'Chichen Itza',       hint: 'Maya' },
     { word: 'Teotihuacan',        hint: 'Azteken' },
@@ -282,12 +267,200 @@ const IMPOSTER_DATA = {
     { word: 'Plitvice',           hint: 'Seen' },
     { word: 'Dubrovnik',          hint: 'Mauern' },
     { word: 'Cinque Terre',       hint: 'Farbig' },
-    { word: 'Amalfikueste',       hint: 'Steil' },
-    { word: 'Grönland',           hint: 'Eis' },
-    { word: 'Nordkap',            hint: 'Ende' },
     { word: 'Loch Ness',          hint: 'Monster' },
-    { word: 'Ben Nevis',          hint: 'Schottland' },
-    { word: 'Parthenon',          hint: 'Athen' }
+    { word: 'Nordkap',            hint: 'Ende' }
+  ],
+
+  essen: [
+    { word: 'Lasagne',        hint: 'Schichten' },
+    { word: 'Sushi',          hint: 'Rollen' },
+    { word: 'Tiramisu',       hint: 'Kaffee' },
+    { word: 'Fondue',         hint: 'Schmelzen' },
+    { word: 'Döner',          hint: 'Drehen' },
+    { word: 'Schnitzel',      hint: 'Klopfen' },
+    { word: 'Brötchen',       hint: 'Aufschnitt' },
+    { word: 'Croissant',      hint: 'Butter' },
+    { word: 'Guacamole',      hint: 'Avocado' },
+    { word: 'Hummus',         hint: 'Kichererbsen' },
+    { word: 'Tacos',          hint: 'Mexiko' },
+    { word: 'Burger',         hint: 'Fleisch' },
+    { word: 'Pommes',         hint: 'Frittiert' },
+    { word: 'Pizza',          hint: 'Ofen' },
+    { word: 'Pasta',          hint: 'Nudeln' },
+    { word: 'Risotto',        hint: 'Reis' },
+    { word: 'Paella',         hint: 'Safran' },
+    { word: 'Tapas',          hint: 'Spanien' },
+    { word: 'Ramen',          hint: 'Brühe' },
+    { word: 'Dim Sum',        hint: 'Dämpfen' },
+    { word: 'Currywurst',     hint: 'Sauce' },
+    { word: 'Bratwurst',      hint: 'Grillen' },
+    { word: 'Leberkäse',      hint: 'Bayern' },
+    { word: 'Weißwurst',      hint: 'Süß' },
+    { word: 'Knodel',         hint: 'Rund' },
+    { word: 'Sauerkraut',     hint: 'Säuerlich' },
+    { word: 'Bretzel',        hint: 'Salz' },
+    { word: 'Pflaumenkuchen', hint: 'Blech' },
+    { word: 'Schwarzwälder',  hint: 'Kirschen' },
+    { word: 'Apfelstrudel',   hint: 'Wien' },
+    { word: 'Kaiserschmarrn', hint: 'Zerrissen' },
+    { word: 'Palatschinke',   hint: 'Dünn' },
+    { word: 'Waffel',         hint: 'Gitter' },
+    { word: 'Pancakes',       hint: 'Stapeln' },
+    { word: 'Smoothie',       hint: 'Mixen' },
+    { word: 'Limonade',       hint: 'Zitronen' },
+    { word: 'Eiskaffee',      hint: 'Kalt' },
+    { word: 'Milchshake',     hint: 'Eis' },
+    { word: 'Espresso',       hint: 'Klein' },
+    { word: 'Cappuccino',     hint: 'Schaum' },
+    { word: 'Latte Macchiato',hint: 'Schichten' },
+    { word: 'Tee',            hint: 'Aufgießen' },
+    { word: 'Glühwein',       hint: 'Winter' },
+    { word: 'Bowle',          hint: 'Punsch' },
+    { word: 'Sangria',        hint: 'Wein' },
+    { word: 'Mojito',         hint: 'Minze' },
+    { word: 'Marmelade',      hint: 'Einkochen' },
+    { word: 'Nutella',        hint: 'Aufstreichen' },
+    { word: 'Honig',          hint: 'Biene' },
+    { word: 'Käsefondue',     hint: 'Schweiz' },
+    { word: 'Raclette',       hint: 'Schmelzen' },
+    { word: 'Grillplatte',    hint: 'Kohle' },
+    { word: 'Buffet',         hint: 'Auswahl' },
+    { word: 'Vorspeise',      hint: 'Anfang' },
+    { word: 'Dessert',        hint: 'Ende' },
+    { word: 'Beilagen',       hint: 'Dazu' },
+    { word: 'Suppe',          hint: 'Schlurfen' },
+    { word: 'Salat',          hint: 'Grün' },
+    { word: 'Steak',          hint: 'Blutig' },
+    { word: 'Lachs',          hint: 'Rosa' },
+    { word: 'Garnelen',       hint: 'Schalen' },
+    { word: 'Tofu',           hint: 'Soja' },
+    { word: 'Falafel',        hint: 'Kichererbsen' },
+    { word: 'Couscous',       hint: 'Nordafrika' },
+    { word: 'Linsen',         hint: 'Hülsen' },
+    { word: 'Quinoa',         hint: 'Südamerika' },
+    { word: 'Avocado',        hint: 'Kern' },
+    { word: 'Mango',          hint: 'Tropisch' },
+    { word: 'Ananas',         hint: 'Stachelig' },
+    { word: 'Wassermelone',   hint: 'Kern' },
+    { word: 'Erdbeere',       hint: 'Rot' },
+    { word: 'Blaubeere',      hint: 'Blau' },
+    { word: 'Himbeere',       hint: 'Stacheln' },
+    { word: 'Feige',          hint: 'Süß' },
+    { word: 'Granatapfel',    hint: 'Körner' },
+    { word: 'Kokos',          hint: 'Palme' },
+    { word: 'Macaron',        hint: 'Farbe' },
+    { word: 'Eclair',         hint: 'Creme' },
+    { word: 'Muffin',         hint: 'Papier' },
+    { word: 'Brownie',        hint: 'Schokolade' },
+    { word: 'Cheesecake',     hint: 'Käse' },
+    { word: 'Sorbet',         hint: 'Gefroren' },
+    { word: 'Gelatine',       hint: 'Wackeln' },
+    { word: 'Chips',          hint: 'Knabbern' },
+    { word: 'Popcorn',        hint: 'Kino' },
+    { word: 'Gummibärchen',   hint: 'Gummi' },
+    { word: 'Schokolade',     hint: 'Kakao' },
+    { word: 'Karamell',       hint: 'Verbrennen' },
+    { word: 'Marzipan',       hint: 'Mandeln' },
+    { word: 'Lebkuchen',      hint: 'Weihnachten' },
+    { word: 'Plätzchen',      hint: 'Backen' },
+    { word: 'Donut',          hint: 'Loch' },
+    { word: 'Bagel',          hint: 'Ring' },
+    { word: 'Wrap',           hint: 'Einrollen' }
+  ],
+
+  sport: [
+    { word: 'Elfmeter',       hint: 'Strafe' },
+    { word: 'Freistoß',       hint: 'Mauer' },
+    { word: 'Dribbling',      hint: 'Ball' },
+    { word: 'Aufschlag',      hint: 'Tennis' },
+    { word: 'Slalom',         hint: 'Stangen' },
+    { word: 'Abseits',        hint: 'Linie' },
+    { word: 'Hattrick',       hint: 'Drei' },
+    { word: 'Schiedsrichter', hint: 'Pfeifen' },
+    { word: 'Gelbe Karte',    hint: 'Warnung' },
+    { word: 'Rote Karte',     hint: 'Raus' },
+    { word: 'Eckball',        hint: 'Ecke' },
+    { word: 'Einwurf',        hint: 'Seitenlinie' },
+    { word: 'Kopfball',       hint: 'Stirn' },
+    { word: 'Fallrückzieher',  hint: 'Akrobatik' },
+    { word: 'Torwart',        hint: 'Hände' },
+    { word: 'Sprinter',       hint: 'Schnell' },
+    { word: 'Staffel',        hint: 'Stab' },
+    { word: 'Weitsprung',     hint: 'Grube' },
+    { word: 'Hochsprung',     hint: 'Latte' },
+    { word: 'Diskus',         hint: 'Werfen' },
+    { word: 'Speerwurf',      hint: 'Speer' },
+    { word: 'Hammerwerfen',   hint: 'Kreis' },
+    { word: 'Marathon',       hint: '42 km' },
+    { word: 'Triathlon',      hint: 'Drei' },
+    { word: 'Schwimmen',      hint: 'Bahn' },
+    { word: 'Radsport',       hint: 'Pedale' },
+    { word: 'Rudern',         hint: 'Riemen' },
+    { word: 'Kanu',           hint: 'Paddel' },
+    { word: 'Surfen',         hint: 'Welle' },
+    { word: 'Tauchen',        hint: 'Flasche' },
+    { word: 'Klettern',       hint: 'Griffe' },
+    { word: 'Bouldern',       hint: 'Abstürzen' },
+    { word: 'Ski alpin',      hint: 'Piste' },
+    { word: 'Langlauf',       hint: 'Loipe' },
+    { word: 'Biathlon',       hint: 'Schießen' },
+    { word: 'Eiskunstlauf',   hint: 'Pirouette' },
+    { word: 'Eishockey',      hint: 'Scheibe' },
+    { word: 'Curling',        hint: 'Schrubben' },
+    { word: 'Bobsport',       hint: 'Kanal' },
+    { word: 'Rodeln',         hint: 'Hang' },
+    { word: 'Basketball',     hint: 'Korb' },
+    { word: 'Volleyball',     hint: 'Netz' },
+    { word: 'Handball',       hint: 'Tor' },
+    { word: 'Rugby',          hint: 'Oval' },
+    { word: 'American Football',hint: 'Helm' },
+    { word: 'Baseball',       hint: 'Schlagstock' },
+    { word: 'Cricket',        hint: 'England' },
+    { word: 'Golf',           hint: 'Loch' },
+    { word: 'Tennis',         hint: 'Netz' },
+    { word: 'Tischtennis',    hint: 'Platte' },
+    { word: 'Badminton',      hint: 'Feder' },
+    { word: 'Squash',         hint: 'Wand' },
+    { word: 'Boxen',          hint: 'Handschuhe' },
+    { word: 'Ringen',         hint: 'Matte' },
+    { word: 'Judo',           hint: 'Wurf' },
+    { word: 'Karate',         hint: 'Kata' },
+    { word: 'Taekwondo',      hint: 'Fuß' },
+    { word: 'Fechten',        hint: 'Klinge' },
+    { word: 'Bogenschiessen', hint: 'Pfeil' },
+    { word: 'Reiten',         hint: 'Sattel' },
+    { word: 'Turnen',         hint: 'Reck' },
+    { word: 'Rhythmische Gym.',hint: 'Band' },
+    { word: 'Trampolinspringen',hint: 'Federn' },
+    { word: 'Synchronschwimmen',hint: 'Gleichzeitig' },
+    { word: 'Wasserball',     hint: 'Becken' },
+    { word: 'Degenfechten',   hint: 'Spitze' },
+    { word: 'Pentathlon',     hint: 'Fünf' },
+    { word: 'Leichtathletik', hint: 'Stadion' },
+    { word: 'Crossfit',       hint: 'Intensiv' },
+    { word: 'Yoga',           hint: 'Dehnen' },
+    { word: 'Pilates',        hint: 'Rumpf' },
+    { word: 'Zumba',          hint: 'Tanzen' },
+    { word: 'Spinning',       hint: 'Rad' },
+    { word: 'Krafttraining',  hint: 'Hanteln' },
+    { word: 'Ausdauertraining',hint: 'Herz' },
+    { word: 'Intervalltraining',hint: 'Pausen' },
+    { word: 'Stretching',     hint: 'Dehnen' },
+    { word: 'Meditation',     hint: 'Stille' },
+    { word: 'Wandern',        hint: 'Berge' },
+    { word: 'Joggen',         hint: 'Schuhe' },
+    { word: 'Nordic Walking', hint: 'Stöcke' },
+    { word: 'Inlineskaten',   hint: 'Rollen' },
+    { word: 'Skateboard',     hint: 'Tricks' },
+    { word: 'BMX',            hint: 'Sprung' },
+    { word: 'Motocross',      hint: 'Schlamm' },
+    { word: 'Formel 1',       hint: 'Rennstrecke' },
+    { word: 'Dart',           hint: 'Scheibe' },
+    { word: 'Billard',        hint: 'Queue' },
+    { word: 'Bowling',        hint: 'Kegel' },
+    { word: 'Minigolf',       hint: 'Hindernis' },
+    { word: 'Schach',         hint: 'König' },
+    { word: 'Tauziehen',      hint: 'Seil' }
   ]
 };
 
@@ -306,21 +479,16 @@ let state = {
   hintEnabled: false
 };
 
-// ── SETUP ────────────────────────────────────
 function renderNameInputs() {
   const container = document.getElementById('name-inputs');
   container.innerHTML = '';
   for (let i = 0; i < state.players; i++) {
     const row = document.createElement('div');
     row.className = 'name-row';
-    row.innerHTML = `<label>Spieler ${i+1}</label>
-      <input type="text" id="name-${i}" placeholder="Name eingeben" maxlength="20" />`;
+    row.innerHTML = `<label>Spieler ${i+1}</label><input type="text" id="name-${i}" placeholder="Name eingeben" maxlength="20" />`;
     container.appendChild(row);
   }
-  state.names.forEach((n, i) => {
-    const el = document.getElementById('name-' + i);
-    if (el) el.value = n;
-  });
+  state.names.forEach((n, i) => { const el = document.getElementById('name-'+i); if (el) el.value = n; });
 }
 
 function changeCount(delta) {
@@ -335,23 +503,16 @@ function changeTime(delta) {
 }
 
 function toggleCat(cat) {
-  const checked = document.getElementById('cat-' + cat).checked;
-  if (checked) {
-    if (state.selectedCats.length >= 3) {
-      document.getElementById('cat-' + cat).checked = false;
-      return;
-    }
+  const cb = document.getElementById('cat-' + cat);
+  if (cb.checked) {
+    if (state.selectedCats.length >= 3) { cb.checked = false; return; }
     if (!state.selectedCats.includes(cat)) state.selectedCats.push(cat);
   } else {
-    if (state.selectedCats.length <= 1) {
-      document.getElementById('cat-' + cat).checked = true;
-      return;
-    }
+    if (state.selectedCats.length <= 1) { cb.checked = true; return; }
     state.selectedCats = state.selectedCats.filter(c => c !== cat);
   }
 }
 
-// ── START ────────────────────────────────────
 function startImposter() {
   state.names = [];
   for (let i = 0; i < state.players; i++) {
@@ -359,8 +520,6 @@ function startImposter() {
     state.names.push(el && el.value.trim() ? el.value.trim() : 'Spieler ' + (i+1));
   }
   state.hintEnabled = document.getElementById('hint-toggle').checked;
-
-  // pool all selected categories
   let pool = [];
   state.selectedCats.forEach(cat => { pool = pool.concat(IMPOSTER_DATA[cat]); });
   const entry = pool[Math.floor(Math.random() * pool.length)];
@@ -368,42 +527,30 @@ function startImposter() {
   state.hint = entry.hint;
   state.imposterIndex = Math.floor(Math.random() * state.players);
   state.currentDealing = 0;
-
-  show('imposter-deal');
-  hide('imposter-setup');
-  hide('imposter-play');
-  hide('imposter-reveal');
+  show('imposter-deal'); hide('imposter-setup'); hide('imposter-play'); hide('imposter-reveal');
   showDealWaiting();
 }
 
-// ── DEAL ────────────────────────────────────
 function showDealWaiting() {
-  document.getElementById('deal-player-name').textContent =
-    state.names[state.currentDealing];
-  show('deal-waiting');
-  hide('deal-card');
+  document.getElementById('deal-player-name').textContent = state.names[state.currentDealing];
+  show('deal-waiting'); hide('deal-card');
 }
 
 function showCard() {
   const i = state.currentDealing;
   const isImposter = i === state.imposterIndex;
-  const card   = document.getElementById('player-card');
+  const card = document.getElementById('player-card');
   const roleEl = document.getElementById('card-role');
   const wordEl = document.getElementById('card-word');
   const hintEl = document.getElementById('card-hint');
   const catEl  = document.getElementById('card-cat');
-
   if (isImposter) {
     card.className = 'card imposter-card';
     roleEl.textContent = '🕵️ Du bist der Imposter!';
     wordEl.textContent = '???';
     catEl.textContent  = state.selectedCats.map(c => catLabel(c)).join(', ');
-    if (state.hintEnabled) {
-      hintEl.innerHTML = '💡 Tipp: <span>' + state.hint + '</span>';
-      hintEl.classList.remove('hidden');
-    } else {
-      hintEl.classList.add('hidden');
-    }
+    if (state.hintEnabled) { hintEl.innerHTML = '💡 Tipp: <span>' + state.hint + '</span>'; hintEl.classList.remove('hidden'); }
+    else hintEl.classList.add('hidden');
   } else {
     card.className = 'card';
     roleEl.textContent = '✅ Kein Imposter';
@@ -411,12 +558,11 @@ function showCard() {
     catEl.textContent  = state.selectedCats.map(c => catLabel(c)).join(', ');
     hintEl.classList.add('hidden');
   }
-  hide('deal-waiting');
-  show('deal-card');
+  hide('deal-waiting'); show('deal-card');
 }
 
 function catLabel(cat) {
-  return { alltag: 'Alltag', tiere: 'Tiere', sehenswuerdigkeiten: 'Sehensw.' }[cat] || cat;
+  return { alltag: 'Alltag', tiere: 'Tiere', sehenswuerdigkeiten: 'Sehensw.', essen: 'Essen & Trinken', sport: 'Sport' }[cat] || cat;
 }
 
 function nextPlayer() {
@@ -425,62 +571,51 @@ function nextPlayer() {
   else showDealWaiting();
 }
 
-// ── PLAY ────────────────────────────────────
 function startPlayPhase() {
-  hide('imposter-deal');
-  show('imposter-play');
+  hide('imposter-deal'); show('imposter-play');
   state.totalSeconds = state.gameMins * 60;
   state.timerSeconds = state.totalSeconds;
   updateTimerDisplay();
   clearInterval(state.timerInterval);
   state.timerInterval = setInterval(() => {
-    state.timerSeconds--;
-    updateTimerDisplay();
+    state.timerSeconds--; updateTimerDisplay();
     if (state.timerSeconds <= 0) { clearInterval(state.timerInterval); revealImposter(); }
   }, 1000);
 }
 
 function updateTimerDisplay() {
   const s = state.timerSeconds;
-  const mins = String(Math.floor(s / 60)).padStart(2, '0');
-  const secs = String(s % 60).padStart(2, '0');
+  const mins = String(Math.floor(s/60)).padStart(2,'0');
+  const secs = String(s%60).padStart(2,'0');
   const textEl = document.getElementById('timer-text');
-  textEl.textContent = mins + ':' + secs;
-  if (s <= 30) textEl.classList.add('urgent'); else textEl.classList.remove('urgent');
-  const circ = 2 * Math.PI * 54;
-  const fraction = Math.max(0, s / state.totalSeconds);
-  document.getElementById('timer-ring').style.strokeDashoffset = circ * (1 - fraction);
+  textEl.textContent = mins+':'+secs;
+  if (s<=30) textEl.classList.add('urgent'); else textEl.classList.remove('urgent');
+  const circ = 2*Math.PI*54;
+  document.getElementById('timer-ring').style.strokeDashoffset = circ*(1-Math.max(0,s/state.totalSeconds));
   const ring = document.getElementById('timer-ring');
-  if (s <= 30) ring.classList.add('urgent'); else ring.classList.remove('urgent');
+  if (s<=30) ring.classList.add('urgent'); else ring.classList.remove('urgent');
 }
 
-// ── REVEAL ────────────────────────────────
 function revealImposter() {
   clearInterval(state.timerInterval);
-  hide('imposter-play');
-  show('imposter-reveal');
+  hide('imposter-play'); show('imposter-reveal');
   document.getElementById('reveal-word').textContent = state.word;
-  document.getElementById('reveal-imposter').textContent =
-    '🕵️ ' + state.names[state.imposterIndex];
+  document.getElementById('reveal-imposter').textContent = '🕵️ ' + state.names[state.imposterIndex];
   const list = document.getElementById('reveal-players-list');
   list.innerHTML = '';
   state.names.forEach((name, i) => {
     const row = document.createElement('div');
     const isImp = i === state.imposterIndex;
     row.className = 'player-row' + (isImp ? ' is-imposter' : '');
-    row.innerHTML = `<span class="player-name">${name}</span>
-      <span class="player-tag ${isImp ? 'imposter-tag' : ''}">
-        ${isImp ? '🕵️ Imposter' : '✅ Unschuldig'}</span>`;
+    row.innerHTML = `<span class="player-name">${name}</span><span class="player-tag ${isImp?'imposter-tag':''}">${isImp?'🕵️ Imposter':'✅ Unschuldig'}</span>`;
     list.appendChild(row);
   });
 }
 
-// ── RESET ────────────────────────────────
 function resetImposter() {
   clearInterval(state.timerInterval);
   hide('imposter-deal'); hide('imposter-play'); hide('imposter-reveal');
-  show('imposter-setup');
-  renderNameInputs();
+  show('imposter-setup'); renderNameInputs();
 }
 
 function show(id) { document.getElementById(id).classList.remove('hidden'); }
