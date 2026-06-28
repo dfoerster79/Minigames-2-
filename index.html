@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minigames</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <div id="home-screen" class="screen active">
+      <h1>🎮 Minigames</h1>
+      <div class="game-cards">
+        <div class="game-card" onclick="showGame('imposter')">
+          <div class="game-icon">🕵️</div>
+          <h2>Imposter</h2>
+          <p>Finde den Imposter – oder sei du selbst einer!</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="imposter-screen" class="screen">
+      <button class="back-btn" onclick="showHome()">← Zurück</button>
+      <h1>🕵️ Imposter</h1>
+
+      <div id="imposter-setup">
+        <h2>Einstellungen</h2>
+        <div class="form-group">
+          <label>Kategorie:</label>
+          <select id="category-select">
+            <option value="alltag">Alltag</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Anzahl Spieler:</label>
+          <div class="counter">
+            <button onclick="changeCount(-1)">−</button>
+            <span id="player-count">4</span>
+            <button onclick="changeCount(1)">+</button>
+          </div>
+        </div>
+        <button class="btn-primary" onclick="startImposter()">Spiel starten</button>
+      </div>
+
+      <div id="imposter-deal" class="hidden">
+        <div id="deal-waiting">
+          <h2>Karten verteilen</h2>
+          <p>Spieler <span id="current-player-num"></span> von <span id="total-players"></span></p>
+          <button class="btn-primary" onclick="showCard()">Meine Karte ansehen 👁️</button>
+        </div>
+        <div id="deal-card" class="hidden">
+          <div class="card" id="player-card">
+            <div class="card-label" id="card-role"></div>
+            <div class="card-word" id="card-word"></div>
+          </div>
+          <button class="btn-secondary" onclick="nextPlayer()">Karte verbergen & weiter</button>
+        </div>
+      </div>
+
+      <div id="imposter-play" class="hidden">
+        <h2>Spiel läuft! 🎯</h2>
+        <p class="hint">Alle beschreiben das Wort – der Imposter versucht mitzumachen ohne es zu kennen!</p>
+        <div class="word-reveal-box">
+          <p>Das Wort ist:</p>
+          <div class="big-word" id="play-word"></div>
+        </div>
+        <p class="small-hint">⚠️ Nur sichtbar für den Spielleiter / nach dem Spiel</p>
+        <button class="btn-danger" onclick="resetImposter()">Neues Spiel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="imposter.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
