@@ -46,6 +46,20 @@
       </div>
 
       <div class="section-card">
+        <div class="section-title">Tipp für den Imposter</div>
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-label">Tipp aktivieren</div>
+            <div class="toggle-sub">Der Imposter erhält einen kleinen Hinweis zum Wort</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="hint-toggle" />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="section-card">
         <div class="section-title">Spielzeit (Minuten)</div>
         <div class="counter">
           <button class="cnt-btn" onclick="changeTime(-1)">−</button>
@@ -76,13 +90,14 @@
       </div>
       <div id="deal-waiting" class="center-content">
         <div class="player-badge" id="deal-player-name"></div>
-        <p class="deal-hint">Tippe auf den Button und schau dir deine Karte an. Zeige sie niemand anderem!</p>
+        <p class="deal-hint">Tippe auf den Button und schau dir deine Karte an. Zeige sie niemand anderem!</p>
         <button class="btn-primary" onclick="showCard()">👁️ Meine Karte</button>
       </div>
       <div id="deal-card" class="hidden">
         <div class="card" id="player-card">
           <div class="card-role" id="card-role"></div>
           <div class="card-word" id="card-word"></div>
+          <div class="card-hint hidden" id="card-hint"></div>
           <div class="card-cat" id="card-cat"></div>
         </div>
         <button class="btn-secondary" onclick="nextPlayer()">✅ Verstanden – weiter</button>
@@ -96,8 +111,7 @@
         <h2>Spiel läuft 🎯</h2>
         <div></div>
       </div>
-
-      <div class="timer-circle" id="timer-circle">
+      <div class="timer-circle">
         <svg viewBox="0 0 120 120">
           <circle cx="60" cy="60" r="54" class="timer-bg"/>
           <circle cx="60" cy="60" r="54" class="timer-ring" id="timer-ring"
@@ -105,9 +119,7 @@
         </svg>
         <div class="timer-text" id="timer-text">--:--</div>
       </div>
-
       <p class="play-hint">Reihum beschreiben – der Imposter kennt das Wort nicht!</p>
-
       <button class="btn-danger" onclick="revealImposter()">🕵️ Imposter aufdecken</button>
       <button class="btn-ghost" onclick="resetImposter()">↩ Neues Spiel</button>
     </div>
@@ -119,16 +131,13 @@
         <h2>Auflösung 🎉</h2>
         <div></div>
       </div>
-
       <div class="reveal-card">
         <div class="reveal-label">Das Wort war</div>
         <div class="reveal-word" id="reveal-word"></div>
         <div class="reveal-label" style="margin-top:24px">Der Imposter war</div>
         <div class="reveal-imposter" id="reveal-imposter"></div>
       </div>
-
       <div class="players-list" id="reveal-players-list"></div>
-
       <button class="btn-primary" onclick="resetImposter()">🔄 Nochmal spielen</button>
       <button class="btn-ghost" onclick="showHome()">🏠 Hauptmenü</button>
     </div>
