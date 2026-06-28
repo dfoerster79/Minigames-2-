@@ -164,7 +164,6 @@
         <h2>🐺 Werwolf</h2>
         <div></div>
       </div>
-
       <div class="section-card">
         <div class="section-title">Sonderrollen</div>
         <div class="cat-checks">
@@ -176,7 +175,6 @@
           <label class="cat-check"><input type="checkbox" id="ww-role-dorfmatratze" onchange="toggleWWRole('dorfmatratze')" /><span>🛌 Dorfmatratze</span></label>
         </div>
       </div>
-
       <div class="section-card bm-card">
         <div class="section-title">Extra-Rolle</div>
         <label class="cat-check bm-check">
@@ -185,13 +183,11 @@
         </label>
         <p class="bm-hint">Ersetzt einen Dorfbewohner – Stimme zählt doppelt</p>
       </div>
-
       <div class="section-card ww-info-card">
         <div class="ww-info-row"><span>🐺 Werwölfe</span><span id="ww-wolf-count" class="ww-count wolf-count">1</span></div>
         <div class="ww-info-row"><span>✨ Sonderrollen</span><span id="ww-special-count" class="ww-count">2</span></div>
         <div class="ww-info-row"><span>🧑‍🌾 Dorfbewohner</span><span id="ww-village-count" class="ww-count">3</span></div>
       </div>
-
       <div class="section-card">
         <div class="section-title">Spieler</div>
         <div class="counter" style="margin-bottom:16px">
@@ -201,22 +197,17 @@
         </div>
         <div id="werwolf-name-inputs"></div>
       </div>
-
       <button class="btn-primary" onclick="startWerwolf()">Rollen verteilen 🎭</button>
     </div>
 
-    <!-- DEAL (identisch wie Imposter) -->
+    <!-- DEAL -->
     <div id="werwolf-deal" class="hidden">
       <div class="top-bar"><div></div><h2>Rollen verteilen</h2><div></div></div>
-
-      <!-- Warten-Screen -->
       <div id="ww-deal-waiting" class="center-content">
         <div class="player-badge" id="ww-deal-player-name"></div>
         <p class="deal-hint">Tippe auf den Button und schau dir deine Rolle an.<br>Zeige sie <strong>niemand anderem</strong>!</p>
         <button class="btn-primary" onclick="wwShowCard()">👁️ Meine Rolle</button>
       </div>
-
-      <!-- Karten-Screen -->
       <div id="ww-deal-card" class="hidden">
         <div class="card" id="ww-player-card">
           <div class="ww-card-emoji" id="ww-card-emoji"></div>
@@ -228,76 +219,50 @@
       </div>
     </div>
 
-    <!-- OVERVIEW (Spielleiter) -->
-    <div id="werwolf-overview" class="hidden">
-      <div class="top-bar"><div></div><h2>Spielleiter 📋</h2><div></div></div>
-      <div class="section-card">
-        <div class="section-title">Rollenzuweisung</div>
-        <div id="ww-overview-list"></div>
+    <!-- NIGHT SCREEN -->
+    <div id="werwolf-night" class="hidden">
+      <div class="top-bar"><div></div><h2>🌙 Nacht</h2><div></div></div>
+      <div class="night-card">
+        <div class="night-emoji" id="ww-night-emoji">🌙</div>
+        <div class="night-title" id="ww-night-title"></div>
+        <div class="night-desc" id="ww-night-desc"></div>
+      </div>
+      <div id="ww-night-selector"></div>
+      <div id="ww-night-extra"></div>
+      <div id="ww-night-buttons"></div>
+      <button class="btn-ghost" style="margin-top:16px" onclick="resetWerwolf()">↩ Spiel abbrechen</button>
+    </div>
+
+    <!-- DAY SCREEN -->
+    <div id="werwolf-day" class="hidden">
+      <div class="top-bar"><div></div><h2>☀️ Tag <span id="ww-round-num">1</span></h2><div></div></div>
+      <div id="ww-day-announce"></div>
+      <div class="section-card" style="margin-top:12px">
+        <div class="section-title">Spielerstatus</div>
+        <div id="ww-player-status"></div>
       </div>
       <div class="section-card">
-        <div class="section-title">Rollenübersicht</div>
-        <div id="ww-role-summary" class="role-summary"></div>
+        <div id="ww-vote-section"></div>
       </div>
-      <button class="btn-primary" onclick="wwShowGuide()">📖 Spielanleitung</button>
-      <button class="btn-ghost" onclick="resetWerwolf()">↩ Neues Spiel</button>
+      <button class="btn-ghost" style="margin-top:8px" onclick="resetWerwolf()">↩ Spiel abbrechen</button>
+    </div>
+
+    <!-- WIN SCREEN -->
+    <div id="werwolf-win" class="hidden">
+      <div class="top-bar"><div></div><h2>Spielende 🎉</h2><div></div></div>
+      <div class="win-card">
+        <div class="win-emoji" id="ww-win-emoji"></div>
+        <div class="win-title" id="ww-win-title"></div>
+        <div class="win-sub" id="ww-win-sub"></div>
+      </div>
+      <div class="players-list" id="ww-win-list" style="margin:16px 0"></div>
+      <button class="btn-primary" onclick="resetWerwolf()">🔄 Nochmal spielen</button>
       <button class="btn-ghost" onclick="showHome()">🏠 Hauptmenü</button>
     </div>
 
-    <!-- GUIDE -->
-    <div id="werwolf-guide" class="hidden">
-      <div class="top-bar">
-        <button class="icon-btn" onclick="wwBackToOverview()">‹</button>
-        <h2>Spielanleitung</h2>
-        <div></div>
-      </div>
-      <div class="guide-content">
-        <div class="guide-section">
-          <h3>🌙 Nacht</h3>
-          <ol>
-            <li>Alle schließen die Augen</li>
-            <li>🐺 <strong>Werwölfe</strong> öffnen Augen, wählen ein Opfer, schließen Augen</li>
-            <li>🔮 <strong>Seherin</strong> öffnet Augen, zeigt auf eine Person &rarr; Spielleiter nickt/schüttelt</li>
-            <li>🧝‍♀️ <strong>Hexe</strong> öffnet Augen, Spielleiter zeigt Opfer &rarr; Heiltrank? Gifttrank?</li>
-            <li>💘 <strong>Amor</strong> (Runde 1) zeigt 2 Verliebte</li>
-            <li>🥷 <strong>Dieb</strong> (Runde 1) schaut Zusatzkarten an, tauscht evtl. seine Rolle</li>
-          </ol>
-        </div>
-        <div class="guide-section">
-          <h3>☀️ Tag</h3>
-          <ol>
-            <li>Spielleiter verkündigt Todes-Opfer</li>
-            <li>Diskussion: Wer ist der Werwolf?</li>
-            <li>Abstimmung – die Person mit den meisten Stimmen scheidet aus</li>
-            <li>Ausgeschiedener zeigt seine Rolle &rarr; 🎯 Jäger darf sofort schießen</li>
-          </ol>
-        </div>
-        <div class="guide-section">
-          <h3>🏆 Sieg</h3>
-          <ul>
-            <li>🧑‍🌾 <strong>Dorf</strong> gewinnt, wenn alle Werwölfe tot sind</li>
-            <li>🐺 <strong>Werwölfe</strong> gewinnen, wenn sie die Mehrheit haben</li>
-          </ul>
-        </div>
-        <div class="guide-section">
-          <h3>🎦 Sonderrollen</h3>
-          <div class="roles-grid">
-            <div class="role-info"><span>🔮</span><div><strong>Seherin</strong><br>Deckt jede Nacht eine Rolle auf</div></div>
-            <div class="role-info"><span>🧝‍♀️</span><div><strong>Hexe</strong><br>1x Heilen, 1x Vergiften</div></div>
-            <div class="role-info"><span>💘</span><div><strong>Amor</strong><br>Verknüpft 2 Spieler füreinander</div></div>
-            <div class="role-info"><span>🎯</span><div><strong>Jäger</strong><br>Nimmt jemanden mit in den Tod</div></div>
-            <div class="role-info"><span>🥷</span><div><strong>Dieb</strong><br>Tauscht Rolle mit Zusatzkarte (Runde 1)</div></div>
-            <div class="role-info"><span>🛌</span><div><strong>Dorfmatratze</strong><br>Jeder weiß wer du bist – überlebe!</div></div>
-            <div class="role-info"><span>🌿</span><div><strong>Bürgermeister</strong><br>Doppelte Stimme, bestimmt Nachfolger</div></div>
-          </div>
-        </div>
-      </div>
-      <button class="btn-ghost" onclick="wwBackToOverview()">← Zurück</button>
-    </div>
+  </div><!-- /werwolf-screen -->
 
-  </div>
-
-</div>
+</div><!-- /app -->
 <script src="imposter.js"></script>
 <script src="werwolf.js"></script>
 <script src="app.js"></script>

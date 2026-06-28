@@ -116,60 +116,94 @@ body {
 .players-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
 .player-row { display: flex; align-items: center; justify-content: space-between; background: #1e1e28; border-radius: 12px; padding: 12px 16px; }
 .player-row.is-imposter { border: 1px solid #ef4444; }
+.player-row.dead-row { opacity: 0.4; }
 .player-name { font-weight: 600; }
 .player-tag { font-size: 0.8rem; color: #888; }
 .imposter-tag { color: #ef4444; }
 
-/* WERWOLF */
+/* WERWOLF INFO */
 .ww-info-card { display: flex; flex-direction: column; gap: 10px; }
 .ww-info-row { display: flex; align-items: center; justify-content: space-between; font-size: 0.95rem; }
 .ww-count { font-size: 1.4rem; font-weight: 900; }
 .wolf-count { color: #ef4444; }
-
 .role-summary { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
 .role-badge { background: #2a2a38; border-radius: 20px; padding: 5px 12px; font-size: 0.85rem; }
 .wolf-badge { background: #3a1010; border: 1px solid #ef4444; color: #ef4444; }
 .power-badge { background: #1a1800; border: 1px solid #f59e0b; color: #f59e0b; }
 
-/* GUIDE */
-.guide-content { display: flex; flex-direction: column; gap: 16px; margin-bottom: 16px; }
-.guide-section { background: #1e1e28; border-radius: 16px; padding: 16px; }
-.guide-section h3 { font-size: 1rem; font-weight: 700; margin-bottom: 10px; }
-.guide-section ol, .guide-section ul { padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 0.88rem; color: #ccc; }
-.roles-grid { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
-.role-info { display: flex; align-items: flex-start; gap: 12px; font-size: 0.88rem; }
-.role-info > span { font-size: 1.4rem; }
-.role-info div { color: #ccc; line-height: 1.4; }
-.role-info strong { color: #f0f0f0; }
+/* NIGHT SCREEN */
+.night-card {
+  background: #13112a;
+  border: 2px solid #2a2060;
+  border-radius: 20px;
+  padding: 28px 20px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+.night-emoji { font-size: 3.5rem; margin-bottom: 8px; }
+.night-title { font-size: 1.5rem; font-weight: 900; margin-bottom: 8px; }
+.night-desc  { font-size: 0.9rem; color: #bbb; line-height: 1.5; }
 
-/* BÜRGERMEISTER EXTRA CARD */
+/* PLAYER SELECTOR */
+.player-selector {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  justify-content: center;
+  margin: 12px 0;
+}
+.sel-btn {
+  background: #2a2a38; border: 2px solid transparent;
+  border-radius: 50px; padding: 10px 18px;
+  color: #f0f0f0; font-size: 0.95rem; font-weight: 600;
+  cursor: pointer; transition: all 0.15s;
+}
+.sel-btn.selected { background: #4f46e5; border-color: #818cf8; }
+.sel-btn:active { transform: scale(0.96); }
+
+/* NIGHT BUTTONS */
+.night-choice-col { display: flex; flex-direction: column; gap: 8px; margin: 8px 0; }
+.night-btn { margin-top: 0 !important; }
+.night-choice-row { display: flex; flex-direction: column; gap: 8px; }
+
+/* DAY SCREEN */
+.day-announce {
+  border-radius: 14px; padding: 14px 16px;
+  font-size: 0.95rem; font-weight: 600;
+  margin-bottom: 8px;
+}
+.day-announce.safe { background: #12291a; color: #22c55e; border: 1px solid #22c55e; }
+.day-announce.dead { background: #2a1010; color: #ef4444; border: 1px solid #ef4444; }
+
+.player-vote-btn {
+  width: 100%; padding: 14px 16px;
+  background: #1e1e28; border: 2px solid #2a2a38;
+  border-radius: 12px; color: #f0f0f0;
+  font-size: 0.95rem; font-weight: 600;
+  cursor: pointer; text-align: left;
+  margin-bottom: 8px;
+  transition: border-color 0.15s, background 0.15s;
+}
+.player-vote-btn:hover { background: #2a2a38; border-color: #ef4444; }
+
+/* WIN SCREEN */
+.win-card {
+  background: #13112a; border: 2px solid #4f46e5;
+  border-radius: 20px; padding: 32px 24px;
+  text-align: center; margin-bottom: 16px;
+}
+.win-emoji { font-size: 4rem; margin-bottom: 12px; }
+.win-title { font-size: 1.6rem; font-weight: 900; margin-bottom: 8px; }
+.win-sub   { font-size: 0.9rem; color: #aaa; }
+
+/* BÜRGERMEISTER EXTRA */
 .bm-card { border: 1px solid #4f46e5 !important; background: #13122a !important; }
 .bm-check { margin-bottom: 8px; }
 .bm-hint { font-size: 0.78rem; color: #7c7aaa; margin-top: 6px; }
 
 /* INSTALL POPUP */
-.install-popup {
-  position: fixed; inset: 0; z-index: 1000;
-  background: rgba(0,0,0,0.75);
-  display: flex; align-items: flex-end; justify-content: center;
-  padding: 16px;
-  animation: fadeIn 0.3s ease;
-}
+.install-popup { position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,0.75); display: flex; align-items: flex-end; justify-content: center; padding: 16px; animation: fadeIn 0.3s ease; }
 .install-popup.hidden { display: none; }
-.install-popup-box {
-  background: #1e1e28;
-  border-radius: 24px 24px 16px 16px;
-  padding: 28px 24px 24px;
-  width: 100%; max-width: 480px;
-  position: relative;
-  text-align: center;
-}
-.install-close {
-  position: absolute; top: 14px; right: 16px;
-  background: #2a2a38; border: none; color: #888;
-  width: 32px; height: 32px; border-radius: 50%;
-  font-size: 1rem; cursor: pointer;
-}
+.install-popup-box { background: #1e1e28; border-radius: 24px 24px 16px 16px; padding: 28px 24px 24px; width: 100%; max-width: 480px; position: relative; text-align: center; }
+.install-close { position: absolute; top: 14px; right: 16px; background: #2a2a38; border: none; color: #888; width: 32px; height: 32px; border-radius: 50%; font-size: 1rem; cursor: pointer; }
 .install-icon { font-size: 3rem; margin-bottom: 8px; }
 .install-popup-box h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 10px; }
 .install-popup-box p { font-size: 0.9rem; color: #ccc; line-height: 1.5; margin-bottom: 16px; }
