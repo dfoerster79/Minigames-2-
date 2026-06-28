@@ -9,6 +9,30 @@
 <body>
 <div id="app">
 
+  <!-- INSTALL POPUP -->
+  <div id="install-popup" class="install-popup hidden">
+    <div class="install-popup-box">
+      <button class="install-close" onclick="closeInstallPopup()">&#x2715;</button>
+      <div class="install-icon">🎮</div>
+      <h3>Als App installieren</h3>
+      <!-- iOS -->
+      <div id="install-ios" class="hidden">
+        <p>Tippe auf <strong>📤 Teilen</strong> und wähle dann<br><strong>"Zum Home-Bildschirm"</strong></p>
+        <div class="install-steps">
+          <div class="install-step"><span>1</span> Tippe auf das Teilen-Symbol unten in Safari</div>
+          <div class="install-step"><span>2</span> Scrolle runter und tippe „Zum Home-Bildschirm“</div>
+          <div class="install-step"><span>3</span> Tippe oben rechts auf „Hinzufügen“</div>
+        </div>
+      </div>
+      <!-- Android -->
+      <div id="install-android" class="hidden">
+        <p>Installiere die App für das beste Spielerlebnis!</p>
+        <button class="btn-primary install-android-btn" onclick="triggerAndroidInstall()">➕ Zum Homebildschirm hinzufügen</button>
+      </div>
+      <button class="btn-ghost" onclick="closeInstallPopup()">Später</button>
+    </div>
+  </div>
+
   <!-- HOME -->
   <div id="home-screen" class="screen active">
     <div class="home-header">
@@ -24,20 +48,25 @@
         </div>
         <span class="arrow">›</span>
       </button>
+      <button class="game-btn" onclick="showGame('werwolf')">
+        <span class="game-btn-icon">🐺</span>
+        <div class="game-btn-text">
+          <strong>Werwolf</strong>
+          <span>Wer ist der Werwolf?</span>
+        </div>
+        <span class="arrow">›</span>
+      </button>
     </div>
   </div>
 
   <!-- IMPOSTER -->
   <div id="imposter-screen" class="screen">
-
-    <!-- SETUP -->
     <div id="imposter-setup">
       <div class="top-bar">
         <button class="icon-btn" onclick="showHome()">‹</button>
         <h2>🕵️ Imposter</h2>
         <div></div>
       </div>
-
       <div class="section-card">
         <div class="section-title">Kategorien (max. 3)</div>
         <div class="cat-checks">
@@ -54,7 +83,6 @@
           <label class="cat-check"><input type="checkbox" id="cat-technik" onchange="toggleCat('technik')" /><span>📱 Technik &amp; Gadgets</span></label>
         </div>
       </div>
-
       <div class="section-card">
         <div class="section-title">Tipp für den Imposter</div>
         <div class="toggle-row">
@@ -68,7 +96,6 @@
           </label>
         </div>
       </div>
-
       <div class="section-card">
         <div class="section-title">Spielzeit (Minuten)</div>
         <div class="counter">
@@ -77,7 +104,6 @@
           <button class="cnt-btn" onclick="changeTime(1)">+</button>
         </div>
       </div>
-
       <div class="section-card">
         <div class="section-title">Spieler</div>
         <div class="counter" style="margin-bottom:16px">
@@ -87,11 +113,8 @@
         </div>
         <div id="name-inputs"></div>
       </div>
-
       <button class="btn-primary" onclick="startImposter()">Spiel starten 🚀</button>
     </div>
-
-    <!-- DEAL -->
     <div id="imposter-deal" class="hidden">
       <div class="top-bar"><div></div><h2>Karten verteilen</h2><div></div></div>
       <div id="deal-waiting" class="center-content">
@@ -109,8 +132,6 @@
         <button class="btn-secondary" onclick="nextPlayer()">✅ Verstanden – weiter</button>
       </div>
     </div>
-
-    <!-- PLAY -->
     <div id="imposter-play" class="hidden">
       <div class="top-bar"><div></div><h2>Spiel läuft 🎯</h2><div></div></div>
       <div class="timer-circle">
@@ -124,8 +145,6 @@
       <button class="btn-danger" onclick="revealImposter()">🕵️ Imposter aufdecken</button>
       <button class="btn-ghost" onclick="resetImposter()">↩ Neues Spiel</button>
     </div>
-
-    <!-- REVEAL -->
     <div id="imposter-reveal" class="hidden">
       <div class="top-bar"><div></div><h2>Auflösung 🎉</h2><div></div></div>
       <div class="reveal-card">
@@ -138,10 +157,137 @@
       <button class="btn-primary" onclick="resetImposter()">🔄 Nochmal spielen</button>
       <button class="btn-ghost" onclick="showHome()">🏠 Hauptmenü</button>
     </div>
+  </div>
+
+  <!-- WERWOLF -->
+  <div id="werwolf-screen" class="screen">
+
+    <!-- SETUP -->
+    <div id="werwolf-setup">
+      <div class="top-bar">
+        <button class="icon-btn" onclick="showHome()">‹</button>
+        <h2>🐺 Werwolf</h2>
+        <div></div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-title">Sonderrollen aktivieren</div>
+        <div class="cat-checks">
+          <label class="cat-check"><input type="checkbox" id="ww-role-seherin" checked onchange="toggleWWRole('seherin')" /><span>🔮 Seherin</span></label>
+          <label class="cat-check"><input type="checkbox" id="ww-role-hexe" onchange="toggleWWRole('hexe')" /><span>🧛 Hexe</span></label>
+          <label class="cat-check"><input type="checkbox" id="ww-role-jaeger" onchange="toggleWWRole('jaeger')" /><span>🎯 Jäger</span></label>
+          <label class="cat-check"><input type="checkbox" id="ww-role-amor" onchange="toggleWWRole('amor')" /><span>💘 Amor</span></label>
+          <label class="cat-check"><input type="checkbox" id="ww-role-dorfidiot" onchange="toggleWWRole('dorfidiot')" /><span>🤪 Dorfidiot</span></label>
+          <label class="cat-check"><input type="checkbox" id="ww-role-hauptmann" onchange="toggleWWRole('hauptmann')" /><span>🏅 Hauptmann</span></label>
+        </div>
+      </div>
+
+      <div class="section-card ww-info-card">
+        <div class="ww-info-row"><span>🐺 Werwölfe</span><span id="ww-wolf-count" class="ww-count wolf-count">1</span></div>
+        <div class="ww-info-row"><span>🗓️ Dorf</span><span id="ww-village-count" class="ww-count">5</span></div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-title">Spieler</div>
+        <div class="counter" style="margin-bottom:16px">
+          <button class="cnt-btn" onclick="changeWWCount(-1)">−</button>
+          <span id="ww-player-count">6</span>
+          <button class="cnt-btn" onclick="changeWWCount(1)">+</button>
+        </div>
+        <div id="werwolf-name-inputs"></div>
+      </div>
+
+      <button class="btn-primary" onclick="startWerwolf()">Rollen verteilen 🎭</button>
+    </div>
+
+    <!-- DEAL -->
+    <div id="werwolf-deal" class="hidden">
+      <div class="top-bar"><div></div><h2>Rollen verteilen</h2><div></div></div>
+      <div id="ww-deal-waiting" class="center-content">
+        <div class="player-badge" id="ww-deal-player-name"></div>
+        <p class="deal-hint">Tippe auf den Button und schau dir deine Rolle an. Zeige sie niemand anderem!</p>
+        <button class="btn-primary" onclick="wwShowCard()">👁️ Meine Rolle</button>
+      </div>
+      <div id="ww-deal-card" class="hidden">
+        <div class="card" id="ww-player-card">
+          <div class="ww-card-emoji" id="ww-card-emoji"></div>
+          <div class="card-role" id="ww-card-role"></div>
+          <div class="ww-card-desc" id="ww-card-desc"></div>
+        </div>
+        <button class="btn-secondary" onclick="wwNextPlayer()">✅ Verstanden – weiter</button>
+      </div>
+    </div>
+
+    <!-- OVERVIEW (Spielleiter-Ansicht) -->
+    <div id="werwolf-overview" class="hidden">
+      <div class="top-bar"><div></div><h2>Spielleiter 📋</h2><div></div></div>
+      <div class="section-card">
+        <div class="section-title">Rollenzuweisung</div>
+        <div id="ww-overview-list"></div>
+      </div>
+      <div class="section-card">
+        <div class="section-title">Rollenübersicht</div>
+        <div id="ww-role-summary" class="role-summary"></div>
+      </div>
+      <button class="btn-primary" onclick="wwShowGuide()">📖 Spielanleitung</button>
+      <button class="btn-ghost" onclick="resetWerwolf()">↩ Neues Spiel</button>
+      <button class="btn-ghost" onclick="showHome()">🏠 Hauptmenü</button>
+    </div>
+
+    <!-- GUIDE -->
+    <div id="werwolf-guide" class="hidden">
+      <div class="top-bar">
+        <button class="icon-btn" onclick="wwBackToOverview()">‹</button>
+        <h2>Spielanleitung</h2>
+        <div></div>
+      </div>
+      <div class="guide-content">
+        <div class="guide-section">
+          <h3>🌙 Nacht</h3>
+          <ol>
+            <li>Alle schließen die Augen</li>
+            <li>🐺 <strong>Werwölfe</strong> öffnen Augen, wählen ein Opfer, schließen Augen</li>
+            <li>🔮 <strong>Seherin</strong> öffnet Augen, zeigt auf eine Person &rarr; Spielleiter nickt/schüttelt</li>
+            <li>🧛 <strong>Hexe</strong> öffnet Augen, Spielleiter zeigt Opfer &rarr; Heiltrank? Gifttrank?</li>
+            <li>💘 <strong>Amor</strong> (Runde 1) zeigt 2 Verliebte</li>
+          </ol>
+        </div>
+        <div class="guide-section">
+          <h3>☀️ Tag</h3>
+          <ol>
+            <li>Spielleiter verkundigt Todes-Opfer</li>
+            <li>Diskussion: Wer ist der Werwolf?</li>
+            <li>Abstimmung – die Person mit den meisten Stimmen scheidet aus</li>
+            <li>Ausgeschiedener zeigt seine Rolle</li>
+          </ol>
+        </div>
+        <div class="guide-section">
+          <h3>🏆 Sieg</h3>
+          <ul>
+            <li>🗓️ <strong>Dorf</strong> gewinnt, wenn alle Werwölfe tot sind</li>
+            <li>🐺 <strong>Werwölfe</strong> gewinnen, wenn sie die Mehrheit haben</li>
+          </ul>
+        </div>
+        <div class="guide-section">
+          <h3>🎦 Sonderrollen</h3>
+          <div class="roles-grid">
+            <div class="role-info"><span>🔮</span><div><strong>Seherin</strong><br>Deckt jede Nacht eine Rolle auf</div></div>
+            <div class="role-info"><span>🧛</span><div><strong>Hexe</strong><br>1x Heilen, 1x Vergiften</div></div>
+            <div class="role-info"><span>🎯</span><div><strong>Jäger</strong><br>Nimmt jemanden mit in den Tod</div></div>
+            <div class="role-info"><span>💘</span><div><strong>Amor</strong><br>Verknüpft 2 Spieler füreinander</div></div>
+            <div class="role-info"><span>🤪</span><div><strong>Dorfidiot</strong><br>Kann nicht rausgevoted werden</div></div>
+            <div class="role-info"><span>🏅</span><div><strong>Hauptmann</strong><br>Doppelte Stimme, bestimmt Nachfolger</div></div>
+          </div>
+        </div>
+      </div>
+      <button class="btn-ghost" onclick="wwBackToOverview()">← Zurück</button>
+    </div>
 
   </div>
+
 </div>
 <script src="imposter.js"></script>
+<script src="werwolf.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
