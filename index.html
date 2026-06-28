@@ -19,8 +19,8 @@
         <p>Tippe auf <strong>📤 Teilen</strong> und wähle dann<br><strong>"Zum Home-Bildschirm"</strong></p>
         <div class="install-steps">
           <div class="install-step"><span>1</span> Tippe auf das Teilen-Symbol unten in Safari</div>
-          <div class="install-step"><span>2</span> Scrolle runter und tippe „Zum Home-Bildschirm“</div>
-          <div class="install-step"><span>3</span> Tippe oben rechts auf „Hinzufügen“</div>
+          <div class="install-step"><span>2</span> Scrolle runter und tippe „Zum Home-Bildschirm"</div>
+          <div class="install-step"><span>3</span> Tippe oben rechts auf „Hinzufügen"</div>
         </div>
       </div>
       <div id="install-android" class="hidden">
@@ -40,12 +40,29 @@
     <div class="game-list">
       <button class="game-btn" onclick="showGame('imposter')">
         <span class="game-btn-icon">🕵️</span>
-        <div class="game-btn-text"><strong>Imposter</strong><span>Finde den Imposter!</span></div>
+        <div class="game-btn-text">
+          <strong>Imposter</strong>
+          <span>Finde den Imposter!</span>
+        </div>
+        <span class="player-count-badge">3–15 👥</span>
         <span class="arrow">›</span>
       </button>
       <button class="game-btn" onclick="showGame('werwolf')">
         <span class="game-btn-icon">🐺</span>
-        <div class="game-btn-text"><strong>Werwolf</strong><span>Wer ist der Werwolf?</span></div>
+        <div class="game-btn-text">
+          <strong>Werwolf</strong>
+          <span>Wer ist der Werwolf?</span>
+        </div>
+        <span class="player-count-badge">6–15 👥</span>
+        <span class="arrow">›</span>
+      </button>
+      <button class="game-btn" onclick="showGame('tictactoe')">
+        <span class="game-btn-icon">⭕</span>
+        <div class="game-btn-text">
+          <strong>Tic Tac Toe</strong>
+          <span>3 in einer Reihe gewinnt!</span>
+        </div>
+        <span class="player-count-badge">2 👥</span>
         <span class="arrow">›</span>
       </button>
     </div>
@@ -156,16 +173,12 @@
 
   <!-- WERWOLF -->
   <div id="werwolf-screen" class="screen">
-
-    <!-- SETUP -->
     <div id="werwolf-setup">
       <div class="top-bar">
         <button class="icon-btn" onclick="showHome()">‹</button>
         <h2>🐺 Werwolf</h2>
         <div></div>
       </div>
-
-      <!-- Erzähler -->
       <div class="section-card narrator-card">
         <div class="toggle-row">
           <div>
@@ -179,8 +192,6 @@
         </div>
         <div id="ww-narrator-label" class="narrator-status">🔇 Erzähler aus</div>
       </div>
-
-      <!-- Werwölfe Anzahl -->
       <div class="section-card">
         <div class="section-title">🐺 Werwölfe</div>
         <div class="counter">
@@ -189,21 +200,15 @@
           <button class="cnt-btn" onclick="changeWWWolves(1)">+</button>
         </div>
       </div>
-
-      <!-- Sonderrollen -->
       <div class="section-card">
         <div class="section-title">Sonderrollen</div>
         <div id="ww-role-rows"></div>
       </div>
-
-      <!-- Übersicht -->
       <div class="section-card ww-info-card">
-        <div class="ww-info-row"><span>🐺 Werwölfe</span><span id="ww-wolf-count-info" style="font-size:1.2rem;font-weight:900;color:#ef4444"></span></div>
+        <div class="ww-info-row"><span>🐺 Werwölfe</span><span id="ww-wolf-count-info" style="font-size:1.2rem;font-weight:900;color:#f87171"></span></div>
         <div class="ww-info-row"><span>✨ Sonderrollen</span><span id="ww-special-count" style="font-size:1.2rem;font-weight:900"></span></div>
         <div class="ww-info-row"><span>🧑‍🌾 Dorfbewohner</span><span id="ww-village-count" style="font-size:1.2rem;font-weight:900"></span></div>
       </div>
-
-      <!-- Spieler -->
       <div class="section-card">
         <div class="section-title">Spieler</div>
         <div class="counter" style="margin-bottom:16px">
@@ -213,11 +218,9 @@
         </div>
         <div id="werwolf-name-inputs"></div>
       </div>
-
       <button class="btn-primary" onclick="startWerwolf()">Rollen verteilen 🎭</button>
     </div>
 
-    <!-- DEAL -->
     <div id="werwolf-deal" class="hidden">
       <div class="top-bar"><div></div><h2>Rollen verteilen</h2><div></div></div>
       <div id="ww-deal-waiting" class="center-content">
@@ -236,7 +239,6 @@
       </div>
     </div>
 
-    <!-- NIGHT SCREEN -->
     <div id="werwolf-night" class="hidden">
       <div class="top-bar"><div></div><h2>🌙 Nacht</h2><div></div></div>
       <div class="night-card">
@@ -250,7 +252,6 @@
       <button class="btn-ghost" style="margin-top:16px" onclick="resetWerwolf()">↩ Spiel abbrechen</button>
     </div>
 
-    <!-- DAY SCREEN -->
     <div id="werwolf-day" class="hidden">
       <div class="top-bar"><div></div><h2>☀️ Tag <span id="ww-round-num">1</span></h2><div></div></div>
       <div id="ww-day-announce"></div>
@@ -264,7 +265,6 @@
       <button class="btn-ghost" style="margin-top:8px" onclick="resetWerwolf()">↩ Spiel abbrechen</button>
     </div>
 
-    <!-- WIN SCREEN -->
     <div id="werwolf-win" class="hidden">
       <div class="top-bar"><div></div><h2>Spielende 🎉</h2><div></div></div>
       <div class="win-card">
@@ -276,12 +276,67 @@
       <button class="btn-primary" onclick="resetWerwolf()">🔄 Nochmal spielen</button>
       <button class="btn-ghost" onclick="showHome()">🏠 Hauptmenü</button>
     </div>
+  </div>
 
-  </div><!-- /werwolf-screen -->
+  <!-- TIC TAC TOE -->
+  <div id="tictactoe-screen" class="screen">
+    <div class="top-bar">
+      <button class="icon-btn" onclick="showHome()">‹</button>
+      <h2>❌⭕ Tic Tac Toe</h2>
+      <div></div>
+    </div>
 
-</div><!-- /app -->
+    <div id="ttt-setup">
+      <div class="section-card">
+        <div class="section-title">Spielfeldgröße</div>
+        <div style="display:flex;gap:10px;margin-top:4px">
+          <button id="ttt-size-3" class="ttt-size-btn ttt-size-active" onclick="setTTTSize(3)">3×3</button>
+          <button id="ttt-size-5" class="ttt-size-btn" onclick="setTTTSize(5)">5×5 (4 in Reihe)</button>
+        </div>
+      </div>
+      <div class="section-card">
+        <div class="section-title">Spielernamen</div>
+        <div class="name-row"><label>✖ Spieler X</label><input type="text" id="ttt-name-x" placeholder="Spieler X" maxlength="16" /></div>
+        <div class="name-row"><label>◯ Spieler O</label><input type="text" id="ttt-name-o" placeholder="Spieler O" maxlength="16" /></div>
+      </div>
+      <button class="btn-primary" onclick="startTTT()">Spiel starten 🎮</button>
+    </div>
+
+    <div id="ttt-game" class="hidden">
+      <div class="ttt-scoreboard">
+        <div class="ttt-score-box ttt-score-x" id="ttt-score-x-box">
+          <div class="ttt-score-name" id="ttt-score-name-x">X</div>
+          <div class="ttt-score-num ttt-score-x-num" id="ttt-score-x">0</div>
+        </div>
+        <div class="ttt-score-mid">
+          <div class="ttt-score-draws-label">Unentschieden</div>
+          <div class="ttt-score-draws" id="ttt-score-draws">0</div>
+        </div>
+        <div class="ttt-score-box ttt-score-o" id="ttt-score-o-box">
+          <div class="ttt-score-name" id="ttt-score-name-o">O</div>
+          <div class="ttt-score-num ttt-score-o-num" id="ttt-score-o">0</div>
+        </div>
+      </div>
+
+      <div class="ttt-status" id="ttt-status">Spieler X ist dran</div>
+      <div class="ttt-board" id="ttt-board"></div>
+
+      <div class="ttt-result hidden" id="ttt-result">
+        <div class="ttt-result-emoji" id="ttt-result-emoji">🎉</div>
+        <div class="ttt-result-text" id="ttt-result-text"></div>
+        <button class="btn-primary" style="margin-top:16px" onclick="resetTTTRound()">🔄 Nochmal</button>
+        <button class="btn-ghost" onclick="showTTTSetup()">⚙️ Einstellungen</button>
+        <button class="btn-ghost" onclick="showHome()">🏠 Hauptmenü</button>
+      </div>
+
+      <button class="btn-ghost" style="margin-top:12px" onclick="showHome()">🏠 Hauptmenü</button>
+    </div>
+  </div>
+
+</div>
 <script src="imposter.js"></script>
 <script src="werwolf.js"></script>
+<script src="tictactoe.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
