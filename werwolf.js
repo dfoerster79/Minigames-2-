@@ -55,7 +55,6 @@ function speak(text) {
   utt.lang = 'de-DE';
   utt.rate = 0.92;
   utt.pitch = 1.0;
-  // Prefer a German voice if available
   const voices = window.speechSynthesis.getVoices();
   const deVoice = voices.find(v => v.lang.startsWith('de') && !v.name.includes('Google')) ||
                   voices.find(v => v.lang.startsWith('de'));
@@ -173,10 +172,10 @@ function startWerwolf() {
   wwShowDealWaiting();
 }
 
+// Kein speak() hier – Erzähler schweigt während der Rollenverteilung
 function wwShowDealWaiting() {
   document.getElementById('ww-deal-player-name').textContent = ws.names[ws.currentDealing];
   wwShow('ww-deal-waiting'); wwHide('ww-deal-card');
-  speak(ws.names[ws.currentDealing] + ' ist dran. Tippe auf Meine Rolle.');
 }
 
 function wwShowCard() {
@@ -190,7 +189,7 @@ function wwShowCard() {
   document.getElementById('ww-card-sub').textContent = rolle.team==='wolf'?'🐺 Du bist ein Werwolf!':'✅ Du gehörst zum Dorf';
   document.getElementById('ww-card-desc').textContent = rolle.desc;
   wwHide('ww-deal-waiting'); wwShow('ww-deal-card');
-  speak('Deine Rolle ist: ' + rolle.name + '. ' + rolle.desc);
+  // Kein speak() – die Rolle ist geheim und soll nicht laut vorgelesen werden
 }
 
 function wwNextPlayer() {
@@ -481,7 +480,6 @@ function showWinScreen(winner){
 }
 
 // ===================== NIGHT SCREEN BUILDER =====================
-// ttsText is optional – if provided, it overrides the default speak text
 function setNightScreen(emoji,title,desc,selectorHtml,extraHtml,buttons,ttsText){
   document.getElementById('ww-night-emoji').textContent=emoji||'';
   document.getElementById('ww-night-title').textContent=title||'';
@@ -496,7 +494,6 @@ function setNightScreen(emoji,title,desc,selectorHtml,extraHtml,buttons,ttsText)
     btn.textContent=b.label; btn.setAttribute('onclick',b.fn);
     btns.appendChild(btn);
   });
-  // TTS
   const text = ttsText || (title ? title+'. '+desc : desc);
   speak(text);
 }
