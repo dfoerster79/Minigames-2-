@@ -24,16 +24,16 @@ const WDL_CATS = {
       ['doppelt so groß sein', 'halb so groß sein'],
       ['eine Sprache perfekt sprechen', '10 Sprachen mittelmäßig sprechen'],
       ['immer müde sein', 'immer aufgedreht sein'],
-      ['nur in der Vergangenheit telefonieren können', 'nur in der Zukunft telefonieren können'],
       ['im Winter frieren', 'im Sommer schwitzen'],
       ['berühmt aber unglücklich sein', 'unbekannt aber glücklich sein'],
       ['jeden Tag Sport machen müssen', 'nie wieder Sport machen dürfen'],
-      ['eine Schachtel Lego mit bloßen Füßen überqueren', 'eine Stunde lang auf einem unbequemen Stuhl sitzen'],
+      ['eine Schachtel Lego mit bloßen Füßen überqueren', 'eine Stunde auf einem unbequemen Stuhl sitzen'],
       ['dein ganzes Leben auf dem Land wohnen', 'dein ganzes Leben in der Stadt wohnen'],
       ['immer das Falsche sagen', 'immer das Richtige denken aber schweigen'],
       ['ein brillantes Gedächtnis haben', 'körperlich sehr stark sein'],
       ['rückwärts gehen müssen wenn du lügst', 'laut singen müssen wenn du lügst'],
       ['Gedanken lesen können', 'die Zukunft sehen können'],
+      ['immer der Erste sein', 'immer der Letzte sein'],
     ]
   },
   freunde: {
@@ -66,7 +66,7 @@ const WDL_CATS = {
       ['eine Schlange um den Hals tragen', 'eine Spinne in der Hand halten'],
       ['mit 200 km/h Achterbahn fahren', 'mit 200 km/h Boot fahren'],
       ['auf einem Gletscher schlafen', 'in der Wüste schlafen'],
-      ['eine Woche ohne Essen auskommen', 'eine Woche ohne Wasser auskommen – nein: ohne Schlaf'],
+      ['eine Woche ohne Essen auskommen', 'eine Woche ohne Schlaf auskommen'],
       ['eine lebende Heuschrecke essen', 'eine lebende Raupe essen'],
       ['in einem Käfig mit einem Löwen sitzen', 'im Wasser mit einem Weißen Hai schwimmen'],
       ['von einer Klippe ins Meer springen (10m)', 'eine Brücke mit Bungeeseil überspringen (50m)'],
@@ -95,8 +95,8 @@ const WDL_CATS = {
       ['in einem Schultheaterstück die Hauptrolle spielen', 'in einer Schulband auftreten'],
       ['immer die Antwort wissen aber nie drankommen', 'immer drankommen aber nie die Antwort wissen'],
       ['in einer Klasse mit deinen besten Freunden sein aber schlechte Lehrer haben', 'top Lehrer haben aber keine Freunde in der Klasse'],
-      ['das Schulessen jeden Tag selbst kochen', 'das Schulessen jeden Tag kaufen'],
       ['nur digitale Bücher haben', 'nur schwere physische Bücher haben'],
+      ['Schulessen selbst kochen', 'Schulessen jeden Tag kaufen'],
     ]
   },
   fortnite: {
@@ -115,7 +115,7 @@ const WDL_CATS = {
       ['Zero Build spielen', 'nur Classic mit Building spielen'],
       ['Battle Pass immer komplett machen', 'nie Battle Pass kaufen aber vbucks sparen'],
       ['Midas Berührung haben – alles wird Gold', 'Jonesy sein – immer mittelmäßig'],
-      ['nur mit dem Battle Bus landen (keine Glider)', 'immer vom stärksten Sturm getroffen werden'],
+      ['nur mit dem Battle Bus landen', 'immer vom stärksten Sturm getroffen werden'],
       ['auf einem Shopping Cart durch die Map fahren', 'auf einem Motorrad durch die Map fahren'],
       ['immer den schlechtesten Loot finden', 'immer im letzten Kreis ohne Heilitems sein'],
     ]
@@ -131,7 +131,7 @@ const WDL_CATS = {
       ['immer Solo Showdown spielen', 'immer Duo Showdown mit einem Random spielen'],
       ['Brawl Ball immer als Torwart spielen', 'Brawl Ball immer als Stürmer spielen'],
       ['immer in Bronze Trophy Road stecken', 'Power League spielen aber immer verlieren'],
-      ['Mega Box oder 2 Big Boxes öffnen', '3 normale Boxen öffnen'],
+      ['Mega Box öffnen', '3 normale Boxen öffnen'],
       ['einen Legendary Brawler zufällig bekommen', 'deinen Lieblings-Brawler selbst wählen aber nur Epic'],
       ['in Heist immer den Safe angreifen', 'in Heist immer den Safe verteidigen'],
       ['Edgar Rush-Spieler sein', 'Piper Sniper-Spieler sein'],
@@ -154,20 +154,18 @@ const WDL_CATS = {
       ['Stripclub besuchen', 'einen Strip für jemanden machen'],
       ['für immer nur Quickies', 'für immer nur langsamen Sex'],
       ['mit 20 Personen geschlafen haben', 'mit einer Person geschlafen haben die du nicht magst'],
-      ['eine Beziehung mit einer 18+ Rollenverteilung', 'eine Beziehung ohne jegliche Körperlichkeit'],
       ['immer derjenige sein der anfängt', 'immer derjenige sein der aufhört'],
       ['3 Stunden Vorspiel ohne mehr', 'direkt zum Punkt in 5 Minuten'],
-      ['mit deinem attraktivsten Freund schlafen und es bleibt geheim', 'es passiert nie aber du weißt dass er es will'],
       ['Handschellen ausprobieren', 'Rollenspiel ausprobieren'],
       ['nackt kochen', 'nackt einkaufen gehen'],
+      ['dein attraktivstes Date nochmal sehen', 'dein schlechtestes Date vergessen können'],
+      ['immer zu offensiv flirten', 'nie den ersten Schritt machen'],
     ]
   }
 };
 
 let wdl = {
   activeCats: ['klassik','freunde'],
-  currentQ: null,
-  answered: [],
   usedKeys: {},
   totalAnswered: 0,
 };
@@ -181,14 +179,13 @@ function wdlRenderCats() {
   if (!box) return;
   box.innerHTML = '';
   Object.entries(WDL_CATS).forEach(([key, cat]) => {
-    const checked = wdl.activeCats.includes(key) ? 'checked' : '';
+    const isActive = wdl.activeCats.includes(key);
     const label = document.createElement('label');
-    label.className = 'splash-cat-card wdl-cat-' + key;
-    if (wdl.activeCats.includes(key)) label.classList.add('active-cat');
+    label.className = 'splash-cat-card wdl-cat-' + key + (isActive ? ' active-cat' : '');
     label.innerHTML = `
-      <input type="checkbox" ${checked} onchange="wdlToggleCat('${key}')" />
+      <input type="checkbox" ${isActive ? 'checked' : ''} onchange="wdlToggleCat('${key}')" />
       <span class="scc-emoji">${cat.emoji}</span>
-      <span class="scc-label">${cat.label.replace(/^[^ ]+ /, '')}</span>
+      <span class="scc-label">${cat.label.replace(/^[^\s]+ /, '')}</span>
     `;
     box.appendChild(label);
   });
@@ -204,7 +201,6 @@ function wdlToggleCat(key) {
 }
 
 function startWDL() {
-  // Init used keys
   wdl.usedKeys = {};
   wdl.activeCats.forEach(k => { wdl.usedKeys[k] = []; });
   wdl.totalAnswered = 0;
@@ -216,12 +212,7 @@ function startWDL() {
 }
 
 function wdlPickQuestion() {
-  // shuffle cats
-  const cats = [...wdl.activeCats];
-  for (let i = cats.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [cats[i], cats[j]] = [cats[j], cats[i]];
-  }
+  const cats = [...wdl.activeCats].sort(() => Math.random() - .5);
   for (const cat of cats) {
     const qs = WDL_CATS[cat].questions;
     const used = wdl.usedKeys[cat] || [];
@@ -232,58 +223,61 @@ function wdlPickQuestion() {
       return { cat, q: qs[idx] };
     }
   }
-  // All used – reset
   wdl.activeCats.forEach(k => { wdl.usedKeys[k] = []; });
   return wdlPickQuestion();
 }
 
 function wdlNextQuestion() {
   const picked = wdlPickQuestion();
-  wdl.currentQ = picked;
 
-  const card = document.getElementById('wdl-card');
   const optA = document.getElementById('wdl-opt-a');
   const optB = document.getElementById('wdl-opt-b');
   const catBadge = document.getElementById('wdl-cat-badge');
   const counter = document.getElementById('wdl-counter');
-
-  optA.textContent = '👈 ' + picked.q[0];
-  optB.textContent = picked.q[1] + ' 👉';
-  catBadge.textContent = WDL_CATS[picked.cat].label;
+  const nextBtn = document.getElementById('wdl-next-btn');
+  const card = document.getElementById('wdl-card');
 
   wdl.totalAnswered++;
   if (counter) counter.textContent = wdl.totalAnswered;
+  if (catBadge) catBadge.textContent = WDL_CATS[picked.cat].label;
 
-  // reset card state
+  // Reset styles
   card.classList.remove('wdl-chosen-a', 'wdl-chosen-b');
-  optA.classList.remove('wdl-btn-chosen', 'wdl-btn-other');
-  optB.classList.remove('wdl-btn-chosen', 'wdl-btn-other');
+  optA.className = 'wdl-option-card wdl-option-a';
+  optB.className = 'wdl-option-card wdl-option-b';
   optA.disabled = false;
   optB.disabled = false;
 
-  document.getElementById('wdl-next-btn').classList.add('hidden');
+  // Set text (without emoji prefix)
+  document.getElementById('wdl-opt-a-text').textContent = picked.q[0];
+  document.getElementById('wdl-opt-b-text').textContent = picked.q[1];
+
+  // Hide next button
+  nextBtn.classList.add('hidden');
+
+  // Animate card in
+  card.classList.remove('wdl-card-pop');
+  void card.offsetWidth;
+  card.classList.add('wdl-card-pop');
 }
 
 function wdlChoose(side) {
   const optA = document.getElementById('wdl-opt-a');
   const optB = document.getElementById('wdl-opt-b');
-  const card = document.getElementById('wdl-card');
+  const nextBtn = document.getElementById('wdl-next-btn');
 
   optA.disabled = true;
   optB.disabled = true;
-  optA.classList.remove('wdl-btn-chosen', 'wdl-btn-other');
-  optB.classList.remove('wdl-btn-chosen', 'wdl-btn-other');
 
   if (side === 'a') {
-    optA.classList.add('wdl-btn-chosen');
-    optB.classList.add('wdl-btn-other');
-    card.classList.add('wdl-chosen-a');
+    optA.classList.add('wdl-option-chosen');
+    optB.classList.add('wdl-option-dimmed');
   } else {
-    optB.classList.add('wdl-btn-chosen');
-    optA.classList.add('wdl-btn-other');
-    card.classList.add('wdl-chosen-b');
+    optB.classList.add('wdl-option-chosen');
+    optA.classList.add('wdl-option-dimmed');
   }
-  document.getElementById('wdl-next-btn').classList.remove('hidden');
+
+  nextBtn.classList.remove('hidden');
 }
 
 function resetWDL() {

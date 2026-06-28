@@ -45,307 +45,87 @@
       <p class="subtitle">Wähle ein Spiel</p>
     </div>
     <div class="splash-game-grid">
-
       <button class="splash-card splash-card-imposter" onclick="showGame('imposter')">
         <div class="splash-card-emoji">🕵️</div>
         <div class="splash-card-title">Imposter</div>
         <div class="splash-card-sub">Finde den Imposter!</div>
         <div class="splash-card-badge">3–15 👥</div>
       </button>
-
       <button class="splash-card splash-card-werwolf" onclick="showGame('werwolf')">
         <div class="splash-card-emoji">🐺</div>
         <div class="splash-card-title">Werwolf</div>
         <div class="splash-card-sub">Wer ist der Werwolf?</div>
         <div class="splash-card-badge">6–15 👥</div>
       </button>
-
       <button class="splash-card splash-card-ttt" onclick="showGame('tictactoe')">
         <div class="splash-card-emoji">⭕</div>
         <div class="splash-card-title">Tic Tac Toe</div>
         <div class="splash-card-sub">3 in einer Reihe!</div>
         <div class="splash-card-badge">1–2 👥</div>
       </button>
-
       <button class="splash-card splash-card-wbi" onclick="showGame('werbinich')">
         <div class="splash-card-emoji">🎭</div>
         <div class="splash-card-title">Wer bin ich?</div>
         <div class="splash-card-sub">Handy an die Stirn!</div>
         <div class="splash-card-badge">1+ 👥</div>
       </button>
-
       <button class="splash-card splash-card-wdl" onclick="showGame('wdl')">
         <div class="splash-card-emoji">🤔</div>
         <div class="splash-card-title">Würdest du eher</div>
         <div class="splash-card-sub">A oder B?</div>
         <div class="splash-card-badge">2+ 👥</div>
       </button>
-
     </div>
   </div>
 
   <!-- IMPOSTER -->
   <div id="imposter-screen" class="screen">
     <div id="imposter-setup">
-      <div class="top-bar">
-        <button class="icon-btn" onclick="showHome()">‹</button>
-        <h2>🕵️ Imposter</h2>
-        <div></div>
-      </div>
-      <div class="section-card">
-        <div class="section-title">Kategorien (max. 3)</div>
-        <div class="splash-cat-grid">
-          <label class="splash-cat-card splash-cat-alltag"><input type="checkbox" id="cat-alltag" checked onchange="toggleCat('alltag')" /><span class="scc-emoji">🏠</span><span class="scc-label">Alltag</span></label>
-          <label class="splash-cat-card splash-cat-tiere"><input type="checkbox" id="cat-tiere" onchange="toggleCat('tiere')" /><span class="scc-emoji">🐾</span><span class="scc-label">Tiere</span></label>
-          <label class="splash-cat-card splash-cat-sehenswuerdigkeiten"><input type="checkbox" id="cat-sehenswuerdigkeiten" onchange="toggleCat('sehenswuerdigkeiten')" /><span class="scc-emoji">🏙️</span><span class="scc-label">Sehenswürd.</span></label>
-          <label class="splash-cat-card splash-cat-essen"><input type="checkbox" id="cat-essen" onchange="toggleCat('essen')" /><span class="scc-emoji">🍕</span><span class="scc-label">Essen</span></label>
-          <label class="splash-cat-card splash-cat-sport"><input type="checkbox" id="cat-sport" onchange="toggleCat('sport')" /><span class="scc-emoji">⚽</span><span class="scc-label">Sport</span></label>
-          <label class="splash-cat-card splash-cat-filme"><input type="checkbox" id="cat-filme" onchange="toggleCat('filme')" /><span class="scc-emoji">🎬</span><span class="scc-label">Filme</span></label>
-          <label class="splash-cat-card splash-cat-urlaub"><input type="checkbox" id="cat-urlaub" onchange="toggleCat('urlaub')" /><span class="scc-emoji">✈️</span><span class="scc-label">Urlaub</span></label>
-          <label class="splash-cat-card splash-cat-berufe"><input type="checkbox" id="cat-berufe" onchange="toggleCat('berufe')" /><span class="scc-emoji">🛠️</span><span class="scc-label">Berufe</span></label>
-          <label class="splash-cat-card splash-cat-musik"><input type="checkbox" id="cat-musik" onchange="toggleCat('musik')" /><span class="scc-emoji">🎸</span><span class="scc-label">Musik</span></label>
-          <label class="splash-cat-card splash-cat-wissenschaft"><input type="checkbox" id="cat-wissenschaft" onchange="toggleCat('wissenschaft')" /><span class="scc-emoji">🔬</span><span class="scc-label">Wissenschaft</span></label>
-          <label class="splash-cat-card splash-cat-technik"><input type="checkbox" id="cat-technik" onchange="toggleCat('technik')" /><span class="scc-emoji">📱</span><span class="scc-label">Technik</span></label>
-          <label class="splash-cat-card splash-cat-fortnite"><input type="checkbox" id="cat-fortnite" onchange="toggleCat('fortnite')" /><span class="scc-emoji">🎮</span><span class="scc-label">Fortnite</span></label>
-          <label class="splash-cat-card splash-cat-brawl"><input type="checkbox" id="cat-brawlstars" onchange="toggleCat('brawlstars')" /><span class="scc-emoji">🌟</span><span class="scc-label">Brawl Stars</span></label>
-          <label class="splash-cat-card splash-cat-spicy"><input type="checkbox" id="cat-spicy" onchange="toggleCat('spicy')" /><span class="scc-emoji">🌶️</span><span class="scc-label">Spicy 18+</span></label>
-        </div>
-      </div>
-      <div class="section-card">
-        <div class="section-title">Tipp für den Imposter</div>
-        <div class="toggle-row">
-          <div><div class="toggle-label">Tipp aktivieren</div><div class="toggle-sub">Der Imposter erhält ein Stichwort</div></div>
-          <label class="toggle"><input type="checkbox" id="hint-toggle" /><span class="toggle-slider"></span></label>
-        </div>
-      </div>
-      <div class="section-card">
-        <div class="section-title">Spielzeit (Minuten)</div>
-        <div class="counter">
-          <button class="cnt-btn" onclick="changeTime(-1)">−</button><span id="game-time">3</span><button class="cnt-btn" onclick="changeTime(1)">+</button>
-        </div>
-      </div>
-      <div class="section-card">
-        <div class="section-title">Spieler</div>
-        <div class="counter" style="margin-bottom:16px">
-          <button class="cnt-btn" onclick="changeCount(-1)">−</button><span id="player-count">4</span><button class="cnt-btn" onclick="changeCount(1)">+</button>
-        </div>
-        <div id="name-inputs"></div>
-      </div>
+      <div class="top-bar"><button class="icon-btn" onclick="showHome()">‹</button><h2>🕵️ Imposter</h2><div></div></div>
+      <div class="section-card"><div class="section-title">Kategorien (max. 3)</div><div class="splash-cat-grid"><label class="splash-cat-card splash-cat-alltag"><input type="checkbox" id="cat-alltag" checked onchange="toggleCat('alltag')" /><span class="scc-emoji">🏠</span><span class="scc-label">Alltag</span></label><label class="splash-cat-card splash-cat-tiere"><input type="checkbox" id="cat-tiere" onchange="toggleCat('tiere')" /><span class="scc-emoji">🐾</span><span class="scc-label">Tiere</span></label><label class="splash-cat-card splash-cat-sehenswuerdigkeiten"><input type="checkbox" id="cat-sehenswuerdigkeiten" onchange="toggleCat('sehenswuerdigkeiten')" /><span class="scc-emoji">🏙️</span><span class="scc-label">Sehenswürd.</span></label><label class="splash-cat-card splash-cat-essen"><input type="checkbox" id="cat-essen" onchange="toggleCat('essen')" /><span class="scc-emoji">🍕</span><span class="scc-label">Essen</span></label><label class="splash-cat-card splash-cat-sport"><input type="checkbox" id="cat-sport" onchange="toggleCat('sport')" /><span class="scc-emoji">⚽</span><span class="scc-label">Sport</span></label><label class="splash-cat-card splash-cat-filme"><input type="checkbox" id="cat-filme" onchange="toggleCat('filme')" /><span class="scc-emoji">🎬</span><span class="scc-label">Filme</span></label><label class="splash-cat-card splash-cat-urlaub"><input type="checkbox" id="cat-urlaub" onchange="toggleCat('urlaub')" /><span class="scc-emoji">✈️</span><span class="scc-label">Urlaub</span></label><label class="splash-cat-card splash-cat-berufe"><input type="checkbox" id="cat-berufe" onchange="toggleCat('berufe')" /><span class="scc-emoji">🛠️</span><span class="scc-label">Berufe</span></label><label class="splash-cat-card splash-cat-musik"><input type="checkbox" id="cat-musik" onchange="toggleCat('musik')" /><span class="scc-emoji">🎸</span><span class="scc-label">Musik</span></label><label class="splash-cat-card splash-cat-wissenschaft"><input type="checkbox" id="cat-wissenschaft" onchange="toggleCat('wissenschaft')" /><span class="scc-emoji">🔬</span><span class="scc-label">Wissenschaft</span></label><label class="splash-cat-card splash-cat-technik"><input type="checkbox" id="cat-technik" onchange="toggleCat('technik')" /><span class="scc-emoji">📱</span><span class="scc-label">Technik</span></label><label class="splash-cat-card splash-cat-fortnite"><input type="checkbox" id="cat-fortnite" onchange="toggleCat('fortnite')" /><span class="scc-emoji">🎮</span><span class="scc-label">Fortnite</span></label><label class="splash-cat-card splash-cat-brawl"><input type="checkbox" id="cat-brawlstars" onchange="toggleCat('brawlstars')" /><span class="scc-emoji">🌟</span><span class="scc-label">Brawl Stars</span></label><label class="splash-cat-card splash-cat-spicy"><input type="checkbox" id="cat-spicy" onchange="toggleCat('spicy')" /><span class="scc-emoji">🌶️</span><span class="scc-label">Spicy 18+</span></label></div></div>
+      <div class="section-card"><div class="section-title">Tipp für den Imposter</div><div class="toggle-row"><div><div class="toggle-label">Tipp aktivieren</div><div class="toggle-sub">Der Imposter erhält ein Stichwort</div></div><label class="toggle"><input type="checkbox" id="hint-toggle" /><span class="toggle-slider"></span></label></div></div>
+      <div class="section-card"><div class="section-title">Spielzeit (Minuten)</div><div class="counter"><button class="cnt-btn" onclick="changeTime(-1)">−</button><span id="game-time">3</span><button class="cnt-btn" onclick="changeTime(1)">+</button></div></div>
+      <div class="section-card"><div class="section-title">Spieler</div><div class="counter" style="margin-bottom:16px"><button class="cnt-btn" onclick="changeCount(-1)">−</button><span id="player-count">4</span><button class="cnt-btn" onclick="changeCount(1)">+</button></div><div id="name-inputs"></div></div>
       <button class="btn-primary" onclick="startImposter()">Spiel starten 🚀</button>
     </div>
-    <div id="imposter-deal" class="hidden">
-      <div class="top-bar"><div></div><h2>Karten verteilen</h2><div></div></div>
-      <div id="deal-waiting" class="center-content">
-        <div class="player-badge" id="deal-player-name"></div>
-        <p class="deal-hint">Tippe auf den Button und schau dir deine Karte an. Zeige sie niemand anderem!</p>
-        <button class="btn-primary" onclick="showCard()">👁️ Meine Karte</button>
-      </div>
-      <div id="deal-card" class="hidden">
-        <div class="card" id="player-card">
-          <div class="card-role" id="card-role"></div>
-          <div class="card-word" id="card-word"></div>
-          <div class="card-hint hidden" id="card-hint"></div>
-          <div class="card-cat" id="card-cat"></div>
-        </div>
-        <button class="btn-secondary" onclick="nextPlayer()">✅ Verstanden – weiter</button>
-      </div>
-    </div>
-    <div id="imposter-play" class="hidden">
-      <div class="top-bar"><div></div><h2>Spiel läuft 🎯</h2><div></div></div>
-      <div class="timer-circle">
-        <svg viewBox="0 0 120 120">
-          <circle cx="60" cy="60" r="54" class="timer-bg"/>
-          <circle cx="60" cy="60" r="54" class="timer-ring" id="timer-ring" stroke-dasharray="339.3" stroke-dashoffset="0"/>
-        </svg>
-        <div class="timer-text" id="timer-text">--:--</div>
-      </div>
-      <p class="play-hint">Reihum beschreiben – der Imposter kennt das Wort nicht!</p>
-      <button class="btn-danger" onclick="revealImposter()">🕵️ Imposter aufdecken</button>
-      <button class="btn-ghost" onclick="resetImposter()">↩ Neues Spiel</button>
-    </div>
-    <div id="imposter-reveal" class="hidden">
-      <div class="top-bar"><div></div><h2>Auflösung 🎉</h2><div></div></div>
-      <div class="reveal-card">
-        <div class="reveal-label">Das Wort war</div>
-        <div class="reveal-word" id="reveal-word"></div>
-        <div class="reveal-label" style="margin-top:24px">Der Imposter war</div>
-        <div class="reveal-imposter" id="reveal-imposter"></div>
-      </div>
-      <div class="players-list" id="reveal-players-list"></div>
-      <button class="btn-primary" onclick="resetImposter()">🔄 Nochmal spielen</button>
-      <button class="btn-ghost" onclick="showHome()">🏠 Hauptmenü</button>
-    </div>
+    <div id="imposter-deal" class="hidden"><div class="top-bar"><div></div><h2>Karten verteilen</h2><div></div></div><div id="deal-waiting" class="center-content"><div class="player-badge" id="deal-player-name"></div><p class="deal-hint">Tippe auf den Button und schau dir deine Karte an. Zeige sie niemand anderem!</p><button class="btn-primary" onclick="showCard()">👁️ Meine Karte</button></div><div id="deal-card" class="hidden"><div class="card" id="player-card"><div class="card-role" id="card-role"></div><div class="card-word" id="card-word"></div><div class="card-hint hidden" id="card-hint"></div><div class="card-cat" id="card-cat"></div></div><button class="btn-secondary" onclick="nextPlayer()">✅ Verstanden – weiter</button></div></div>
+    <div id="imposter-play" class="hidden"><div class="top-bar"><div></div><h2>Spiel läuft 🎯</h2><div></div></div><div class="timer-circle"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="54" class="timer-bg"/><circle cx="60" cy="60" r="54" class="timer-ring" id="timer-ring" stroke-dasharray="339.3" stroke-dashoffset="0"/></svg><div class="timer-text" id="timer-text">--:--</div></div><p class="play-hint">Reihum beschreiben – der Imposter kennt das Wort nicht!</p><button class="btn-danger" onclick="revealImposter()">🕵️ Imposter aufdecken</button><button class="btn-ghost" onclick="resetImposter()">↩ Neues Spiel</button></div>
+    <div id="imposter-reveal" class="hidden"><div class="top-bar"><div></div><h2>Auflösung 🎉</h2><div></div></div><div class="reveal-card"><div class="reveal-label">Das Wort war</div><div class="reveal-word" id="reveal-word"></div><div class="reveal-label" style="margin-top:24px">Der Imposter war</div><div class="reveal-imposter" id="reveal-imposter"></div></div><div class="players-list" id="reveal-players-list"></div><button class="btn-primary" onclick="resetImposter()">🔄 Nochmal spielen</button><button class="btn-ghost" onclick="showHome()">🏠 Hauptmenü</button></div>
   </div>
 
   <!-- WERWOLF -->
   <div id="werwolf-screen" class="screen">
-    <div id="werwolf-setup">
-      <div class="top-bar"><button class="icon-btn" onclick="showHome()">‹</button><h2>🐺 Werwolf</h2><div></div></div>
-      <div class="section-card narrator-card">
-        <div class="toggle-row">
-          <div><div class="toggle-label">🔊 Erzähler</div><div class="toggle-sub">Liest jeden Schritt automatisch vor</div></div>
-          <label class="toggle"><input type="checkbox" id="ww-narrator-toggle" onchange="toggleNarrator()" /><span class="toggle-slider"></span></label>
-        </div>
-        <div id="ww-narrator-label" class="narrator-status">🔇 Erzähler aus</div>
-      </div>
-      <div class="section-card"><div class="section-title">🐺 Werwölfe</div><div class="counter"><button class="cnt-btn" onclick="changeWWWolves(-1)">−</button><span id="ww-wolf-count">1</span><button class="cnt-btn" onclick="changeWWWolves(1)">+</button></div></div>
-      <div class="section-card"><div class="section-title">Sonderrollen</div><div id="ww-role-rows"></div></div>
-      <div class="section-card ww-info-card">
-        <div class="ww-info-row"><span>🐺 Werwölfe</span><span id="ww-wolf-count-info" style="font-size:1.2rem;font-weight:900;color:#f87171"></span></div>
-        <div class="ww-info-row"><span>✨ Sonderrollen</span><span id="ww-special-count" style="font-size:1.2rem;font-weight:900"></span></div>
-        <div class="ww-info-row"><span>🧑‍🌾 Dorfbewohner</span><span id="ww-village-count" style="font-size:1.2rem;font-weight:900"></span></div>
-      </div>
-      <div class="section-card"><div class="section-title">Spieler</div><div class="counter" style="margin-bottom:16px"><button class="cnt-btn" onclick="changeWWCount(-1)">−</button><span id="ww-player-count">6</span><button class="cnt-btn" onclick="changeWWCount(1)">+</button></div><div id="werwolf-name-inputs"></div></div>
-      <button class="btn-primary" onclick="startWerwolf()">Rollen verteilen 🎭</button>
-    </div>
-    <div id="werwolf-deal" class="hidden">
-      <div class="top-bar"><div></div><h2>Rollen verteilen</h2><div></div></div>
-      <div id="ww-deal-waiting" class="center-content">
-        <div class="player-badge" id="ww-deal-player-name"></div>
-        <p class="deal-hint">Tippe auf den Button und schau dir deine Rolle an.<br>Zeige sie <strong>niemand anderem</strong>!</p>
-        <button class="btn-primary" onclick="wwShowCard()">👁️ Meine Rolle</button>
-      </div>
-      <div id="ww-deal-card" class="hidden">
-        <div class="card" id="ww-player-card">
-          <div class="ww-card-emoji" id="ww-card-emoji"></div>
-          <div class="card-role" id="ww-card-sub"></div>
-          <div class="card-word" id="ww-card-role"></div>
-          <div class="ww-card-desc" id="ww-card-desc"></div>
-        </div>
-        <button class="btn-secondary" onclick="wwNextPlayer()">✅ Verstanden – weiter</button>
-      </div>
-    </div>
-    <div id="werwolf-night" class="hidden">
-      <div class="top-bar"><div></div><h2>🌙 Nacht</h2><div></div></div>
-      <div class="night-card"><div class="night-emoji" id="ww-night-emoji">🌙</div><div class="night-title" id="ww-night-title"></div><div class="night-desc" id="ww-night-desc"></div></div>
-      <div id="ww-night-selector"></div><div id="ww-night-extra"></div><div id="ww-night-buttons"></div>
-      <button class="btn-ghost" style="margin-top:16px" onclick="resetWerwolf()">↩ Spiel abbrechen</button>
-    </div>
-    <div id="werwolf-day" class="hidden">
-      <div class="top-bar"><div></div><h2>☀️ Tag <span id="ww-round-num">1</span></h2><div></div></div>
-      <div id="ww-day-announce"></div>
-      <div class="section-card" style="margin-top:12px"><div class="section-title">Spielerstatus</div><div id="ww-player-status"></div></div>
-      <div class="section-card"><div id="ww-vote-section"></div></div>
-      <button class="btn-ghost" style="margin-top:8px" onclick="resetWerwolf()">↩ Spiel abbrechen</button>
-    </div>
-    <div id="werwolf-win" class="hidden">
-      <div class="top-bar"><div></div><h2>Spielende 🎉</h2><div></div></div>
-      <div class="win-card"><div class="win-emoji" id="ww-win-emoji"></div><div class="win-title" id="ww-win-title"></div><div class="win-sub" id="ww-win-sub"></div></div>
-      <div class="players-list" id="ww-win-list" style="margin:16px 0"></div>
-      <button class="btn-primary" onclick="resetWerwolf()">🔄 Nochmal spielen</button>
-      <button class="btn-ghost" onclick="showHome()">🏠 Hauptmenü</button>
-    </div>
+    <div id="werwolf-setup"><div class="top-bar"><button class="icon-btn" onclick="showHome()">‹</button><h2>🐺 Werwolf</h2><div></div></div><div class="section-card narrator-card"><div class="toggle-row"><div><div class="toggle-label">🔊 Erzähler</div><div class="toggle-sub">Liest jeden Schritt automatisch vor</div></div><label class="toggle"><input type="checkbox" id="ww-narrator-toggle" onchange="toggleNarrator()" /><span class="toggle-slider"></span></label></div><div id="ww-narrator-label" class="narrator-status">🔇 Erzähler aus</div></div><div class="section-card"><div class="section-title">🐺 Werwölfe</div><div class="counter"><button class="cnt-btn" onclick="changeWWWolves(-1)">−</button><span id="ww-wolf-count">1</span><button class="cnt-btn" onclick="changeWWWolves(1)">+</button></div></div><div class="section-card"><div class="section-title">Sonderrollen</div><div id="ww-role-rows"></div></div><div class="section-card ww-info-card"><div class="ww-info-row"><span>🐺 Werwölfe</span><span id="ww-wolf-count-info"></span></div><div class="ww-info-row"><span>✨ Sonderrollen</span><span id="ww-special-count"></span></div><div class="ww-info-row"><span>🧑‍🌾 Dorfbewohner</span><span id="ww-village-count"></span></div></div><div class="section-card"><div class="section-title">Spieler</div><div class="counter" style="margin-bottom:16px"><button class="cnt-btn" onclick="changeWWCount(-1)">−</button><span id="ww-player-count">6</span><button class="cnt-btn" onclick="changeWWCount(1)">+</button></div><div id="werwolf-name-inputs"></div></div><button class="btn-primary" onclick="startWerwolf()">Rollen verteilen 🎭</button></div>
+    <div id="werwolf-deal" class="hidden"><div class="top-bar"><div></div><h2>Rollen verteilen</h2><div></div></div><div id="ww-deal-waiting" class="center-content"><div class="player-badge" id="ww-deal-player-name"></div><p class="deal-hint">Tippe auf den Button und schau dir deine Rolle an.<br>Zeige sie <strong>niemand anderem</strong>!</p><button class="btn-primary" onclick="wwShowCard()">👁️ Meine Rolle</button></div><div id="ww-deal-card" class="hidden"><div class="card" id="ww-player-card"><div class="ww-card-emoji" id="ww-card-emoji"></div><div class="card-role" id="ww-card-sub"></div><div class="card-word" id="ww-card-role"></div><div class="ww-card-desc" id="ww-card-desc"></div></div><button class="btn-secondary" onclick="wwNextPlayer()">✅ Verstanden – weiter</button></div></div>
+    <div id="werwolf-night" class="hidden"><div class="top-bar"><div></div><h2>🌙 Nacht</h2><div></div></div><div class="night-card"><div class="night-emoji" id="ww-night-emoji">🌙</div><div class="night-title" id="ww-night-title"></div><div class="night-desc" id="ww-night-desc"></div></div><div id="ww-night-selector"></div><div id="ww-night-extra"></div><div id="ww-night-buttons"></div><button class="btn-ghost" style="margin-top:16px" onclick="resetWerwolf()">↩ Spiel abbrechen</button></div>
+    <div id="werwolf-day" class="hidden"><div class="top-bar"><div></div><h2>☀️ Tag <span id="ww-round-num">1</span></h2><div></div></div><div id="ww-day-announce"></div><div class="section-card" style="margin-top:12px"><div class="section-title">Spielerstatus</div><div id="ww-player-status"></div></div><div class="section-card"><div id="ww-vote-section"></div></div><button class="btn-ghost" style="margin-top:8px" onclick="resetWerwolf()">↩ Spiel abbrechen</button></div>
+    <div id="werwolf-win" class="hidden"><div class="top-bar"><div></div><h2>Spielende 🎉</h2><div></div></div><div class="win-card"><div class="win-emoji" id="ww-win-emoji"></div><div class="win-title" id="ww-win-title"></div><div class="win-sub" id="ww-win-sub"></div></div><div class="players-list" id="ww-win-list" style="margin:16px 0"></div><button class="btn-primary" onclick="resetWerwolf()">🔄 Nochmal spielen</button><button class="btn-ghost" onclick="showHome()">🏠 Hauptmenü</button></div>
   </div>
 
   <!-- TIC TAC TOE -->
   <div id="tictactoe-screen" class="screen">
     <div class="top-bar"><button class="icon-btn" onclick="showHome()">‹</button><h2>❌⭕ Tic Tac Toe</h2><div></div></div>
-    <div id="ttt-setup">
-      <div class="section-card">
-        <div class="section-title">Spielfeldgröße</div>
-        <div style="display:flex;gap:10px;margin-top:4px">
-          <button id="ttt-size-3" class="ttt-size-btn ttt-size-active" onclick="setTTTSize(3)">3×3</button>
-          <button id="ttt-size-5" class="ttt-size-btn" onclick="setTTTSize(5)">5×5 (4 in Reihe)</button>
-        </div>
-      </div>
-      <div class="section-card">
-        <div class="toggle-row">
-          <div><div class="toggle-label">🤖 Gegen Bot spielen</div><div class="toggle-sub">Spiele alleine gegen den Computer</div></div>
-          <label class="toggle"><input type="checkbox" id="ttt-bot-toggle" onchange="toggleTTTBot()" /><span class="toggle-slider"></span></label>
-        </div>
-        <div id="ttt-diff-row" class="ttt-diff-row hidden">
-          <div class="ttt-diff-label">Schwierigkeit:</div>
-          <div class="ttt-diff-btns">
-            <button id="ttt-diff-easy" class="ttt-diff-btn ttt-diff-easy" onclick="setTTTDifficulty('easy')">😊 Leicht</button>
-            <button id="ttt-diff-medium" class="ttt-diff-btn ttt-diff-medium ttt-diff-active" onclick="setTTTDifficulty('medium')">🧠 Mittel</button>
-            <button id="ttt-diff-hard" class="ttt-diff-btn ttt-diff-hard" onclick="setTTTDifficulty('hard')">💀 Schwer</button>
-          </div>
-        </div>
-      </div>
-      <div class="section-card">
-        <div class="section-title">Spielernamen</div>
-        <div class="name-row"><label>✖ Spieler X</label><input type="text" id="ttt-name-x" placeholder="Spieler X" maxlength="16" /></div>
-        <div class="name-row" id="ttt-name-o-row"><label>◯ Spieler O</label><input type="text" id="ttt-name-o" placeholder="Spieler O" maxlength="16" /></div>
-      </div>
-      <button class="btn-primary" onclick="startTTT()">Spiel starten 🎮</button>
-    </div>
-    <div id="ttt-game" class="hidden">
-      <div class="ttt-scoreboard">
-        <div class="ttt-score-box ttt-score-x" id="ttt-score-x-box"><div class="ttt-score-name" id="ttt-score-name-x">X</div><div class="ttt-score-num ttt-score-x-num" id="ttt-score-x">0</div></div>
-        <div class="ttt-score-mid"><div class="ttt-score-draws-label">Unentschieden</div><div class="ttt-score-draws" id="ttt-score-draws">0</div></div>
-        <div class="ttt-score-box ttt-score-o" id="ttt-score-o-box"><div class="ttt-score-name" id="ttt-score-name-o">O</div><div class="ttt-score-num ttt-score-o-num" id="ttt-score-o">0</div></div>
-      </div>
-      <div class="ttt-status" id="ttt-status">Spieler X ist dran</div>
-      <div class="ttt-board" id="ttt-board"></div>
-      <div class="ttt-result hidden" id="ttt-result">
-        <div class="ttt-result-emoji" id="ttt-result-emoji">🎉</div>
-        <div class="ttt-result-text" id="ttt-result-text"></div>
-        <button class="btn-primary" style="margin-top:16px" onclick="resetTTTRound()">🔄 Nochmal</button>
-        <button class="btn-ghost" onclick="showTTTSetup()">⚙️ Einstellungen</button>
-        <button class="btn-ghost" onclick="showHome()">🏠 Hauptmenü</button>
-      </div>
-      <button class="btn-ghost" style="margin-top:12px" onclick="showHome()">🏠 Hauptmenü</button>
-    </div>
+    <div id="ttt-setup"><div class="section-card"><div class="section-title">Spielfeldgröße</div><div style="display:flex;gap:10px;margin-top:4px"><button id="ttt-size-3" class="ttt-size-btn ttt-size-active" onclick="setTTTSize(3)">3×3</button><button id="ttt-size-5" class="ttt-size-btn" onclick="setTTTSize(5)">5×5 (4 in Reihe)</button></div></div><div class="section-card"><div class="toggle-row"><div><div class="toggle-label">🤖 Gegen Bot spielen</div><div class="toggle-sub">Spiele alleine gegen den Computer</div></div><label class="toggle"><input type="checkbox" id="ttt-bot-toggle" onchange="toggleTTTBot()" /><span class="toggle-slider"></span></label></div><div id="ttt-diff-row" class="ttt-diff-row hidden"><div class="ttt-diff-label">Schwierigkeit:</div><div class="ttt-diff-btns"><button id="ttt-diff-easy" class="ttt-diff-btn ttt-diff-easy" onclick="setTTTDifficulty('easy')">😊 Leicht</button><button id="ttt-diff-medium" class="ttt-diff-btn ttt-diff-medium ttt-diff-active" onclick="setTTTDifficulty('medium')">🧠 Mittel</button><button id="ttt-diff-hard" class="ttt-diff-btn ttt-diff-hard" onclick="setTTTDifficulty('hard')">💀 Schwer</button></div></div></div><div class="section-card"><div class="section-title">Spielernamen</div><div class="name-row"><label>✖ Spieler X</label><input type="text" id="ttt-name-x" placeholder="Spieler X" maxlength="16" /></div><div class="name-row" id="ttt-name-o-row"><label>◯ Spieler O</label><input type="text" id="ttt-name-o" placeholder="Spieler O" maxlength="16" /></div></div><button class="btn-primary" onclick="startTTT()">Spiel starten 🎮</button></div>
+    <div id="ttt-game" class="hidden"><div class="ttt-scoreboard"><div class="ttt-score-box ttt-score-x" id="ttt-score-x-box"><div class="ttt-score-name" id="ttt-score-name-x">X</div><div class="ttt-score-num ttt-score-x-num" id="ttt-score-x">0</div></div><div class="ttt-score-mid"><div class="ttt-score-draws-label">Unentschieden</div><div class="ttt-score-draws" id="ttt-score-draws">0</div></div><div class="ttt-score-box ttt-score-o" id="ttt-score-o-box"><div class="ttt-score-name" id="ttt-score-name-o">O</div><div class="ttt-score-num ttt-score-o-num" id="ttt-score-o">0</div></div></div><div class="ttt-status" id="ttt-status">Spieler X ist dran</div><div class="ttt-board" id="ttt-board"></div><div class="ttt-result hidden" id="ttt-result"><div class="ttt-result-emoji" id="ttt-result-emoji">🎉</div><div class="ttt-result-text" id="ttt-result-text"></div><button class="btn-primary" style="margin-top:16px" onclick="resetTTTRound()">🔄 Nochmal</button><button class="btn-ghost" onclick="showTTTSetup()">⚙️ Einstellungen</button><button class="btn-ghost" onclick="showHome()">🏠 Hauptmenü</button></div><button class="btn-ghost" style="margin-top:12px" onclick="showHome()">🏠 Hauptmenü</button></div>
   </div>
 
   <!-- WER BIN ICH -->
   <div id="werbinich-screen" class="screen">
-    <div id="wbi-setup">
-      <div class="top-bar"><button class="icon-btn" onclick="showHome()">‹</button><h2>🎭 Wer bin ich?</h2><div></div></div>
-      <div class="wbi-how-to">
-        <div class="wbi-how-step"><span>1️⃣</span> Handy ans Ohr halten – <strong>Display zeigt nach außen</strong></div>
-        <div class="wbi-how-step"><span>2️⃣</span> Andere sehen den Begriff – du nicht!</div>
-        <div class="wbi-how-step"><span>↩️</span> Handy nach <strong>hinten kippen</strong> = ✅ Richtig erraten</div>
-        <div class="wbi-how-step"><span>⏩</span> Handy nach <strong>vorne kippen</strong> = ⏭️ Überspringen</div>
-      </div>
-      <div class="section-card"><div class="section-title">Dein Name</div><div class="name-row"><label>Name</label><input type="text" id="wbi-player-name" placeholder="z.B. Anna" maxlength="16" /></div></div>
-      <div class="section-card"><div class="section-title">Kategorien</div><div class="splash-cat-grid" id="wbi-cat-checks"></div></div>
-      <div class="section-card"><div class="section-title">⏱ Zeit pro Runde</div><div class="counter"><button class="cnt-btn" onclick="wbiChangeTimer(-10)">−</button><span id="wbi-timer-val">60s</span><button class="cnt-btn" onclick="wbiChangeTimer(10)">+</button></div></div>
-      <button class="btn-primary" onclick="startWBI()">Los geht's! 🎭</button>
-    </div>
-    <div id="wbi-game" class="hidden wbi-game-fullscreen">
-      <div id="wbi-countdown-wrap" class="wbi-countdown-wrap">
-        <div class="wbi-countdown-emoji">📱</div>
-        <div class="wbi-countdown-instruction">Handy jetzt an<br>deine <strong>Stirn halten!</strong></div>
-        <div class="wbi-countdown-hint">Display zeigt nach außen</div>
-        <div class="wbi-countdown-num wbi-cd-pop" id="wbi-countdown-num">3</div>
-      </div>
-      <div class="wbi-game-timer-bar hidden" id="wbi-game-timer-bar">
-        <div class="wbi-game-timer-val" id="wbi-game-timer">60s</div>
-        <div class="wbi-score-inline">✅ <span id="wbi-score-val">0</span></div>
-      </div>
-      <div class="wbi-splash-center hidden" id="wbi-splash-center">
-        <div class="wbi-splash-term" id="wbi-splash-term">Begriff</div>
-      </div>
-      <div class="wbi-tilt-overlay" id="wbi-tilt-overlay"></div>
-      <div class="wbi-manual-btns hidden" id="wbi-manual-btns">
-        <button class="wbi-ans-btn wbi-ans-no" onclick="wbiSkip()">⏭️ Weiter</button>
-        <button class="wbi-ans-btn wbi-ans-yes" onclick="wbiCorrect()">✅ Richtig</button>
-      </div>
-      <button class="btn-ghost" style="margin:16px 16px 0" onclick="resetWBI()">✕ Abbrechen</button>
-    </div>
-    <div id="wbi-result" class="hidden">
-      <div class="top-bar"><div></div><h2>🎉 Ergebnis</h2><div></div></div>
-      <div class="win-card">
-        <div class="win-emoji">🎭</div>
-        <div class="win-title" id="wbi-result-name"></div>
-        <div class="win-sub" style="font-size:1rem;margin-top:12px"><span style="font-size:2rem;font-weight:900;color:#6ee7b7" id="wbi-result-score">0</span> richtig erraten</div>
-        <div class="win-sub" style="margin-top:8px"><span id="wbi-result-skipped">0</span> übersprungen</div>
-      </div>
-      <button class="btn-primary" onclick="startWBI()">🔄 Nochmal</button>
-      <button class="btn-ghost" onclick="resetWBI()">⚙️ Einstellungen</button>
-      <button class="btn-ghost" onclick="showHome()">🏠 Hauptmenü</button>
-    </div>
+    <div id="wbi-setup"><div class="top-bar"><button class="icon-btn" onclick="showHome()">‹</button><h2>🎭 Wer bin ich?</h2><div></div></div><div class="wbi-how-to"><div class="wbi-how-step"><span>1️⃣</span> Handy ans Ohr halten – <strong>Display zeigt nach außen</strong></div><div class="wbi-how-step"><span>2️⃣</span> Andere sehen den Begriff – du nicht!</div><div class="wbi-how-step"><span>↩️</span> Handy nach <strong>hinten kippen</strong> = ✅ Richtig erraten</div><div class="wbi-how-step"><span>⏩</span> Handy nach <strong>vorne kippen</strong> = ⏭️ Überspringen</div></div><div class="section-card"><div class="section-title">Dein Name</div><div class="name-row"><label>Name</label><input type="text" id="wbi-player-name" placeholder="z.B. Anna" maxlength="16" /></div></div><div class="section-card"><div class="section-title">Kategorien</div><div class="splash-cat-grid" id="wbi-cat-checks"></div></div><div class="section-card"><div class="section-title">⏱ Zeit pro Runde</div><div class="counter"><button class="cnt-btn" onclick="wbiChangeTimer(-10)">−</button><span id="wbi-timer-val">60s</span><button class="cnt-btn" onclick="wbiChangeTimer(10)">+</button></div></div><button class="btn-primary" onclick="startWBI()">Los geht's! 🎭</button></div>
+    <div id="wbi-game" class="hidden wbi-game-fullscreen"><div id="wbi-countdown-wrap" class="wbi-countdown-wrap"><div class="wbi-countdown-emoji">📱</div><div class="wbi-countdown-instruction">Handy jetzt an<br>deine <strong>Stirn halten!</strong></div><div class="wbi-countdown-hint">Display zeigt nach außen</div><div class="wbi-countdown-num wbi-cd-pop" id="wbi-countdown-num">3</div></div><div class="wbi-game-timer-bar hidden" id="wbi-game-timer-bar"><div class="wbi-game-timer-val" id="wbi-game-timer">60s</div><div class="wbi-score-inline">✅ <span id="wbi-score-val">0</span></div></div><div class="wbi-splash-center hidden" id="wbi-splash-center"><div class="wbi-splash-term" id="wbi-splash-term">Begriff</div></div><div class="wbi-tilt-overlay" id="wbi-tilt-overlay"></div><div class="wbi-manual-btns hidden" id="wbi-manual-btns"><button class="wbi-ans-btn wbi-ans-no" onclick="wbiSkip()">⏭️ Weiter</button><button class="wbi-ans-btn wbi-ans-yes" onclick="wbiCorrect()">✅ Richtig</button></div><button class="btn-ghost" style="margin:16px 16px 0" onclick="resetWBI()">✕ Abbrechen</button></div>
+    <div id="wbi-result" class="hidden"><div class="top-bar"><div></div><h2>🎉 Ergebnis</h2><div></div></div><div class="win-card"><div class="win-emoji">🎭</div><div class="win-title" id="wbi-result-name"></div><div class="win-sub" style="font-size:1rem;margin-top:12px"><span style="font-size:2rem;font-weight:900;color:#6ee7b7" id="wbi-result-score">0</span> richtig erraten</div><div class="win-sub" style="margin-top:8px"><span id="wbi-result-skipped">0</span> übersprungen</div></div><button class="btn-primary" onclick="startWBI()">🔄 Nochmal</button><button class="btn-ghost" onclick="resetWBI()">⚙️ Einstellungen</button><button class="btn-ghost" onclick="showHome()">🏠 Hauptmenü</button></div>
   </div>
 
   <!-- WÜRDEST DU EHER -->
   <div id="wdl-screen" class="screen">
+
+    <!-- SETUP -->
     <div id="wdl-setup">
       <div class="top-bar"><button class="icon-btn" onclick="showHome()">‹</button><h2>🤔 Würdest du eher</h2><div></div></div>
       <div class="wdl-how-to">
         <div class="wbi-how-step"><span>👈</span> Tippe auf <strong>Option A</strong> oder <strong>B</strong></div>
         <div class="wbi-how-step"><span>🗣️</span> Diskutiert eure Antworten!</div>
-        <div class="wbi-how-step"><span>➡️</span> Tippe auf <strong>Nächste Frage</strong> weiterzumachen</div>
+        <div class="wbi-how-step"><span>➡️</span> Tippe auf <strong>Nächste Frage</strong> zum Weitermachen</div>
       </div>
       <div class="section-card">
         <div class="section-title">Kategorien</div>
@@ -354,29 +134,38 @@
       <button class="btn-primary" onclick="startWDL()">Los geht's! 🤔</button>
     </div>
 
+    <!-- GAME -->
     <div id="wdl-game" class="hidden">
       <div class="top-bar">
         <button class="icon-btn" onclick="resetWDL()">‹</button>
         <div class="wdl-top-info">
-          <span id="wdl-cat-badge" class="wdl-cat-badge">Klassik</span>
+          <span id="wdl-cat-badge" class="wdl-cat-badge">😅 Klassik</span>
           <span class="wdl-counter-wrap">Frage <span id="wdl-counter">1</span></span>
         </div>
         <div></div>
       </div>
 
-      <div class="wdl-vs-label">Würdest du eher…</div>
+      <p class="wdl-headline">Würdest du eher…</p>
 
       <div class="wdl-card" id="wdl-card">
-        <button class="wdl-btn wdl-btn-a" id="wdl-opt-a" onclick="wdlChoose('a')">Option A</button>
-        <div class="wdl-or-divider">
-          <div class="wdl-or-line"></div>
-          <span class="wdl-or-text">ODER</span>
-          <div class="wdl-or-line"></div>
-        </div>
-        <button class="wdl-btn wdl-btn-b" id="wdl-opt-b" onclick="wdlChoose('b')">Option B</button>
+        <!-- Option A -->
+        <button class="wdl-option-card wdl-option-a" id="wdl-opt-a" onclick="wdlChoose('a')">
+          <span class="wdl-option-letter">A</span>
+          <span class="wdl-option-text" id="wdl-opt-a-text">Option A</span>
+          <span class="wdl-option-check">✔️</span>
+        </button>
+
+        <div class="wdl-or-badge">ODER</div>
+
+        <!-- Option B -->
+        <button class="wdl-option-card wdl-option-b" id="wdl-opt-b" onclick="wdlChoose('b')">
+          <span class="wdl-option-letter">B</span>
+          <span class="wdl-option-text" id="wdl-opt-b-text">Option B</span>
+          <span class="wdl-option-check">✔️</span>
+        </button>
       </div>
 
-      <button class="btn-primary" id="wdl-next-btn" style="margin-top:16px" onclick="wdlNextQuestion()" hidden>➡️ Nächste Frage</button>
+      <button class="btn-primary hidden" id="wdl-next-btn" onclick="wdlNextQuestion()">➡️ Nächste Frage</button>
       <button class="btn-ghost" style="margin-top:8px" onclick="resetWDL()">🏠 Zurück</button>
     </div>
 

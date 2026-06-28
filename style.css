@@ -236,16 +236,84 @@ html, body { height: 100%; font-family: -apple-system, BlinkMacSystemFont, 'Sego
 
 /* ===== WÜRDEST DU EHER ===== */
 .wdl-how-to { background: #1a1a2e; border-radius: 16px; padding: 16px; margin-bottom: 14px; display: flex; flex-direction: column; gap: 8px; }
+
+.wdl-headline { text-align: center; font-size: .95rem; font-weight: 700; color: #a0a0c0; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 14px; }
+
 .wdl-top-info { display: flex; flex-direction: column; align-items: center; gap: 4px; }
 .wdl-cat-badge { background: linear-gradient(135deg,#b45309,#d97706); color: #fff; font-size: .75rem; font-weight: 800; padding: 4px 12px; border-radius: 20px; }
 .wdl-counter-wrap { font-size: .75rem; color: #8080a0; font-weight: 700; }
-.wdl-vs-label { text-align: center; font-size: 1rem; font-weight: 700; color: #a0a0c0; margin-bottom: 12px; letter-spacing: .05em; text-transform: uppercase; }
-.wdl-card { display: flex; flex-direction: column; gap: 0; background: #1a1a2e; border-radius: 20px; overflow: hidden; border: 1.5px solid rgba(255,255,255,.08); }
-.wdl-btn { width: 100%; padding: 22px 18px; border: none; background: transparent; color: #e0e0f0; font-size: 1rem; font-weight: 700; cursor: pointer; text-align: left; line-height: 1.5; transition: background .2s, transform .15s; }
-.wdl-btn-a { border-bottom: 1px solid rgba(255,255,255,.06); }
-.wdl-btn:active { transform: scale(.98); }
-.wdl-btn-chosen { background: linear-gradient(135deg, rgba(124,58,237,.3), rgba(219,39,119,.2)) !important; color: #fff !important; font-size: 1.05rem; }
-.wdl-btn-other  { opacity: .35; }
-.wdl-or-divider { display: flex; align-items: center; gap: 10px; padding: 0 18px; }
-.wdl-or-line { flex: 1; height: 1px; background: rgba(255,255,255,.08); }
-.wdl-or-text { font-size: .75rem; font-weight: 900; color: #6060a0; letter-spacing: .1em; }
+
+/* Question card wrapper */
+.wdl-card { display: flex; flex-direction: column; gap: 0; border-radius: 24px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,.5); }
+@keyframes wdlPop { 0%{opacity:0;transform:scale(.96) translateY(10px)} 100%{opacity:1;transform:scale(1) translateY(0)} }
+.wdl-card-pop { animation: wdlPop .3s cubic-bezier(.2,.8,.3,1) forwards; }
+
+/* Option cards */
+.wdl-option-card {
+  width: 100%;
+  min-height: 130px;
+  border: none;
+  padding: 24px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  text-align: left;
+  transition: transform .15s, filter .2s;
+  position: relative;
+}
+.wdl-option-card:active { transform: scale(.98); }
+
+.wdl-option-a { background: linear-gradient(135deg, #1e3a8a, #2563eb); }
+.wdl-option-b { background: linear-gradient(135deg, #7c1a6e, #db2777); }
+
+/* Letter badge */
+.wdl-option-letter {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #fff;
+}
+
+/* Option text */
+.wdl-option-text {
+  flex: 1;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.5;
+  text-shadow: 0 1px 4px rgba(0,0,0,.3);
+}
+
+/* Check icon (hidden by default) */
+.wdl-option-check {
+  font-size: 1.4rem;
+  opacity: 0;
+  transition: opacity .2s;
+  flex-shrink: 0;
+}
+
+/* OR divider between options */
+.wdl-or-badge {
+  background: #0f0f1a;
+  color: #6060a0;
+  font-size: .7rem;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-align: center;
+  padding: 8px 0;
+  border-top: 1px solid rgba(255,255,255,.06);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+/* After choosing */
+.wdl-option-chosen .wdl-option-check { opacity: 1; }
+.wdl-option-chosen { filter: brightness(1.15); transform: scale(1.01); }
+.wdl-option-dimmed { filter: brightness(0.45) saturate(0.5); }
