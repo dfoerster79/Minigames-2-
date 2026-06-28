@@ -39,10 +39,21 @@
       </div>
 
       <div class="section-card">
-        <div class="section-title">Kategorie</div>
-        <select id="category-select">
-          <option value="alltag">🏠 Alltag</option>
-        </select>
+        <div class="section-title">Kategorien (max. 3)</div>
+        <div class="cat-checks">
+          <label class="cat-check">
+            <input type="checkbox" id="cat-alltag" checked onchange="toggleCat('alltag')" />
+            <span>🏠 Alltag</span>
+          </label>
+          <label class="cat-check">
+            <input type="checkbox" id="cat-tiere" onchange="toggleCat('tiere')" />
+            <span>🐾 Tiere</span>
+          </label>
+          <label class="cat-check">
+            <input type="checkbox" id="cat-sehenswuerdigkeiten" onchange="toggleCat('sehenswuerdigkeiten')" />
+            <span>🏙️ Sehenswürdigkeiten</span>
+          </label>
+        </div>
       </div>
 
       <div class="section-card">
@@ -50,7 +61,7 @@
         <div class="toggle-row">
           <div>
             <div class="toggle-label">Tipp aktivieren</div>
-            <div class="toggle-sub">Der Imposter erhält einen kleinen Hinweis zum Wort</div>
+            <div class="toggle-sub">Der Imposter erhält ein Stichwort</div>
           </div>
           <label class="toggle">
             <input type="checkbox" id="hint-toggle" />
@@ -83,14 +94,10 @@
 
     <!-- DEAL -->
     <div id="imposter-deal" class="hidden">
-      <div class="top-bar">
-        <div></div>
-        <h2>Karten verteilen</h2>
-        <div></div>
-      </div>
+      <div class="top-bar"><div></div><h2>Karten verteilen</h2><div></div></div>
       <div id="deal-waiting" class="center-content">
         <div class="player-badge" id="deal-player-name"></div>
-        <p class="deal-hint">Tippe auf den Button und schau dir deine Karte an. Zeige sie niemand anderem!</p>
+        <p class="deal-hint">Tippe auf den Button und schau dir deine Karte an. Zeige sie niemand anderem!</p>
         <button class="btn-primary" onclick="showCard()">👁️ Meine Karte</button>
       </div>
       <div id="deal-card" class="hidden">
@@ -106,11 +113,7 @@
 
     <!-- PLAY -->
     <div id="imposter-play" class="hidden">
-      <div class="top-bar">
-        <div></div>
-        <h2>Spiel läuft 🎯</h2>
-        <div></div>
-      </div>
+      <div class="top-bar"><div></div><h2>Spiel läuft 🎯</h2><div></div></div>
       <div class="timer-circle">
         <svg viewBox="0 0 120 120">
           <circle cx="60" cy="60" r="54" class="timer-bg"/>
@@ -126,11 +129,7 @@
 
     <!-- REVEAL -->
     <div id="imposter-reveal" class="hidden">
-      <div class="top-bar">
-        <div></div>
-        <h2>Auflösung 🎉</h2>
-        <div></div>
-      </div>
+      <div class="top-bar"><div></div><h2>Auflösung 🎉</h2><div></div></div>
       <div class="reveal-card">
         <div class="reveal-label">Das Wort war</div>
         <div class="reveal-word" id="reveal-word"></div>

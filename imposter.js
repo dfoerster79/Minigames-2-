@@ -1,106 +1,293 @@
 const IMPOSTER_DATA = {
   alltag: [
-    // Haushalt
-    { word: 'Zahnbürste',    hint: 'Morgens und abends benutzt' },
-    { word: 'Kühlschrank',    hint: 'Hält Sachen kalt' },
-    { word: 'Wecker',          hint: 'Macht morgens Krach' },
-    { word: 'Einkaufstasche',  hint: 'Trägt man zum Laden mit' },
-    { word: 'Schlüssel',       hint: 'Ohne ihn kommt man nicht rein' },
-    { word: 'Kaffeetasse',     hint: 'Ein heißes Getränk drin' },
-    { word: 'Haustür',         hint: 'Der erste Eingang' },
-    { word: 'Briefkasten',     hint: 'Post landet hier' },
-    { word: 'Regenschirm',     hint: 'Schutz bei Regen' },
-    { word: 'Lichtschalter',   hint: 'An der Wand, hell oder dunkel' },
-    { word: 'Handtuch',        hint: 'Nach dem Duschen wichtig' },
-    { word: 'Spülmaschine',    hint: 'Wäscht Geschirr automatisch' },
-    { word: 'Mülleimer',       hint: 'Für alles was man wegwirft' },
-    { word: 'Fernbedienung',   hint: 'Steuert den Fernseher' },
-    { word: 'Kopfkissen',      hint: 'Liegt im Bett' },
-    { word: 'Geldbörse',       hint: 'Geld und Karten drin' },
-    { word: 'Fahrradhelm',     hint: 'Schutz für den Kopf' },
-    { word: 'Joghurt',         hint: 'Milchprodukt aus dem Kühlregal' },
-    { word: 'Waschmaschine',   hint: 'Wäscht Klamotten' },
-    { word: 'Hausschuhe',      hint: 'Drinnen an den Füßen' },
-    { word: 'Klopapier',       hint: 'Im Bad unverzichtbar' },
-    { word: 'Balkon',          hint: 'Außen an der Wohnung' },
-    { word: 'Parkplatz',       hint: 'Fürs Auto' },
-    { word: 'Supermarkt',      hint: 'Einkaufen gehen' },
-    { word: 'Bushaltestelle',  hint: 'Dort wartet man auf den Bus' },
-    { word: 'Rezept',          hint: 'Anleitung zum Kochen oder vom Arzt' },
-    { word: 'Trinkflasche',    hint: 'Wasser unterwegs' },
-    { word: 'Lunchbox',        hint: 'Essen für die Arbeit' },
-    { word: 'Terminkalender',  hint: 'Verpasst keine Verabredungen' },
-    { word: 'Handy',           hint: 'Immer dabei, immer online' },
-    // Essen & Trinken
-    { word: 'Brotdose',        hint: 'Brot geht nicht kaputt darin' },
-    { word: 'Kaffeemaschine',  hint: 'Braut das Morgengetränk' },
-    { word: 'Toaster',         hint: 'Macht Brot knusprig' },
-    { word: 'Mikrowelle',      hint: 'Wärmt Essen schnell auf' },
-    { word: 'Schneidebrett',   hint: 'Zum Gemüse schneiden' },
-    { word: 'Pfanne',          hint: 'Braten auf dem Herd' },
-    { word: 'Kochtopf',        hint: 'Suppe oder Nudeln darin' },
-    { word: 'Gewürze',         hint: 'Salz und Pfeffer sind dabei' },
-    { word: 'Tiefkühlpizza',   hint: 'Schnelles Abendessen' },
-    { word: 'Apfelsaft',       hint: 'Aus Obst gepresst' },
-    // Mobilität
-    { word: 'Fahrrad',         hint: 'Zwei Räder, kein Motor' },
-    { word: 'Haltestelle',     hint: 'Bus oder Bahn wartet hier' },
-    { word: 'Tankstelle',      hint: 'Hier wird das Auto befüllt' },
-    { word: 'Bahnsteig',       hint: 'Dort fährt der Zug ein' },
-    { word: 'Navi',            hint: 'Zeigt den Weg' },
-    { word: 'Autoparkschein',  hint: 'Bezahlt fürs Parken' },
-    { word: 'Koffer',          hint: 'Im Urlaub dabei' },
-    { word: 'Rucksack',        hint: 'Auf dem Rücken getragen' },
-    // Arbeit & Alltag
-    { word: 'Laptop',          hint: 'Portabler Computer' },
-    { word: 'Drucker',         hint: 'Macht Papier aus Daten' },
-    { word: 'Stempel',         hint: 'Hässliche Spuren auf Papier' },
-    { word: 'Kugelschreiber',  hint: 'Schreiben auf Papier' },
-    { word: 'Haftnotiz',       hint: 'Kleiner gelber Zettel' },
-    { word: 'Konferenzraum',   hint: 'Meeting findet hier statt' },
-    { word: 'Feierabend',      hint: 'Das Schönste an der Arbeit' },
-    { word: 'Krankenhaus',     hint: 'Ärzte und Schwestern arbeiten hier' },
-    { word: 'Apotheke',        hint: 'Hier kauft man Medikamente' },
-    { word: 'Post',            hint: 'Pakete und Briefe' },
-    { word: 'Bank',            hint: 'Geld verwalten' },
-    { word: 'Behörde',          hint: 'Formulare ausfüllen müssen' },
-    // Wohnen
-    { word: 'Sofa',            hint: 'Darauf sitzen oder liegen' },
-    { word: 'Schreibtisch',    hint: 'Dort arbeitet man zu Hause' },
-    { word: 'Regal',           hint: 'Bücher und Dinge drauf' },
-    { word: 'Badewanne',       hint: 'Entspannen im Wasser' },
-    { word: 'Dusche',          hint: 'Schneller als Baden' },
-    { word: 'Spiegel',         hint: 'Zeigt das eigene Gesicht' },
-    { word: 'Vorhang',         hint: 'Hängt am Fenster' },
-    { word: 'Teppich',         hint: 'Liegt auf dem Boden' },
-    { word: 'Blumentopf',      hint: 'Pflanze darin' },
-    { word: 'Nachttisch',      hint: 'Neben dem Bett' },
-    // Freizeit
-    { word: 'Spielkarten',     hint: 'Für viele Spiele geeignet' },
-    { word: 'Brettspiel',      hint: 'Gemeinsam am Tisch spielen' },
-    { word: 'Kopfhörer',       hint: 'Musik für die Ohren' },
-    { word: 'Fernseher',       hint: 'Großer Bildschirm im Wohnzimmer' },
-    { word: 'Buch',            hint: 'Viele Seiten, eine Geschichte' },
-    { word: 'Zeitschrift',     hint: 'Gedruckt, wöchentlich oder monatlich' },
-    { word: 'Kino',            hint: 'Große Leinwand, Popcorn' },
-    { word: 'Restaurant',      hint: 'Jemand kocht für dich' },
-    { word: 'Café',            hint: 'Kaffee und Kuchen' },
-    { word: 'Einkaufszentrum', hint: 'Viele Läden unter einem Dach' },
-    // Natur & Wetter
-    { word: 'Sonnencreme',     hint: 'Schutz vor der Sonne' },
-    { word: 'Gummistiefel',    hint: 'Bei Regen und Matsch' },
-    { word: 'Thermometer',     hint: 'Misst die Temperatur' },
-    { word: 'Gartenmöbel',     hint: 'Draußen sitzen' },
-    { word: 'Gartenschlauch',  hint: 'Pflanzen gießen draussen' },
-    { word: 'Mülltrennung',    hint: 'Gelbe Tonne, Papiertonne...' },
-    // Körper & Gesundheit
-    { word: 'Arzttermin',      hint: 'Kalender eintragen nicht vergessen' },
-    { word: 'Pflaster',        hint: 'Kleine Wunden abdecken' },
-    { word: 'Tablette',        hint: 'Schlucken mit Wasser' },
-    { word: 'Brille',          hint: 'Besser sehen damit' },
-    { word: 'Sportschuhe',     hint: 'Fürs Training' },
-    { word: 'Fitnessstudio',   hint: 'Muskeln trainieren' },
-    { word: 'Spaziergang',     hint: 'Einfach draußen gehen' }
+    { word: 'Zahnbürste',    hint: 'Bürsten' },
+    { word: 'Kühlschrank',    hint: 'Frischhalten' },
+    { word: 'Wecker',          hint: 'Aufwachen' },
+    { word: 'Einkaufstasche',  hint: 'Tragen' },
+    { word: 'Schlüssel',       hint: 'Öffnen' },
+    { word: 'Kaffeetasse',     hint: 'Heiß' },
+    { word: 'Haustür',         hint: 'Eingang' },
+    { word: 'Briefkasten',     hint: 'Post' },
+    { word: 'Regenschirm',     hint: 'Nass' },
+    { word: 'Lichtschalter',   hint: 'Wand' },
+    { word: 'Handtuch',        hint: 'Trocknen' },
+    { word: 'Spülmaschine',    hint: 'Geschürr' },
+    { word: 'Mülleimer',       hint: 'Abfall' },
+    { word: 'Fernbedienung',   hint: 'Klicken' },
+    { word: 'Kopfkissen',      hint: 'Schlafen' },
+    { word: 'Geldbörse',       hint: 'Bezahlen' },
+    { word: 'Fahrradhelm',     hint: 'Schutz' },
+    { word: 'Joghurt',         hint: 'Milch' },
+    { word: 'Waschmaschine',   hint: 'Drehen' },
+    { word: 'Hausschuhe',      hint: 'Drinnen' },
+    { word: 'Klopapier',       hint: 'Bad' },
+    { word: 'Balkon',          hint: 'Draußen' },
+    { word: 'Parkplatz',       hint: 'Auto' },
+    { word: 'Supermarkt',      hint: 'Einkaufen' },
+    { word: 'Bushaltestelle',  hint: 'Warten' },
+    { word: 'Rezept',          hint: 'Kochen' },
+    { word: 'Trinkflasche',    hint: 'Wasser' },
+    { word: 'Lunchbox',        hint: 'Mittagessen' },
+    { word: 'Terminkalender',  hint: 'Planen' },
+    { word: 'Handy',           hint: 'Tippen' },
+    { word: 'Brotdose',        hint: 'Schule' },
+    { word: 'Kaffeemaschine',  hint: 'Morgen' },
+    { word: 'Toaster',         hint: 'Knusprig' },
+    { word: 'Mikrowelle',      hint: 'Aufwärmen' },
+    { word: 'Schneidebrett',   hint: 'Messer' },
+    { word: 'Pfanne',          hint: 'Braten' },
+    { word: 'Kochtopf',        hint: 'Kochen' },
+    { word: 'Gewürze',         hint: 'Würzen' },
+    { word: 'Tiefkühlpizza',   hint: 'Eingefroren' },
+    { word: 'Apfelsaft',       hint: 'Obst' },
+    { word: 'Fahrrad',         hint: 'Radeln' },
+    { word: 'Tankstelle',      hint: 'Benzin' },
+    { word: 'Bahnsteig',       hint: 'Zug' },
+    { word: 'Navi',            hint: 'Richtung' },
+    { word: 'Koffer',          hint: 'Reise' },
+    { word: 'Rucksack',        hint: 'Rücken' },
+    { word: 'Laptop',          hint: 'Tippen' },
+    { word: 'Drucker',         hint: 'Papier' },
+    { word: 'Kugelschreiber',  hint: 'Schreiben' },
+    { word: 'Haftnotiz',       hint: 'Kleben' },
+    { word: 'Feierabend',      hint: 'Schluss' },
+    { word: 'Krankenhaus',     hint: 'Krank' },
+    { word: 'Apotheke',        hint: 'Medikamente' },
+    { word: 'Post',            hint: 'Pakete' },
+    { word: 'Bank',            hint: 'Geld' },
+    { word: 'Sofa',            hint: 'Sitzen' },
+    { word: 'Schreibtisch',    hint: 'Arbeiten' },
+    { word: 'Regal',           hint: 'Bücher' },
+    { word: 'Badewanne',       hint: 'Baden' },
+    { word: 'Dusche',          hint: 'Waschen' },
+    { word: 'Spiegel',         hint: 'Spiegeln' },
+    { word: 'Vorhang',         hint: 'Fenster' },
+    { word: 'Teppich',         hint: 'Boden' },
+    { word: 'Blumentopf',      hint: 'Pflanze' },
+    { word: 'Nachttisch',      hint: 'Bett' },
+    { word: 'Spielkarten',     hint: 'Mischen' },
+    { word: 'Brettspiel',      hint: 'Spielen' },
+    { word: 'Kopfhörer',       hint: 'Musik' },
+    { word: 'Fernseher',       hint: 'Schauen' },
+    { word: 'Buch',            hint: 'Lesen' },
+    { word: 'Kino',            hint: 'Film' },
+    { word: 'Restaurant',      hint: 'Essen' },
+    { word: 'Café',            hint: 'Kaffee' },
+    { word: 'Einkaufszentrum', hint: 'Shoppen' },
+    { word: 'Sonnencreme',     hint: 'Sonne' },
+    { word: 'Gummistiefel',    hint: 'Regen' },
+    { word: 'Thermometer',     hint: 'Messen' },
+    { word: 'Pflaster',        hint: 'Wunde' },
+    { word: 'Brille',          hint: 'Sehen' },
+    { word: 'Sportschuhe',     hint: 'Laufen' },
+    { word: 'Fitnessstudio',   hint: 'Muskeln' },
+    { word: 'Spaziergang',     hint: 'Gehen' },
+    { word: 'Mülltrennung',    hint: 'Recyceln' },
+    { word: 'Gartenschlauch',  hint: 'Gießen' },
+    { word: 'Gartenmöbel',     hint: 'Terrasse' },
+    { word: 'Arzttermin',      hint: 'Warten' },
+    { word: 'Tablette',        hint: 'Schlucken' },
+    { word: 'Zeitschrift',     hint: 'Blättern' },
+    { word: 'Konferenzraum',   hint: 'Meeting' },
+    { word: 'Stempel',         hint: 'Abdruck' },
+    { word: 'Autoparkschein',  hint: 'Parkuhr' },
+    { word: 'Haltestelle',     hint: 'Bus' }
+  ],
+
+  tiere: [
+    { word: 'Elefant',         hint: 'Groß' },
+    { word: 'Giraffe',         hint: 'Hals' },
+    { word: 'Löwe',            hint: 'Mähne' },
+    { word: 'Pinguin',         hint: 'Eis' },
+    { word: 'Delfin',          hint: 'Springen' },
+    { word: 'Krokodil',        hint: 'Schnappen' },
+    { word: 'Gorilla',         hint: 'Klettern' },
+    { word: 'Zebra',           hint: 'Streifen' },
+    { word: 'Koala',           hint: 'Schlafen' },
+    { word: 'Känguru',         hint: 'Hüpfen' },
+    { word: 'Flamingo',        hint: 'Rosa' },
+    { word: 'Hai',             hint: 'Flosse' },
+    { word: 'Oktopus',         hint: 'Arme' },
+    { word: 'Schildkröte',     hint: 'Langsam' },
+    { word: 'Papagei',         hint: 'Reden' },
+    { word: 'Pferd',           hint: 'Reiten' },
+    { word: 'Kuh',             hint: 'Milch' },
+    { word: 'Schwein',         hint: 'Schlamm' },
+    { word: 'Schaf',           hint: 'Wolle' },
+    { word: 'Ziege',           hint: 'Meckern' },
+    { word: 'Huhn',            hint: 'Ei' },
+    { word: 'Ente',            hint: 'Quaken' },
+    { word: 'Hund',            hint: 'Bellen' },
+    { word: 'Katze',           hint: 'Schnurren' },
+    { word: 'Hase',            hint: 'Hoppeln' },
+    { word: 'Hamster',         hint: 'Backen' },
+    { word: 'Meerschweinchen', hint: 'Quietschen' },
+    { word: 'Goldfisch',       hint: 'Aquarium' },
+    { word: 'Papagei',         hint: 'Sprechen' },
+    { word: 'Schildkröte',     hint: 'Panzer' },
+    { word: 'Adler',           hint: 'Fliegen' },
+    { word: 'Eule',            hint: 'Nacht' },
+    { word: 'Schwan',          hint: 'Weiß' },
+    { word: 'Storch',          hint: 'Baby' },
+    { word: 'Specht',          hint: 'Klopfen' },
+    { word: 'Schmetterling',   hint: 'Flügel' },
+    { word: 'Biene',           hint: 'Honig' },
+    { word: 'Ameise',          hint: 'Tragen' },
+    { word: 'Spinne',          hint: 'Netz' },
+    { word: 'Frosch',          hint: 'Quaken' },
+    { word: 'Schlange',        hint: 'Züngeln' },
+    { word: 'Eidechse',        hint: 'Schwanz' },
+    { word: 'Chamäläon',       hint: 'Farbe' },
+    { word: 'Igel',            hint: 'Stacheln' },
+    { word: 'Maulwurf',        hint: 'Graben' },
+    { word: 'Fuchs',           hint: 'Schlau' },
+    { word: 'Wolf',            hint: 'Heulen' },
+    { word: 'Bär',             hint: 'Honig' },
+    { word: 'Reh',             hint: 'Wald' },
+    { word: 'Wildschwein',     hint: 'Hauer' },
+    { word: 'Dachs',           hint: 'Streifen' },
+    { word: 'Biber',           hint: 'Dämme' },
+    { word: 'Otter',           hint: 'Schwimmen' },
+    { word: 'Seehünd',         hint: 'Klatschen' },
+    { word: 'Walross',         hint: 'Zähne' },
+    { word: 'Eisbär',          hint: 'Arktis' },
+    { word: 'Polarfuchs',      hint: 'Weiß' },
+    { word: 'Rentier',         hint: 'Weihnachten' },
+    { word: 'Nashorn',         hint: 'Horn' },
+    { word: 'Flusspferd',      hint: 'Wasser' },
+    { word: 'Gepard',          hint: 'Schnell' },
+    { word: 'Leopard',         hint: 'Flecken' },
+    { word: 'Tiger',           hint: 'Streifen' },
+    { word: 'Puma',            hint: 'Springen' },
+    { word: 'Luchs',           hint: 'Pinselohren' },
+    { word: 'Kamel',           hint: 'Höcker' },
+    { word: 'Lama',            hint: 'Spucken' },
+    { word: 'Alpaka',          hint: 'Wolle' },
+    { word: 'Strauß',          hint: 'Laufen' },
+    { word: 'Pelikan',         hint: 'Schnabel' },
+    { word: 'Tukan',           hint: 'Bunt' },
+    { word: 'Kolibri',         hint: 'Klein' },
+    { word: 'Karpfen',         hint: 'Teich' },
+    { word: 'Lachs',           hint: 'Springen' },
+    { word: 'Wal',             hint: 'Riesig' },
+    { word: 'Tintenfisch',     hint: 'Tinte' },
+    { word: 'Seepferdchen',    hint: 'Aufrecht' },
+    { word: 'Krabbe',          hint: 'Seitlich' },
+    { word: 'Hummer',          hint: 'Rot' },
+    { word: 'Qualle',          hint: 'Durchsichtig' },
+    { word: 'Muschel',         hint: 'Strand' },
+    { word: 'Nashornkäfer',    hint: 'Gehörnt' },
+    { word: 'Marienkäfer',     hint: 'Punkte' },
+    { word: 'Libelle',         hint: 'Leuchten' },
+    { word: 'Grille',          hint: 'Zürpen' },
+    { word: 'Schnecke',        hint: 'Haus' },
+    { word: 'Regenwurm',       hint: 'Erde' },
+    { word: 'Fledermaus',      hint: 'Echolot' },
+    { word: 'Orang-Utan',      hint: 'Rot' },
+    { word: 'Schimpanse',      hint: 'Werkzeug' },
+    { word: 'Erdmännchen',     hint: 'Aufrecht' },
+    { word: 'Tapir',           hint: 'Rüssel' },
+    { word: 'Axolotl',         hint: 'Kiemen' },
+    { word: 'Koi',             hint: 'Bunt' }
+  ],
+
+  sehenswuerdigkeiten: [
+    { word: 'Eiffelturm',         hint: 'Eisen' },
+    { word: 'Kolosseum',          hint: 'Gladiatoren' },
+    { word: 'Chinesische Mauer',  hint: 'Lang' },
+    { word: 'Taj Mahal',          hint: 'Marmor' },
+    { word: 'Alhambra',           hint: 'Mosaik' },
+    { word: 'Machu Picchu',       hint: 'Berge' },
+    { word: 'Pyramiden',          hint: 'Wüste' },
+    { word: 'Akropolis',          hint: 'Hügel' },
+    { word: 'Stonehenge',         hint: 'Steine' },
+    { word: 'Big Ben',            hint: 'Tick' },
+    { word: 'Freiheitsstatue',    hint: 'Fackel' },
+    { word: 'Golden Gate',        hint: 'Brücke' },
+    { word: 'Burj Khalifa',       hint: 'Höchste' },
+    { word: 'Sagrada Familia',    hint: 'Baustelle' },
+    { word: 'Vatikan',            hint: 'Papst' },
+    { word: 'Notre-Dame',         hint: 'Feuer' },
+    { word: 'Louvre',             hint: 'Mona Lisa' },
+    { word: 'Brandenburger Tor',  hint: 'Berlin' },
+    { word: 'Neuschwanstein',     hint: 'Märchen' },
+    { word: 'Oktoberfest',        hint: 'Bier' },
+    { word: 'Reichstag',          hint: 'Glas' },
+    { word: 'Kölner Dom',         hint: 'Spitzen' },
+    { word: 'Hamburger Speicherstadt', hint: 'Kanal' },
+    { word: 'Frauenkirche',       hint: 'München' },
+    { word: 'Schwarzwald',        hint: 'Kirsch' },
+    { word: 'Zugspitze',          hint: 'Gipfel' },
+    { word: 'Heidelberger Schloss', hint: 'Ruine' },
+    { word: 'Sylt',               hint: 'Insel' },
+    { word: 'Bodensee',           hint: 'Grenze' },
+    { word: 'Rhön',               hint: 'Hochland' },
+    { word: 'Rheinfall',          hint: 'Wasserfall' },
+    { word: 'Matterhorn',         hint: 'Spitz' },
+    { word: 'Jungfrau',           hint: 'Gletscher' },
+    { word: 'Wiener Staatsoper',  hint: 'Oper' },
+    { word: 'Schönbrunn',         hint: 'Kaiser' },
+    { word: 'Prater',             hint: 'Riesenrad' },
+    { word: 'Sagrada Familia',    hint: 'Gaudi' },
+    { word: 'Colosseum',          hint: 'Arena' },
+    { word: 'Pantheon',           hint: 'Kuppel' },
+    { word: 'Petersdom',          hint: 'Vatikan' },
+    { word: 'Trevi-Brunnen',      hint: 'Münze' },
+    { word: 'Pisa',               hint: 'Schief' },
+    { word: 'Venedig',            hint: 'Gondel' },
+    { word: 'Santorini',          hint: 'Blau' },
+    { word: 'Parthenon',          hint: 'Säulen' },
+    { word: 'Hagia Sophia',       hint: 'Kuppel' },
+    { word: 'Topkapi-Palast',     hint: 'Sultan' },
+    { word: 'Petra',              hint: 'Fels' },
+    { word: 'Angkor Wat',         hint: 'Tempel' },
+    { word: 'Fuji',               hint: 'Vulkan' },
+    { word: 'Verbotene Stadt',    hint: 'Kaiser' },
+    { word: 'Potala-Palast',      hint: 'Tibet' },
+    { word: 'Sydney Opera',       hint: 'Segel' },
+    { word: 'Ayers Rock',         hint: 'Rot' },
+    { word: 'Niagara',            hint: 'Wasserfall' },
+    { word: 'Grand Canyon',       hint: 'Tief' },
+    { word: 'Yellowstone',        hint: 'Geysir' },
+    { word: 'Times Square',       hint: 'Leuchtreklamen' },
+    { word: 'Central Park',       hint: 'Stadtpark' },
+    { word: 'Empire State',       hint: 'Wolkenkratzer' },
+    { word: 'Buckingham Palast',  hint: 'Königin' },
+    { word: 'Tower Bridge',       hint: 'Klappen' },
+    { word: 'London Eye',         hint: 'Riesenrad' },
+    { word: 'Disneyland',         hint: 'Mäuse' },
+    { word: 'Versailles',         hint: 'Garten' },
+    { word: 'Moulin Rouge',       hint: 'Rot' },
+    { word: 'Montmartre',         hint: 'Künstler' },
+    { word: 'Sacré-Coeur',        hint: 'Hügel' },
+    { word: 'Arc de Triomphe',    hint: 'Bogen' },
+    { word: 'Atomium',            hint: 'Atom' },
+    { word: 'Manneken Pis',       hint: 'Klein' },
+    { word: 'Rijksmuseum',        hint: 'Rembrandt' },
+    { word: 'Windmühlen',         hint: 'Holland' },
+    { word: 'Alhambra',           hint: 'Spanien' },
+    { word: 'Sagrada Familia',    hint: 'Unfertig' },
+    { word: 'Kilimandscharo',     hint: 'Afrika' },
+    { word: 'Victoria-See',       hint: 'Groß' },
+    { word: 'Serengeti',          hint: 'Safari' },
+    { word: 'Kapstadt',           hint: 'Küstenstadt' },
+    { word: 'Tafelsitz',          hint: 'Flach' },
+    { word: 'Amazon',             hint: 'Dschungel' },
+    { word: 'Iguazu',             hint: 'Wasserfälle' },
+    { word: 'Galapagos',          hint: 'Schildkröten' },
+    { word: 'Christusstatue',     hint: 'Rio' },
+    { word: 'Chichen Itza',       hint: 'Maya' },
+    { word: 'Teotihuacan',        hint: 'Azteken' },
+    { word: 'Hallstatt',          hint: 'Salz' },
+    { word: 'Plitvice',           hint: 'Seen' },
+    { word: 'Dubrovnik',          hint: 'Mauern' },
+    { word: 'Cinque Terre',       hint: 'Farbig' },
+    { word: 'Amalfikueste',       hint: 'Steil' },
+    { word: 'Grönland',           hint: 'Eis' },
+    { word: 'Nordkap',            hint: 'Ende' },
+    { word: 'Loch Ness',          hint: 'Monster' },
+    { word: 'Ben Nevis',          hint: 'Schottland' },
+    { word: 'Parthenon',          hint: 'Athen' }
   ]
 };
 
@@ -108,7 +295,7 @@ let state = {
   players: 4,
   names: [],
   gameMins: 3,
-  category: 'alltag',
+  selectedCats: ['alltag'],
   word: '',
   hint: '',
   imposterIndex: -1,
@@ -147,6 +334,23 @@ function changeTime(delta) {
   document.getElementById('game-time').textContent = state.gameMins;
 }
 
+function toggleCat(cat) {
+  const checked = document.getElementById('cat-' + cat).checked;
+  if (checked) {
+    if (state.selectedCats.length >= 3) {
+      document.getElementById('cat-' + cat).checked = false;
+      return;
+    }
+    if (!state.selectedCats.includes(cat)) state.selectedCats.push(cat);
+  } else {
+    if (state.selectedCats.length <= 1) {
+      document.getElementById('cat-' + cat).checked = true;
+      return;
+    }
+    state.selectedCats = state.selectedCats.filter(c => c !== cat);
+  }
+}
+
 // ── START ────────────────────────────────────
 function startImposter() {
   state.names = [];
@@ -156,10 +360,10 @@ function startImposter() {
   }
   state.hintEnabled = document.getElementById('hint-toggle').checked;
 
-  const cat = document.getElementById('category-select').value;
-  const entries = IMPOSTER_DATA[cat];
-  const entry = entries[Math.floor(Math.random() * entries.length)];
-  state.category = cat;
+  // pool all selected categories
+  let pool = [];
+  state.selectedCats.forEach(cat => { pool = pool.concat(IMPOSTER_DATA[cat]); });
+  const entry = pool[Math.floor(Math.random() * pool.length)];
   state.word = entry.word;
   state.hint = entry.hint;
   state.imposterIndex = Math.floor(Math.random() * state.players);
@@ -193,7 +397,7 @@ function showCard() {
     card.className = 'card imposter-card';
     roleEl.textContent = '🕵️ Du bist der Imposter!';
     wordEl.textContent = '???';
-    catEl.textContent  = 'Kategorie: Alltag';
+    catEl.textContent  = state.selectedCats.map(c => catLabel(c)).join(', ');
     if (state.hintEnabled) {
       hintEl.innerHTML = '💡 Tipp: <span>' + state.hint + '</span>';
       hintEl.classList.remove('hidden');
@@ -204,21 +408,21 @@ function showCard() {
     card.className = 'card';
     roleEl.textContent = '✅ Kein Imposter';
     wordEl.textContent = state.word;
-    catEl.textContent  = 'Kategorie: Alltag';
+    catEl.textContent  = state.selectedCats.map(c => catLabel(c)).join(', ');
     hintEl.classList.add('hidden');
   }
-
   hide('deal-waiting');
   show('deal-card');
 }
 
+function catLabel(cat) {
+  return { alltag: 'Alltag', tiere: 'Tiere', sehenswuerdigkeiten: 'Sehensw.' }[cat] || cat;
+}
+
 function nextPlayer() {
   state.currentDealing++;
-  if (state.currentDealing >= state.players) {
-    startPlayPhase();
-  } else {
-    showDealWaiting();
-  }
+  if (state.currentDealing >= state.players) startPlayPhase();
+  else showDealWaiting();
 }
 
 // ── PLAY ────────────────────────────────────
@@ -232,10 +436,7 @@ function startPlayPhase() {
   state.timerInterval = setInterval(() => {
     state.timerSeconds--;
     updateTimerDisplay();
-    if (state.timerSeconds <= 0) {
-      clearInterval(state.timerInterval);
-      revealImposter();
-    }
+    if (state.timerSeconds <= 0) { clearInterval(state.timerInterval); revealImposter(); }
   }, 1000);
 }
 
@@ -245,17 +446,15 @@ function updateTimerDisplay() {
   const secs = String(s % 60).padStart(2, '0');
   const textEl = document.getElementById('timer-text');
   textEl.textContent = mins + ':' + secs;
-  if (s <= 30) textEl.classList.add('urgent');
-  else textEl.classList.remove('urgent');
+  if (s <= 30) textEl.classList.add('urgent'); else textEl.classList.remove('urgent');
   const circ = 2 * Math.PI * 54;
   const fraction = Math.max(0, s / state.totalSeconds);
   document.getElementById('timer-ring').style.strokeDashoffset = circ * (1 - fraction);
   const ring = document.getElementById('timer-ring');
-  if (s <= 30) ring.classList.add('urgent');
-  else ring.classList.remove('urgent');
+  if (s <= 30) ring.classList.add('urgent'); else ring.classList.remove('urgent');
 }
 
-// ── REVEAL ──────────────────────────────────
+// ── REVEAL ────────────────────────────────
 function revealImposter() {
   clearInterval(state.timerInterval);
   hide('imposter-play');
@@ -276,12 +475,10 @@ function revealImposter() {
   });
 }
 
-// ── RESET ──────────────────────────────────
+// ── RESET ────────────────────────────────
 function resetImposter() {
   clearInterval(state.timerInterval);
-  hide('imposter-deal');
-  hide('imposter-play');
-  hide('imposter-reveal');
+  hide('imposter-deal'); hide('imposter-play'); hide('imposter-reveal');
   show('imposter-setup');
   renderNameInputs();
 }
