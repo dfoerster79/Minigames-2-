@@ -48,6 +48,7 @@ function showGame(name) {
 function showHome() {
   if (typeof state !== 'undefined') clearInterval(state.timerInterval);
   if (typeof werwolfState !== 'undefined') clearInterval(werwolfState.timerInterval);
+  if (typeof wbi !== 'undefined') clearInterval(wbi.timerInterval);
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById('home-screen').classList.add('active');
 }

@@ -65,6 +65,15 @@
         <span class="player-count-badge">2 👥</span>
         <span class="arrow">›</span>
       </button>
+      <button class="game-btn" onclick="showGame('werbinich')">
+        <span class="game-btn-icon">🎭</span>
+        <div class="game-btn-text">
+          <strong>Wer bin ich?</strong>
+          <span>Stell Ja/Nein-Fragen!</span>
+        </div>
+        <span class="player-count-badge">2–10 👥</span>
+        <span class="arrow">›</span>
+      </button>
     </div>
   </div>
 
@@ -333,10 +342,152 @@
     </div>
   </div>
 
+  <!-- WER BIN ICH -->
+  <div id="werbinich-screen" class="screen">
+
+    <!-- SETUP -->
+    <div id="wbi-setup">
+      <div class="top-bar">
+        <button class="icon-btn" onclick="showHome()">‹</button>
+        <h2>🎭 Wer bin ich?</h2>
+        <div></div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-title">Kategorien</div>
+        <div class="cat-checks" id="wbi-cat-checks"></div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-title">⏳ Zeitlimit pro Zug</div>
+        <div class="toggle-row" style="margin-bottom:12px">
+          <div>
+            <div class="toggle-label">Timer aktivieren</div>
+            <div class="toggle-sub">Zeit pro Spieler begrenzen</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="wbi-timer-toggle" checked onchange="wbiToggleTimerEnabled()" />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div id="wbi-timer-controls" class="counter">
+          <button class="cnt-btn" onclick="wbiChangeTimer(-10)">−</button>
+          <span id="wbi-timer-val">30s</span>
+          <button class="cnt-btn" onclick="wbiChangeTimer(10)">+</button>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-title">Spieler</div>
+        <div class="counter" style="margin-bottom:16px">
+          <button class="cnt-btn" onclick="wbiChangeCount(-1)">−</button>
+          <span id="wbi-player-count">3</span>
+          <button class="cnt-btn" onclick="wbiChangeCount(1)">+</button>
+        </div>
+        <div id="wbi-name-inputs"></div>
+      </div>
+
+      <button class="btn-primary" onclick="startWBI()">Spiel starten 🎭</button>
+    </div>
+
+    <!-- DEAL: Begriff zuweisen (anderen zeigen, Spieler schaut weg) -->
+    <div id="wbi-deal" class="hidden">
+      <div class="top-bar"><div></div><h2>🎭 Begriffe verteilen</h2><div></div></div>
+
+      <div id="wbi-deal-waiting" class="center-content">
+        <div class="player-badge" id="wbi-deal-player"></div>
+        <p class="deal-hint">Schau weg! Die anderen sehen deinen Begriff.<br>Dann Handy weitergeben.</p>
+        <button class="btn-primary" onclick="wbiShowCard()">👁️ Begriff anzeigen</button>
+      </div>
+
+      <div id="wbi-deal-card" class="hidden">
+        <p style="text-align:center;color:#c4b5fd;font-size:0.85rem;margin-bottom:8px">
+          Zeigt diesen Begriff <strong id="wbi-card-playername"></strong> auf der Stirn:
+        </p>
+        <div class="wbi-term-card">
+          <div class="wbi-term-text" id="wbi-card-term"></div>
+        </div>
+        <p style="text-align:center;color:#a78bfa;font-size:0.8rem;margin-top:10px">Alle außer <strong id="wbi-card-playername2"></strong> sehen den Begriff.</p>
+        <button class="btn-secondary" style="margin-top:16px" onclick="wbiDealNext()">✅ Verstanden – weiter</button>
+      </div>
+    </div>
+
+    <!-- PLAY -->
+    <div id="wbi-play" class="hidden">
+      <div class="top-bar">
+        <div></div>
+        <h2>❓ Runde <span id="wbi-round-num">1</span></h2>
+        <div></div>
+      </div>
+
+      <!-- Scoreboard -->
+      <div class="section-card" style="margin-bottom:12px">
+        <div class="section-title">Punktestand</div>
+        <div id="wbi-scoreboard"></div>
+      </div>
+
+      <!-- Aktiver Spieler -->
+      <div class="wbi-turn-card">
+        <div class="wbi-turn-label">Dran ist:</div>
+        <div class="wbi-turn-name" id="wbi-turn-name"></div>
+        <div class="wbi-turn-term" id="wbi-turn-term-hidden">???</div>
+      </div>
+
+      <!-- Timer Bar -->
+      <div class="wbi-timer-wrap" id="wbi-timer-wrap">
+        <div class="wbi-timer-bar-bg">
+          <div class="wbi-timer-fill" id="wbi-timer-bar" style="width:100%"></div>
+        </div>
+        <div class="wbi-timer-label" id="wbi-timer-text">30s</div>
+      </div>
+
+      <!-- Antwort-Buttons (für die anderen Spieler) -->
+      <div id="wbi-answer-btns">
+        <p style="text-align:center;color:#c4b5fd;font-size:0.85rem;margin:12px 0 8px">Antwortet nur mit:</p>
+        <div style="display:flex;gap:10px">
+          <button class="wbi-ans-btn wbi-ans-yes">✅ Ja</button>
+          <button class="wbi-ans-btn wbi-ans-no">❌ Nein</button>
+          <button class="wbi-ans-btn wbi-ans-maybe">🤔 Vielleicht</button>
+        </div>
+      </div>
+
+      <!-- Ich hab's erraten! -->
+      <div id="wbi-guess-btn" style="margin-top:12px">
+        <button class="btn-secondary" onclick="wbiGuess()">🎯 Ich hab's erraten!</button>
+      </div>
+
+      <!-- Confirm richtig/falsch -->
+      <div id="wbi-confirm-wrap" class="hidden" style="margin-top:12px">
+        <div class="wbi-term-card" style="margin-bottom:12px">
+          <div style="font-size:0.75rem;color:#c4b5fd;margin-bottom:6px">Der Begriff war:</div>
+          <div class="wbi-term-text" id="wbi-confirm-term"></div>
+        </div>
+        <p style="text-align:center;color:#c4b5fd;font-size:0.9rem;margin-bottom:10px">War die Antwort richtig?</p>
+        <div style="display:flex;gap:10px">
+          <button class="btn-secondary" style="margin-top:0" onclick="wbiConfirmGuess(true)">✅ Ja, richtig!</button>
+          <button class="btn-danger" style="margin-top:0" onclick="wbiConfirmGuess(false)">❌ Nein, falsch</button>
+        </div>
+      </div>
+
+      <!-- Weiter -->
+      <button class="btn-primary hidden" id="wbi-next-btn" onclick="wbiNext()" style="margin-top:12px">➡️ Nächster Spieler</button>
+
+      <div style="display:flex;gap:10px;margin-top:12px">
+        <button class="btn-ghost" style="flex:1;margin-top:0" onclick="wbiNewRound()">🔁 Neue Runde</button>
+        <button class="btn-ghost" style="flex:1;margin-top:0" onclick="resetWBI()">🏠 Menü</button>
+      </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="wbi-toast" class="wbi-toast hidden"></div>
+
+  </div><!-- /werbinich-screen -->
+
 </div>
 <script src="imposter.js"></script>
 <script src="werwolf.js"></script>
 <script src="tictactoe.js"></script>
+<script src="werbinich.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
