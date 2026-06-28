@@ -4,6 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Minigames</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#7c3aed" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Minigames" />
+  <link rel="apple-touch-icon" href="icon.jpg" />
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -25,7 +35,7 @@
       </div>
       <div id="install-android" class="hidden">
         <p>Installiere die App für das beste Spielerlebnis!</p>
-        <button class="btn-primary install-android-btn" onclick="triggerAndroidInstall()">➕ Zum Homebildschirm hinzufügen</button>
+        <button class="btn-primary install-android-btn" onclick="triggerAndroidInstall()">✚ Zum Homebildschirm hinzufügen</button>
       </div>
       <button class="btn-ghost" onclick="closeInstallPopup()">Später</button>
     </div>
@@ -34,6 +44,7 @@
   <!-- HOME -->
   <div id="home-screen" class="screen active">
     <div class="home-header">
+      <img src="icon.jpg" class="home-logo" alt="Logo" />
       <h1>🎮 Minigames</h1>
       <p class="subtitle">Wähle ein Spiel</p>
     </div>
@@ -78,25 +89,83 @@
         <h2>🕵️ Imposter</h2>
         <div></div>
       </div>
+
       <div class="section-card">
         <div class="section-title">Kategorien (max. 3)</div>
-        <div class="cat-checks">
-          <label class="cat-check"><input type="checkbox" id="cat-alltag" checked onchange="toggleCat('alltag')" /><span>🏠 Alltag</span></label>
-          <label class="cat-check"><input type="checkbox" id="cat-tiere" onchange="toggleCat('tiere')" /><span>🐾 Tiere</span></label>
-          <label class="cat-check"><input type="checkbox" id="cat-sehenswuerdigkeiten" onchange="toggleCat('sehenswuerdigkeiten')" /><span>🏙️ Sehenswürdigkeiten</span></label>
-          <label class="cat-check"><input type="checkbox" id="cat-essen" onchange="toggleCat('essen')" /><span>🍕 Essen &amp; Trinken</span></label>
-          <label class="cat-check"><input type="checkbox" id="cat-sport" onchange="toggleCat('sport')" /><span>⚽ Sport</span></label>
-          <label class="cat-check"><input type="checkbox" id="cat-filme" onchange="toggleCat('filme')" /><span>🎬 Filme &amp; Serien</span></label>
-          <label class="cat-check"><input type="checkbox" id="cat-urlaub" onchange="toggleCat('urlaub')" /><span>✈️ Urlaub &amp; Reisen</span></label>
-          <label class="cat-check"><input type="checkbox" id="cat-berufe" onchange="toggleCat('berufe')" /><span>🛠️ Berufe &amp; Jobs</span></label>
-          <label class="cat-check"><input type="checkbox" id="cat-musik" onchange="toggleCat('musik')" /><span>🎸 Musik &amp; Bands</span></label>
-          <label class="cat-check"><input type="checkbox" id="cat-wissenschaft" onchange="toggleCat('wissenschaft')" /><span>🔬 Wissenschaft &amp; Natur</span></label>
-          <label class="cat-check"><input type="checkbox" id="cat-technik" onchange="toggleCat('technik')" /><span>📱 Technik &amp; Gadgets</span></label>
-          <label class="cat-check cat-check-fortnite"><input type="checkbox" id="cat-fortnite" onchange="toggleCat('fortnite')" /><span>🎮 Fortnite</span></label>
-          <label class="cat-check cat-check-brawl"><input type="checkbox" id="cat-brawlstars" onchange="toggleCat('brawlstars')" /><span>🌟 Brawl Stars</span></label>
-          <label class="cat-check cat-check-spicy"><input type="checkbox" id="cat-spicy" onchange="toggleCat('spicy')" /><span>🌶️ Spicy (18+)</span></label>
+        <div class="splash-cat-grid">
+          <label class="splash-cat-card splash-cat-alltag">
+            <input type="checkbox" id="cat-alltag" checked onchange="toggleCat('alltag')" />
+            <span class="scc-emoji">🏠</span>
+            <span class="scc-label">Alltag</span>
+          </label>
+          <label class="splash-cat-card splash-cat-tiere">
+            <input type="checkbox" id="cat-tiere" onchange="toggleCat('tiere')" />
+            <span class="scc-emoji">🐾</span>
+            <span class="scc-label">Tiere</span>
+          </label>
+          <label class="splash-cat-card splash-cat-sehenswuerdigkeiten">
+            <input type="checkbox" id="cat-sehenswuerdigkeiten" onchange="toggleCat('sehenswuerdigkeiten')" />
+            <span class="scc-emoji">🏙️</span>
+            <span class="scc-label">Sehenswürd.</span>
+          </label>
+          <label class="splash-cat-card splash-cat-essen">
+            <input type="checkbox" id="cat-essen" onchange="toggleCat('essen')" />
+            <span class="scc-emoji">🍕</span>
+            <span class="scc-label">Essen</span>
+          </label>
+          <label class="splash-cat-card splash-cat-sport">
+            <input type="checkbox" id="cat-sport" onchange="toggleCat('sport')" />
+            <span class="scc-emoji">⚽</span>
+            <span class="scc-label">Sport</span>
+          </label>
+          <label class="splash-cat-card splash-cat-filme">
+            <input type="checkbox" id="cat-filme" onchange="toggleCat('filme')" />
+            <span class="scc-emoji">🎬</span>
+            <span class="scc-label">Filme</span>
+          </label>
+          <label class="splash-cat-card splash-cat-urlaub">
+            <input type="checkbox" id="cat-urlaub" onchange="toggleCat('urlaub')" />
+            <span class="scc-emoji">✈️</span>
+            <span class="scc-label">Urlaub</span>
+          </label>
+          <label class="splash-cat-card splash-cat-berufe">
+            <input type="checkbox" id="cat-berufe" onchange="toggleCat('berufe')" />
+            <span class="scc-emoji">🛠️</span>
+            <span class="scc-label">Berufe</span>
+          </label>
+          <label class="splash-cat-card splash-cat-musik">
+            <input type="checkbox" id="cat-musik" onchange="toggleCat('musik')" />
+            <span class="scc-emoji">🎸</span>
+            <span class="scc-label">Musik</span>
+          </label>
+          <label class="splash-cat-card splash-cat-wissenschaft">
+            <input type="checkbox" id="cat-wissenschaft" onchange="toggleCat('wissenschaft')" />
+            <span class="scc-emoji">🔬</span>
+            <span class="scc-label">Wissenschaft</span>
+          </label>
+          <label class="splash-cat-card splash-cat-technik">
+            <input type="checkbox" id="cat-technik" onchange="toggleCat('technik')" />
+            <span class="scc-emoji">📱</span>
+            <span class="scc-label">Technik</span>
+          </label>
+          <label class="splash-cat-card splash-cat-fortnite">
+            <input type="checkbox" id="cat-fortnite" onchange="toggleCat('fortnite')" />
+            <span class="scc-emoji">🎮</span>
+            <span class="scc-label">Fortnite</span>
+          </label>
+          <label class="splash-cat-card splash-cat-brawl">
+            <input type="checkbox" id="cat-brawlstars" onchange="toggleCat('brawlstars')" />
+            <span class="scc-emoji">🌟</span>
+            <span class="scc-label">Brawl Stars</span>
+          </label>
+          <label class="splash-cat-card splash-cat-spicy">
+            <input type="checkbox" id="cat-spicy" onchange="toggleCat('spicy')" />
+            <span class="scc-emoji">🌶️</span>
+            <span class="scc-label">Spicy 18+</span>
+          </label>
         </div>
       </div>
+
       <div class="section-card">
         <div class="section-title">Tipp für den Imposter</div>
         <div class="toggle-row">
@@ -225,7 +294,6 @@
       </div>
       <button class="btn-primary" onclick="startWerwolf()">Rollen verteilen 🎭</button>
     </div>
-
     <div id="werwolf-deal" class="hidden">
       <div class="top-bar"><div></div><h2>Rollen verteilen</h2><div></div></div>
       <div id="ww-deal-waiting" class="center-content">
@@ -243,7 +311,6 @@
         <button class="btn-secondary" onclick="wwNextPlayer()">✅ Verstanden – weiter</button>
       </div>
     </div>
-
     <div id="werwolf-night" class="hidden">
       <div class="top-bar"><div></div><h2>🌙 Nacht</h2><div></div></div>
       <div class="night-card">
@@ -256,7 +323,6 @@
       <div id="ww-night-buttons"></div>
       <button class="btn-ghost" style="margin-top:16px" onclick="resetWerwolf()">↩ Spiel abbrechen</button>
     </div>
-
     <div id="werwolf-day" class="hidden">
       <div class="top-bar"><div></div><h2>☀️ Tag <span id="ww-round-num">1</span></h2><div></div></div>
       <div id="ww-day-announce"></div>
@@ -269,7 +335,6 @@
       </div>
       <button class="btn-ghost" style="margin-top:8px" onclick="resetWerwolf()">↩ Spiel abbrechen</button>
     </div>
-
     <div id="werwolf-win" class="hidden">
       <div class="top-bar"><div></div><h2>Spielende 🎉</h2><div></div></div>
       <div class="win-card">
@@ -333,7 +398,7 @@
     </div>
   </div>
 
-  <!-- WER BIN ICH – SPLASH-MODUS -->
+  <!-- WER BIN ICH -->
   <div id="werbinich-screen" class="screen">
     <div id="wbi-setup">
       <div class="top-bar">
@@ -354,10 +419,12 @@
           <input type="text" id="wbi-player-name" placeholder="z.B. Anna" maxlength="16" />
         </div>
       </div>
+
       <div class="section-card">
         <div class="section-title">Kategorien</div>
-        <div class="cat-checks" id="wbi-cat-checks"></div>
+        <div class="splash-cat-grid" id="wbi-cat-checks"></div>
       </div>
+
       <div class="section-card">
         <div class="section-title">⏱ Zeit pro Runde</div>
         <div class="counter">
