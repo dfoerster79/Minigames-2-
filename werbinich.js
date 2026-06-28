@@ -45,6 +45,14 @@ const WBI_CATS = {
       'Klettern','Golf','Baseball','Volleyball','Tischtennis','Badminton','Reiten',
       'Turnen','Leichtathletik','Radfahren','Eishockey','Rugby','Fechten',
       'Sumo','Curling','Bogenschießen','Triathlon','Breakdance']
+  },
+  spicy: {
+    label: '🌶️ Spicy (18+)',
+    words: ['Dildo','Vibrator','Striptease','Lap Dance','Kondom','Nackt','One-Night-Stand',
+      'Sextape','Orgie','Fetisch','BDSM','Handschellen','Whirlpool','Sauna nackt',
+      'Fremdgehen','Schmusen','Po klatschen','Nutte','Stripper','Erotikkino',
+      'Sexspielzeug','Anmachen','Dirty Talk','Aufreißen','Lovense',
+      'Geilheit','Ficken','Einhorn-Kostüm','Nacktbaden','Swinger-Club']
   }
 };
 
@@ -52,13 +60,14 @@ let wbi = {
   activeCats: ['personen','tiere','berufe','essen'],
   timerSec: 60,
   timerInterval: null,
+  countdownInterval: null,
   timerLeft: 0,
   score: 0,
   skipped: 0,
   currentTerm: '',
   pool: [],
   poolIndex: 0,
-  state: 'idle',       // idle | playing | result
+  state: 'idle',
   gyroActive: false,
   tiltLock: false,
   playerName: '',
@@ -76,7 +85,8 @@ function wbiRenderCats() {
   box.innerHTML = '';
   Object.entries(WBI_CATS).forEach(([key, cat]) => {
     const checked = wbi.activeCats.includes(key) ? 'checked' : '';
-    box.innerHTML += `<label class="cat-check">
+    const isSpicy = key === 'spicy';
+    box.innerHTML += `<label class="cat-check${isSpicy ? ' cat-check-spicy' : ''}">
       <input type="checkbox" ${checked} onchange="wbiToggleCat('${key}')" />
       <span>${cat.label}</span>
     </label>`;
@@ -104,7 +114,6 @@ function wbiUpdateTimerDisplay() {
 // ---- BUILD POOL ----
 function wbiBuildPool() {
   let pool = wbi.activeCats.flatMap(k => WBI_CATS[k].words);
-  // shuffle
   for (let i = pool.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [pool[i], pool[j]] = [pool[j], pool[i]];
@@ -120,18 +129,55 @@ function startWBI() {
   wbi.poolIndex = 0;
   wbi.score = 0;
   wbi.skipped = 0;
-  wbi.state = 'playing';
-  wbi.timerLeft = wbi.timerSec;
+  wbi.state = 'countdown';
 
   document.getElementById('wbi-setup').classList.add('hidden');
   document.getElementById('wbi-result').classList.add('hidden');
   document.getElementById('wbi-game').classList.remove('hidden');
+
+  // Show countdown screen first
+  document.getElementById('wbi-countdown-wrap').classList.remove('hidden');
+  document.getElementById('wbi-splash-center').classList.add('hidden');
+  document.getElementById('wbi-manual-btns').classList.add('hidden');
+  document.getElementById('wbi-game-timer-bar').classList.add('hidden');
+
+  wbiStartCountdown();
+}
+
+// ---- COUNTDOWN ----
+function wbiStartCountdown() {
+  let count = 3;
+  const numEl = document.getElementById('wbi-countdown-num');
+  numEl.textContent = count;
+
+  wbi.countdownInterval = setInterval(() => {
+    count--;
+    if (count > 0) {
+      numEl.textContent = count;
+      numEl.classList.remove('wbi-cd-pop');
+      void numEl.offsetWidth; // reflow
+      numEl.classList.add('wbi-cd-pop');
+    } else {
+      clearInterval(wbi.countdownInterval);
+      wbiLaunchGame();
+    }
+  }, 1000);
+}
+
+function wbiLaunchGame() {
+  wbi.state = 'playing';
+  wbi.timerLeft = wbi.timerSec;
+
+  document.getElementById('wbi-countdown-wrap').classList.add('hidden');
+  document.getElementById('wbi-splash-center').classList.remove('hidden');
+  document.getElementById('wbi-game-timer-bar').classList.remove('hidden');
 
   wbiRequestGyro();
   wbiNextTerm();
   wbiStartTimer();
 }
 
+// ---- NEXT TERM ----
 function wbiNextTerm() {
   if (wbi.poolIndex >= wbi.pool.length) wbi.pool = wbiBuildPool(), wbi.poolIndex = 0;
   wbi.currentTerm = wbi.pool[wbi.poolIndex++];
@@ -165,21 +211,12 @@ function wbiRenderTimer() {
   if (!el) return;
   el.textContent = wbi.timerLeft + 's';
   el.className = 'wbi-game-timer-val' + (wbi.timerLeft <= 10 ? ' urgent' : '');
-  // arc
-  const ring = document.getElementById('wbi-timer-ring');
-  if (ring) {
-    const pct = wbi.timerLeft / wbi.timerSec;
-    const c = 2 * Math.PI * 54;
-    ring.style.strokeDashoffset = c * (1 - pct);
-    ring.style.stroke = wbi.timerLeft <= 10 ? '#f87171' : '#a855f7';
-  }
 }
 
 // ---- GYROSCOPE ----
 function wbiRequestGyro() {
   if (typeof DeviceOrientationEvent !== 'undefined' &&
       typeof DeviceOrientationEvent.requestPermission === 'function') {
-    // iOS 13+
     DeviceOrientationEvent.requestPermission()
       .then(state => {
         if (state === 'granted') wbiAttachGyro();
@@ -205,13 +242,11 @@ function wbiFallbackButtons() {
 
 function wbiHandleTilt(e) {
   if (wbi.state !== 'playing' || wbi.tiltLock) return;
-  const beta = e.beta; // -180..180: 0=flach, 90=aufrecht, neg=nach hinten
+  const beta = e.beta;
   if (beta === null) return;
   if (beta < -20) {
-    // Handy nach hinten kippen = RICHTIG
     wbiCorrect();
   } else if (beta > 50) {
-    // Handy nach vorne kippen = WEITER/SKIP
     wbiSkip();
   }
 }
@@ -260,6 +295,7 @@ function wbiEndGame() {
 // ---- RESET ----
 function resetWBI() {
   clearInterval(wbi.timerInterval);
+  clearInterval(wbi.countdownInterval);
   wbiDetachGyro();
   wbi.state = 'idle';
   document.getElementById('wbi-game').classList.add('hidden');
