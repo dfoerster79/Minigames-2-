@@ -114,7 +114,18 @@ body {
 .player-tag { font-size: 0.8rem; color: #888; }
 .imposter-tag { color: #ef4444; }
 
-/* ===================== WERWOLF ROLE ROWS ===================== */
+/* ===== NARRATOR ===== */
+.narrator-card { border: 1px solid #4f46e5 !important; background: #13122a !important; }
+.narrator-status {
+  font-size: 0.8rem;
+  color: #7c7aaa;
+  margin-top: 10px;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+/* ===== ROLE ROWS ===== */
 .role-row {
   display: flex;
   align-items: center;

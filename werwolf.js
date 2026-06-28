@@ -24,6 +24,7 @@ const SONDER_ROLLEN = [
 let ws = {
   players: 6,
   wolves: 1,
+  narrator: false,
   names: [],
   assignedRoles: [],
   currentDealing: 0,
@@ -42,11 +43,40 @@ let ws = {
   jaegerVictim: -1,
   nightStep: 0,
   diebCards: [],
+  _prevDead: [],
 };
+
+// ===================== ERZÄHLER (TTS) =====================
+function speak(text) {
+  if (!ws.narrator) return;
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const utt = new SpeechSynthesisUtterance(text);
+  utt.lang = 'de-DE';
+  utt.rate = 0.92;
+  utt.pitch = 1.0;
+  // Prefer a German voice if available
+  const voices = window.speechSynthesis.getVoices();
+  const deVoice = voices.find(v => v.lang.startsWith('de') && !v.name.includes('Google')) ||
+                  voices.find(v => v.lang.startsWith('de'));
+  if (deVoice) utt.voice = deVoice;
+  window.speechSynthesis.speak(utt);
+}
+
+function stopSpeak() {
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+}
+
+function toggleNarrator() {
+  ws.narrator = document.getElementById('ww-narrator-toggle').checked;
+  const label = document.getElementById('ww-narrator-label');
+  label.textContent = ws.narrator ? '🔊 Erzähler aktiv' : '🔇 Erzähler aus';
+  if (ws.narrator) speak('Der Erzähler ist jetzt aktiv. Viel Spaß beim Spielen!');
+  else stopSpeak();
+}
 
 // ===================== SETUP =====================
 function werwolfRenderSetup() {
-  // Render role rows
   const container = document.getElementById('ww-role-rows');
   container.innerHTML = '';
   SONDER_ROLLEN.forEach(r => {
@@ -86,7 +116,6 @@ function werwolfRenderNameInputs() {
 function changeWWCount(delta) {
   ws.players = Math.max(5, Math.min(20, ws.players + delta));
   document.getElementById('ww-player-count').textContent = ws.players;
-  // clamp wolves
   const maxWolves = Math.floor(ws.players / 2);
   if (ws.wolves > maxWolves) { ws.wolves = maxWolves; document.getElementById('ww-wolf-count').textContent = ws.wolves; }
   werwolfRenderNameInputs();
@@ -147,6 +176,7 @@ function startWerwolf() {
 function wwShowDealWaiting() {
   document.getElementById('ww-deal-player-name').textContent = ws.names[ws.currentDealing];
   wwShow('ww-deal-waiting'); wwHide('ww-deal-card');
+  speak(ws.names[ws.currentDealing] + ' ist dran. Tippe auf Meine Rolle.');
 }
 
 function wwShowCard() {
@@ -160,9 +190,11 @@ function wwShowCard() {
   document.getElementById('ww-card-sub').textContent = rolle.team==='wolf'?'🐺 Du bist ein Werwolf!':'✅ Du gehörst zum Dorf';
   document.getElementById('ww-card-desc').textContent = rolle.desc;
   wwHide('ww-deal-waiting'); wwShow('ww-deal-card');
+  speak('Deine Rolle ist: ' + rolle.name + '. ' + rolle.desc);
 }
 
 function wwNextPlayer() {
+  stopSpeak();
   ws.currentDealing++;
   if(ws.currentDealing >= ws.players) startNightPhase();
   else wwShowDealWaiting();
@@ -195,33 +227,40 @@ function buildNightSteps() {
   return steps;
 }
 
-function nightNext() { ws.nightStep++; runNightStep(); }
+function nightNext() { stopSpeak(); ws.nightStep++; runNightStep(); }
 
 function showAllSleep() {
-  setNightScreen('🌙','Nacht '+ws.round,'Alle schließen die Augen und schlafen ein...',null,null,[{label:'Weiter →',fn:'nightNext()'}]);
+  setNightScreen('🌙','Nacht '+ws.round,'Alle schließen die Augen und schlafen ein...',null,null,[{label:'Weiter →',fn:'nightNext()'}],
+    'Nacht '+ws.round+'. Alle Dorfbewohner schließen nun die Augen und schlafen ein. Es wird still im Dorf.');
 }
 function showAllWake() {
-  setNightScreen('☀️','Morgengrauen','Alle öffnen die Augen!',null,null,[{label:'Zum Tagesablauf →',fn:'startDayPhase()'}]);
+  setNightScreen('☀️','Morgengrauen','Alle öffnen die Augen!',null,null,[{label:'Zum Tagesablauf →',fn:'startDayPhase()'}],
+    'Die Sonne geht auf. Alle Dorfbewohner öffnen die Augen und schauen sich um.');
 }
 
 function showAmorPhase() {
   if(ws.lovers.length>0){nightNext();return;}
   const amorIdx=aliveIndices().find(i=>ws.assignedRoles[i]==='Amor');
-  setNightScreen('💘','Amor erwacht',ws.names[amorIdx]+' wählt zwei Spieler, die sich verlieben.',buildPlayerSelector('amor',2,aliveIndices()),null,[{label:'Bestätigen & schlafen',fn:'confirmAmor()'}]);
+  setNightScreen('💘','Amor erwacht',ws.names[amorIdx]+' wählt zwei Spieler, die sich verlieben.',buildPlayerSelector('amor',2,aliveIndices()),null,[{label:'Bestätigen & schlafen',fn:'confirmAmor()'}],
+    'Amor erwacht. '+ws.names[amorIdx]+' öffnet die Augen und zeigt auf zwei Spieler, die sich von nun an in Liebe verbunden sind. Stirbt einer, stirbt auch der andere.');
 }
 function confirmAmor(){
   const s=getSelected('amor');
   if(s.length!==2){alert('Bitte genau 2 Spieler auswählen!');return;}
-  ws.lovers=s; nightNext();
+  ws.lovers=s;
+  speak(ws.names[s[0]]+' und '+ws.names[s[1]]+' sind nun für immer verbunden.');
+  setTimeout(()=>nightNext(), 1800);
 }
 
 function showDiebPhase(){
   const diebIdx=aliveIndices().find(i=>ws.assignedRoles[i]==='Dieb');
   const cards=ws.diebCards;
   setNightScreen('🥷','Dieb erwacht',ws.names[diebIdx]+' schaut die Zusatzkarten an: '+cards[0]+' & '+cards[1]+'. Möchte der Dieb tauschen?',null,
-    `<div class="night-choice-col"><button class="btn-secondary night-btn" onclick="confirmDieb(0)">Karte 1: ${cards[0]}</button><button class="btn-secondary night-btn" onclick="confirmDieb(1)">Karte 2: ${cards[1]}</button><button class="btn-ghost night-btn" onclick="confirmDieb(-1)">Nicht tauschen</button></div>`,[]);
+    `<div class="night-choice-col"><button class="btn-secondary night-btn" onclick="confirmDieb(0)">Karte 1: ${cards[0]}</button><button class="btn-secondary night-btn" onclick="confirmDieb(1)">Karte 2: ${cards[1]}</button><button class="btn-ghost night-btn" onclick="confirmDieb(-1)">Nicht tauschen</button></div>`,[],
+    'Der Dieb erwacht. '+ws.names[diebIdx]+' darf nun eine der zwei Zusatzkarten nehmen: '+cards[0]+' oder '+cards[1]+'. Oder er behält seine Rolle.');
 }
 function confirmDieb(cardIdx){
+  stopSpeak();
   if(cardIdx>=0){const diebIdx=aliveIndices().find(i=>ws.assignedRoles[i]==='Dieb');ws.assignedRoles[diebIdx]=ws.diebCards[cardIdx];}
   nightNext();
 }
@@ -229,18 +268,22 @@ function confirmDieb(cardIdx){
 function showWolfPhase(){
   const wolfNames=aliveIndices().filter(i=>ws.assignedRoles[i]==='Werwolf').map(i=>ws.names[i]).join(', ');
   const targets=aliveIndices().filter(i=>ws.assignedRoles[i]!=='Werwolf');
-  setNightScreen('🐺','Werwölfe erwachen','Die Werwölfe ('+wolfNames+') öffnen die Augen und wählen ihr Opfer.',buildPlayerSelector('wolf',1,targets),null,[{label:'Opfer festlegen & schlafen',fn:'confirmWolf()'}]);
+  setNightScreen('🐺','Werwölfe erwachen','Die Werwölfe ('+wolfNames+') öffnen die Augen und wählen ihr Opfer.',buildPlayerSelector('wolf',1,targets),null,[{label:'Opfer festlegen & schlafen',fn:'confirmWolf()'}],
+    'Die Werwölfe erwachen. '+wolfNames+' öffnet die Augen, erkennen sich gegenseitig und wählen nun lautlos ihr heutiges Opfer.');
 }
 function confirmWolf(){
   const s=getSelected('wolf');
   if(s.length!==1){alert('Bitte genau 1 Opfer auswählen!');return;}
-  ws.nightVictim=s[0]; nightNext();
+  ws.nightVictim=s[0];
+  speak('Die Werwölfe haben ihr Opfer gewählt. Sie schließen die Augen.');
+  setTimeout(()=>nightNext(), 1800);
 }
 
 function showSeherinPhase(){
   const sIdx=aliveIndices().find(i=>ws.assignedRoles[i]==='Seherin');
   const targets=aliveIndices().filter(i=>i!==sIdx);
-  setNightScreen('🔮','Seherin erwacht',ws.names[sIdx]+' zeigt auf eine Person – der Spielleiter zeigt ihr die Rolle.',buildPlayerSelector('seherin',1,targets),null,[{label:'Rolle anzeigen',fn:'confirmSeherin()'}]);
+  setNightScreen('🔮','Seherin erwacht',ws.names[sIdx]+' zeigt auf eine Person – der Spielleiter zeigt ihr die Rolle.',buildPlayerSelector('seherin',1,targets),null,[{label:'Rolle anzeigen',fn:'confirmSeherin()'}],
+    'Die Seherin erwacht. '+ws.names[sIdx]+' öffnet die Augen und zeigt lautlos auf eine Person. Der Spielleiter zeigt ihr, ob diese Person ein Werwolf ist oder nicht.');
 }
 function confirmSeherin(){
   const s=getSelected('seherin');
@@ -248,9 +291,11 @@ function confirmSeherin(){
   const idx=s[0];
   ws.seherinResult={idx,role:ws.assignedRoles[idx]};
   const rolle=ROLLEN.find(r=>r.name===ws.assignedRoles[idx])||{emoji:'❓'};
+  const isWolf = ws.assignedRoles[idx]==='Werwolf';
   setNightScreen('🔮','Seherin – Ergebnis',ws.names[idx]+' ist:',null,
     `<div class="reveal-card" style="margin:12px 0"><div style="font-size:2.5rem">${rolle.emoji}</div><div class="card-word" style="font-size:1.6rem">${ws.assignedRoles[idx]}</div></div>`,
-    [{label:'Augen schließen & weiter',fn:'nightNext()'}]);
+    [{label:'Augen schließen & weiter',fn:'nightNext()'}],
+    ws.names[idx]+' ist '+(isWolf?'ein Werwolf!':'kein Werwolf. Die Seherin nickt und schließt die Augen.'));
 }
 
 function showHexePhase(){
@@ -261,22 +306,35 @@ function showHexePhase(){
   if(ws.hexeHeil&&ws.nightVictim>=0) btns.push({label:'💚 Heiltrank (rettet '+victimName+')',fn:'confirmHexe("heal")'});
   if(ws.hexeGift) btns.push({label:'☠️ Gifttrank einsetzen',fn:'showHexeGift()'});
   btns.push({label:'Keine Tränke einsetzen',fn:'confirmHexe("skip")'});
+  const ttsText = ws.names[hIdx]+' erwacht. Das heutige Opfer der Werwölfe ist '+victimName+'. '
+    +(ws.hexeHeil?'Sie hat noch den Heiltrank. ':'')+(ws.hexeGift?'Sie hat noch den Gifttrank. ':'')
+    +'Was möchte die Hexe tun?';
   setNightScreen('🧝‍♀️','Hexe erwacht',
     ws.names[hIdx]+' erwacht. Opfer: '+victimName+(rolle?' '+rolle.emoji:'')+(ws.hexeHeil?' | Heiltrank ✅':' | Heiltrank ❌')+(ws.hexeGift?' | Gifttrank ✅':' | Gifttrank ❌'),
-    null,`<div class="night-choice-col">${btns.map(b=>`<button class="btn-secondary night-btn" onclick="${b.fn}">${b.label}</button>`).join('')}</div>`,[]);
+    null,`<div class="night-choice-col">${btns.map(b=>`<button class="btn-secondary night-btn" onclick="${b.fn}">${b.label}</button>`).join('')}</div>`,[],ttsText);
 }
 function showHexeGift(){
   const targets=aliveIndices().filter(i=>ws.assignedRoles[i]!=='Hexe');
-  setNightScreen('☠️','Hexe – Gifttrank','Wen möchte die Hexe vergiften?',buildPlayerSelector('hexe',1,targets),null,[{label:'Vergiften & schlafen',fn:'confirmHexeGift()'}]);
+  setNightScreen('☠️','Hexe – Gifttrank','Wen möchte die Hexe vergiften?',buildPlayerSelector('hexe',1,targets),null,[{label:'Vergiften & schlafen',fn:'confirmHexeGift()'}],
+    'Die Hexe greift zum Gifttrank. Wen soll das Gift treffen?');
 }
 function confirmHexeGift(){
   const s=getSelected('hexe');
   if(s.length!==1){alert('Bitte 1 Ziel auswählen!');return;}
-  ws.poisonTarget=s[0]; ws.hexeGift=false; ws.hexeAction='poison'; nightNext();
+  ws.poisonTarget=s[0];
+  speak(ws.names[s[0]]+' wird vergiftet. Die Hexe schließt die Augen.');
+  ws.hexeGift=false; ws.hexeAction='poison';
+  setTimeout(()=>nightNext(), 1800);
 }
 function confirmHexe(action){
-  if(action==='heal'){ws.hexeHeil=false;ws.hexeAction='heal';}else{ws.hexeAction='skip';}
-  nightNext();
+  stopSpeak();
+  if(action==='heal'){
+    ws.hexeHeil=false; ws.hexeAction='heal';
+    speak('Die Hexe einsetzt den Heiltrank. Das Opfer wird gerettet.');
+    setTimeout(()=>nightNext(),1600);
+  } else {
+    ws.hexeAction='skip'; nightNext();
+  }
 }
 
 function nightPhaseEnd(){
@@ -296,6 +354,7 @@ function nightPhaseEnd(){
 
 // ===================== DAY PHASE =====================
 function startDayPhase(){
+  stopSpeak();
   if(checkWin()) return;
   wwShowOnly('werwolf-day');
   renderDayScreen();
@@ -304,16 +363,19 @@ function startDayPhase(){
 function renderDayScreen(){
   const newDead=ws.dead.filter(d=>!ws._prevDead||!ws._prevDead.includes(d));
   ws._prevDead=[...ws.dead];
-  let annHtml='';
+  let annHtml=''; let ttsAnn='';
   if(newDead.length===0){
     annHtml='<div class="day-announce safe">👍 Eine ruhige Nacht! Niemand ist gestorben.</div>';
+    ttsAnn='Es war eine ruhige Nacht. Niemand ist gestorben.';
   } else {
     annHtml=newDead.map(i=>{
       const rolle=ROLLEN.find(r=>r.name===ws.assignedRoles[i])||{emoji:'❓'};
       return `<div class="day-announce dead">💀 ${ws.names[i]} ist gestorben! (${rolle.emoji} ${ws.assignedRoles[i]})</div>`;
     }).join('');
+    ttsAnn='Das Dorf erwacht und stellt fest: '+newDead.map(i=>ws.names[i]+' wurde in der Nacht getötet!').join(' Außerdem ');
   }
   document.getElementById('ww-day-announce').innerHTML=annHtml;
+  speak(ttsAnn+' Das Dorf diskutiert nun, wer ein Werwolf sein könnte.');
   const jaegerDead=newDead.find(i=>ws.assignedRoles[i]==='Jäger');
   if(jaegerDead!==undefined&&ws.customRoles['jaeger']){showJaegerShot(jaegerDead);return;}
   renderPlayerStatus();
@@ -352,25 +414,30 @@ function renderVoting(){
 }
 
 function voteOut(idx){
+  stopSpeak();
   if(idx>=0){
     if(!ws.dead.includes(idx)) ws.dead.push(idx);
     if(ws.lovers.includes(idx)){const other=ws.lovers.find(l=>l!==idx);if(!ws.dead.includes(other))ws.dead.push(other);}
     if(ws.assignedRoles[idx]==='Jäger'&&ws.customRoles['jaeger']){showJaegerShot(idx);return;}
     const rolle=ROLLEN.find(r=>r.name===ws.assignedRoles[idx])||{emoji:'❓'};
     wwShowOnly('werwolf-night');
+    const isWolf = ws.assignedRoles[idx]==='Werwolf';
     setNightScreen(rolle.emoji,'Verbannt!',ws.names[idx]+' verlässt das Dorf und zeigt seine Rolle:',null,
       `<div class="reveal-card" style="margin:12px 0"><div style="font-size:2.5rem">${rolle.emoji}</div><div class="card-word" style="font-size:1.6rem">${ws.assignedRoles[idx]}</div></div>`,
-      [{label:'Nächste Nacht →',fn:'startNightPhase()'}]);
+      [{label:'Nächste Nacht →',fn:'startNightPhase()'}],
+      ws.names[idx]+' wird aus dem Dorf verbannt! Er war '+(isWolf?'ein Werwolf! Das Dorf jubelt.':'ein unschuldiger '+ws.assignedRoles[idx]+'. Die Werwölfe lachen leise.'));
     if(checkWin()) return;
   } else {
-    startNightPhase();
+    speak('Das Dorf konnte sich nicht einigen. Die Nacht bricht erneut herein.');
+    setTimeout(()=>startNightPhase(), 1200);
   }
 }
 
 function showJaegerShot(jaegerIdx){
   const targets=aliveIndices().filter(i=>i!==jaegerIdx);
   wwShowOnly('werwolf-night');
-  setNightScreen('🎯','Jäger!',ws.names[jaegerIdx]+' stirbt und darf noch einen letzten Schuss abgeben!',buildPlayerSelector('jaeger',1,targets),null,[{label:'💥 Schießen!',fn:'confirmJaeger()'}]);
+  setNightScreen('🎯','Jäger!',ws.names[jaegerIdx]+' stirbt und darf noch einen letzten Schuss abgeben!',buildPlayerSelector('jaeger',1,targets),null,[{label:'💥 Schießen!',fn:'confirmJaeger()'}],
+    ws.names[jaegerIdx]+' stirbt! Doch als Jäger hat er noch einen letzten Schuss. Wen nimmt er mit in den Tod?');
 }
 function confirmJaeger(){
   const s=getSelected('jaeger');
@@ -378,7 +445,8 @@ function confirmJaeger(){
   const target=s[0];
   if(!ws.dead.includes(target)) ws.dead.push(target);
   if(ws.lovers.includes(target)){const other=ws.lovers.find(l=>l!==target);if(!ws.dead.includes(other))ws.dead.push(other);}
-  if(!checkWin()) startNightPhase();
+  speak(ws.names[target]+' wird vom Jäger erschossen!');
+  setTimeout(()=>{ if(!checkWin()) startNightPhase(); }, 1500);
 }
 
 // ===================== WIN CHECK =====================
@@ -392,6 +460,7 @@ function checkWin(){
 }
 
 function showWinScreen(winner){
+  stopSpeak();
   wwShowOnly('werwolf-win');
   document.getElementById('ww-win-emoji').textContent=winner==='village'?'🏡':'🐺';
   document.getElementById('ww-win-title').textContent=winner==='village'?'Das Dorf hat gewonnen!':'Die Werwölfe haben gewonnen!';
@@ -406,10 +475,14 @@ function showWinScreen(winner){
     row.innerHTML=`<span class="player-name">${rolle.emoji} ${name}</span><span class="player-tag ${ws.assignedRoles[i]==='Werwolf'?'imposter-tag':''}">${ws.assignedRoles[i]} ${dead?'(tot)':''}</span>`;
     list.appendChild(row);
   });
+  setTimeout(()=>speak(winner==='village'
+    ?'Glückwunsch! Das Dorf hat alle Werwölfe entlarvt und gewonnen!'
+    :'Die Werwölfe haben gesiegt! Sie beherrschen nun das Dorf!'), 300);
 }
 
 // ===================== NIGHT SCREEN BUILDER =====================
-function setNightScreen(emoji,title,desc,selectorHtml,extraHtml,buttons){
+// ttsText is optional – if provided, it overrides the default speak text
+function setNightScreen(emoji,title,desc,selectorHtml,extraHtml,buttons,ttsText){
   document.getElementById('ww-night-emoji').textContent=emoji||'';
   document.getElementById('ww-night-title').textContent=title||'';
   document.getElementById('ww-night-desc').textContent=desc||'';
@@ -423,6 +496,9 @@ function setNightScreen(emoji,title,desc,selectorHtml,extraHtml,buttons){
     btn.textContent=b.label; btn.setAttribute('onclick',b.fn);
     btns.appendChild(btn);
   });
+  // TTS
+  const text = ttsText || (title ? title+'. '+desc : desc);
+  speak(text);
 }
 
 // ===================== PLAYER SELECTOR =====================
@@ -452,6 +528,7 @@ function wwShowOnly(id){
   document.getElementById(id).classList.remove('hidden');
 }
 function resetWerwolf(){
+  stopSpeak();
   ws.dead=[]; ws.lovers=[]; ws.round=0; ws.nightVictim=-1; ws._prevDead=[];
   wwShowOnly('werwolf-setup');
 }
