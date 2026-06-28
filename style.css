@@ -47,18 +47,11 @@ body {
 .section-card { background: #1e1e28; border-radius: 16px; padding: 16px; margin-bottom: 16px; }
 .section-title { font-size: 0.8rem; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
 
-/* CATEGORY CHECKS */
-.cat-checks { display: flex; flex-wrap: wrap; gap: 8px; }
-.cat-check { display: flex; align-items: center; gap: 6px; background: #2a2a38; border-radius: 20px; padding: 6px 12px; cursor: pointer; font-size: 0.9rem; user-select: none; }
-.cat-check input { display: none; }
-.cat-check span { transition: opacity 0.15s; }
-.cat-check:has(input:checked) { background: #4f46e5; }
-
 /* TOGGLE */
 .toggle-row { display: flex; align-items: center; justify-content: space-between; }
 .toggle-label { font-size: 0.95rem; font-weight: 600; }
 .toggle-sub { font-size: 0.78rem; color: #888; margin-top: 2px; }
-.toggle { position: relative; width: 48px; height: 26px; }
+.toggle { position: relative; width: 48px; height: 26px; flex-shrink: 0; }
 .toggle input { display: none; }
 .toggle-slider { position: absolute; inset: 0; background: #333; border-radius: 13px; cursor: pointer; transition: background 0.2s; }
 .toggle-slider::after { content: ''; position: absolute; width: 20px; height: 20px; background: #fff; border-radius: 50%; top: 3px; left: 3px; transition: left 0.2s; }
@@ -121,15 +114,49 @@ body {
 .player-tag { font-size: 0.8rem; color: #888; }
 .imposter-tag { color: #ef4444; }
 
+/* ===================== WERWOLF ROLE ROWS ===================== */
+.role-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #2a2a38;
+}
+.role-row:last-child { border-bottom: none; }
+.role-row-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+.role-row-emoji {
+  font-size: 1.6rem;
+  width: 32px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.role-row-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.role-row-text strong {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #f0f0f0;
+}
+.role-row-text span {
+  font-size: 0.78rem;
+  color: #888;
+  margin-top: 2px;
+  line-height: 1.3;
+}
+
 /* WERWOLF INFO */
 .ww-info-card { display: flex; flex-direction: column; gap: 10px; }
 .ww-info-row { display: flex; align-items: center; justify-content: space-between; font-size: 0.95rem; }
-.ww-count { font-size: 1.4rem; font-weight: 900; }
-.wolf-count { color: #ef4444; }
-.role-summary { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
-.role-badge { background: #2a2a38; border-radius: 20px; padding: 5px 12px; font-size: 0.85rem; }
-.wolf-badge { background: #3a1010; border: 1px solid #ef4444; color: #ef4444; }
-.power-badge { background: #1a1800; border: 1px solid #f59e0b; color: #f59e0b; }
 
 /* NIGHT SCREEN */
 .night-card {
@@ -193,11 +220,6 @@ body {
 .win-emoji { font-size: 4rem; margin-bottom: 12px; }
 .win-title { font-size: 1.6rem; font-weight: 900; margin-bottom: 8px; }
 .win-sub   { font-size: 0.9rem; color: #aaa; }
-
-/* BÜRGERMEISTER EXTRA */
-.bm-card { border: 1px solid #4f46e5 !important; background: #13122a !important; }
-.bm-check { margin-bottom: 8px; }
-.bm-hint { font-size: 0.78rem; color: #7c7aaa; margin-top: 6px; }
 
 /* INSTALL POPUP */
 .install-popup { position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,0.75); display: flex; align-items: flex-end; justify-content: center; padding: 16px; animation: fadeIn 0.3s ease; }

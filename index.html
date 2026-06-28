@@ -164,30 +164,31 @@
         <h2>🐺 Werwolf</h2>
         <div></div>
       </div>
+
+      <!-- Werwölfe Anzahl -->
       <div class="section-card">
-        <div class="section-title">Sonderrollen</div>
-        <div class="cat-checks">
-          <label class="cat-check"><input type="checkbox" id="ww-role-seherin"      onchange="toggleWWRole('seherin')"      /><span>🔮 Seherin</span></label>
-          <label class="cat-check"><input type="checkbox" id="ww-role-hexe"         checked onchange="toggleWWRole('hexe')"         /><span>🧝‍♀️ Hexe</span></label>
-          <label class="cat-check"><input type="checkbox" id="ww-role-amor"         checked onchange="toggleWWRole('amor')"         /><span>💘 Amor</span></label>
-          <label class="cat-check"><input type="checkbox" id="ww-role-jaeger"       onchange="toggleWWRole('jaeger')"       /><span>🎯 Jäger</span></label>
-          <label class="cat-check"><input type="checkbox" id="ww-role-dieb"         onchange="toggleWWRole('dieb')"         /><span>🥷 Dieb</span></label>
-          <label class="cat-check"><input type="checkbox" id="ww-role-dorfmatratze" onchange="toggleWWRole('dorfmatratze')" /><span>🛌 Dorfmatratze</span></label>
+        <div class="section-title">🐺 Werwölfe</div>
+        <div class="counter">
+          <button class="cnt-btn" onclick="changeWWWolves(-1)">−</button>
+          <span id="ww-wolf-count">1</span>
+          <button class="cnt-btn" onclick="changeWWWolves(1)">+</button>
         </div>
       </div>
-      <div class="section-card bm-card">
-        <div class="section-title">Extra-Rolle</div>
-        <label class="cat-check bm-check">
-          <input type="checkbox" id="ww-role-buergermeister" onchange="toggleWWRole('buergermeister')" />
-          <span>🌿 Bürgermeister</span>
-        </label>
-        <p class="bm-hint">Ersetzt einen Dorfbewohner – Stimme zählt doppelt</p>
+
+      <!-- Sonderrollen -->
+      <div class="section-card">
+        <div class="section-title">Sonderrollen</div>
+        <div id="ww-role-rows"></div>
       </div>
+
+      <!-- Übersicht -->
       <div class="section-card ww-info-card">
-        <div class="ww-info-row"><span>🐺 Werwölfe</span><span id="ww-wolf-count" class="ww-count wolf-count">1</span></div>
-        <div class="ww-info-row"><span>✨ Sonderrollen</span><span id="ww-special-count" class="ww-count">2</span></div>
-        <div class="ww-info-row"><span>🧑‍🌾 Dorfbewohner</span><span id="ww-village-count" class="ww-count">3</span></div>
+        <div class="ww-info-row"><span>🐺 Werwölfe</span><span id="ww-wolf-count-info" style="font-size:1.2rem;font-weight:900;color:#ef4444"></span></div>
+        <div class="ww-info-row"><span>✨ Sonderrollen</span><span id="ww-special-count" style="font-size:1.2rem;font-weight:900"></span></div>
+        <div class="ww-info-row"><span>🧑‍🌾 Dorfbewohner</span><span id="ww-village-count" style="font-size:1.2rem;font-weight:900"></span></div>
       </div>
+
+      <!-- Spieler -->
       <div class="section-card">
         <div class="section-title">Spieler</div>
         <div class="counter" style="margin-bottom:16px">
@@ -197,6 +198,7 @@
         </div>
         <div id="werwolf-name-inputs"></div>
       </div>
+
       <button class="btn-primary" onclick="startWerwolf()">Rollen verteilen 🎭</button>
     </div>
 
@@ -225,7 +227,7 @@
       <div class="night-card">
         <div class="night-emoji" id="ww-night-emoji">🌙</div>
         <div class="night-title" id="ww-night-title"></div>
-        <div class="night-desc" id="ww-night-desc"></div>
+        <div class="night-desc"  id="ww-night-desc"></div>
       </div>
       <div id="ww-night-selector"></div>
       <div id="ww-night-extra"></div>
@@ -253,7 +255,7 @@
       <div class="win-card">
         <div class="win-emoji" id="ww-win-emoji"></div>
         <div class="win-title" id="ww-win-title"></div>
-        <div class="win-sub" id="ww-win-sub"></div>
+        <div class="win-sub"   id="ww-win-sub"></div>
       </div>
       <div class="players-list" id="ww-win-list" style="margin:16px 0"></div>
       <button class="btn-primary" onclick="resetWerwolf()">🔄 Nochmal spielen</button>
