@@ -38,6 +38,70 @@ html, body { height: 100%; font-family: -apple-system, BlinkMacSystemFont, 'Sego
 .section-card { background: #1a1a2e; border-radius: 16px; padding: 16px; margin-bottom: 14px; border: 1px solid rgba(255,255,255,.07); }
 .section-title { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #8080a0; margin-bottom: 12px; }
 
+/* ===== HOWTO AKKORDEON ===== */
+.howto-card {
+  background: #1a1a2e;
+  border-radius: 16px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  border: 1px solid rgba(124,58,237,.25);
+  cursor: pointer;
+  user-select: none;
+  transition: border-color .2s;
+}
+.howto-card:active { border-color: #7c3aed; }
+.howto-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: .95rem;
+  font-weight: 700;
+  color: #c0b0ff;
+}
+.howto-arrow {
+  font-size: .8rem;
+  color: #7c6aaa;
+  transition: transform .25s;
+}
+.howto-body {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.howto-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: .88rem;
+  color: #c0c0e0;
+  line-height: 1.5;
+}
+.howto-num {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  background: rgba(124,58,237,.35);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .75rem;
+  font-weight: 900;
+  color: #a78bfa;
+  margin-top: 1px;
+}
+.howto-tip {
+  background: rgba(251,191,36,.08);
+  border: 1px solid rgba(251,191,36,.2);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: .82rem;
+  color: #fbbf24;
+  line-height: 1.5;
+  margin-top: 4px;
+}
+
 /* ===== TOGGLE ===== */
 .toggle-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .toggle-label { font-weight: 700; font-size: .95rem; }
@@ -228,18 +292,13 @@ html, body { height: 100%; font-family: -apple-system, BlinkMacSystemFont, 'Sego
 .wbi-how-to { background: #1a1a2e; border-radius: 16px; padding: 16px; margin-bottom: 14px; display: flex; flex-direction: column; gap: 8px; }
 .wbi-how-step { display: flex; align-items: flex-start; gap: 10px; font-size: .9rem; color: #c0c0e0; line-height: 1.4; }
 
-/* ===== QUERFORMAT via CSS-Rotation (funktioniert OHNE native API, auch im Browser) ===== */
-/*
-  Trick: Wir drehen das #wbi-game-element um 90 Grad und passen Breite/Höhe an.
-  Das simuliert Querformat ohne screen.orientation.lock().
-  Funktioniert in jedem Browser, auch ohne installierte PWA.
-*/
+/* ===== QUERFORMAT via CSS-Rotation ===== */
 body.wbi-force-landscape #wbi-game {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vh;        /* Breite = Viewport-Höhe (nach Rotation) */
-  height: 100vw;       /* Höhe = Viewport-Breite (nach Rotation) */
+  width: 100vh;
+  height: 100vw;
   transform-origin: top left;
   transform: rotate(90deg) translateY(-100%);
   z-index: 999;
@@ -248,7 +307,6 @@ body.wbi-force-landscape #wbi-game {
   display: flex;
   flex-direction: column;
 }
-/* Wenn Gerät bereits quer ist (z.B. Tablet), keine extra Rotation */
 @media (orientation: landscape) {
   body.wbi-force-landscape #wbi-game {
     transform: none;
@@ -271,7 +329,6 @@ body.wbi-force-landscape #wbi-game {
 .wbi-cd-pop { animation: cdPop .4s ease; }
 @keyframes cdPop { 0%{transform:scale(.5);opacity:0} 70%{transform:scale(1.15)} 100%{transform:scale(1);opacity:1} }
 
-/* Timer-Leiste + Spielfeld */
 .wbi-game-landscape { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 .wbi-landscape-game { flex: 1; display: flex; flex-direction: column; position: relative; overflow: hidden; }
 .wbi-ls-topbar {
