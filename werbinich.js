@@ -1,4 +1,4 @@
-// ========== WER BIN ICH – BUTTON-MODUS (QUERFORMAT) ==========
+// ========== WER BIN ICH ==========
 const WBI_CATS = {
   personen: {
     label: '🎭 Personen', emoji: '🎭',
@@ -165,7 +165,10 @@ function startWBI() {
   document.getElementById('wbi-splash-center').classList.add('hidden');
   document.getElementById('wbi-game-timer-bar').classList.add('hidden');
 
-  // Querformat anfordern
+  // CSS-Rotation: body bekommt Klasse, dreht alles via CSS (funktioniert auch im Browser)
+  document.body.classList.add('wbi-force-landscape');
+
+  // Zusätzlich native API versuchen (klappt nur als installierte PWA)
   if (screen.orientation && screen.orientation.lock) {
     screen.orientation.lock('landscape').catch(() => {});
   }
@@ -251,10 +254,8 @@ function wbiShowOverlay(icon, type, term) {
 
 function wbiEndGame() {
   wbi.state = 'result';
-  // Hochformat wieder freigeben
-  if (screen.orientation && screen.orientation.unlock) {
-    screen.orientation.unlock();
-  }
+  document.body.classList.remove('wbi-force-landscape');
+  if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
   document.getElementById('wbi-game').classList.add('hidden');
   document.getElementById('wbi-result').classList.remove('hidden');
   document.getElementById('wbi-result-score').textContent = wbi.score;
@@ -265,6 +266,7 @@ function wbiEndGame() {
 function resetWBI() {
   clearInterval(wbi.timerInterval);
   clearInterval(wbi.countdownInterval);
+  document.body.classList.remove('wbi-force-landscape');
   if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
   wbi.state = 'idle';
   document.getElementById('wbi-game').classList.add('hidden');

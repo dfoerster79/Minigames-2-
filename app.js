@@ -27,9 +27,20 @@ function showInstallPopup() {
 function triggerAndroidInstall() {
   if (deferredPrompt) {
     deferredPrompt.prompt();
-    deferredPrompt.userChoice.then(() => { deferredPrompt = null; });
+    deferredPrompt.userChoice.then(() => { deferredPrompt = null; closeInstallPopup(); });
+  } else {
+    // Fallback: manuelle Anleitung anzeigen
+    const androidDiv = document.getElementById('install-android');
+    androidDiv.innerHTML = `
+      <p style="color:#a0a0c0;font-size:.9rem;margin-bottom:12px">Tippe auf die <strong>drei Punkte ⋮</strong> oben rechts im Browser und wähle:</p>
+      <div class="install-steps">
+        <div class="install-step"><span>1</span> Tippe auf <strong>⋮ Menü</strong> (oben rechts)</div>
+        <div class="install-step"><span>2</span> Wähle <strong>"Zum Startbildschirm hinzufügen"</strong></div>
+        <div class="install-step"><span>3</span> Tippe auf <strong>"Hinzufügen"</strong></div>
+      </div>
+      <button class="btn-ghost" onclick="closeInstallPopup()">Schließen</button>
+    `;
   }
-  closeInstallPopup();
 }
 
 function closeInstallPopup() {
@@ -48,7 +59,9 @@ function showGame(name) {
 function showHome() {
   if (typeof state !== 'undefined') clearInterval(state.timerInterval);
   if (typeof werwolfState !== 'undefined') clearInterval(werwolfState.timerInterval);
-  if (typeof wbi !== 'undefined') clearInterval(wbi.timerInterval);
+  if (typeof wbi !== 'undefined') { clearInterval(wbi.timerInterval); clearInterval(wbi.countdownInterval); }
+  // Querformat-Klasse entfernen falls aktiv
+  document.body.classList.remove('wbi-force-landscape');
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById('home-screen').classList.add('active');
 }
