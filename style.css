@@ -42,8 +42,8 @@ html, body { height: 100%; font-family: -apple-system, BlinkMacSystemFont, 'Sego
 .toggle-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .toggle-label { font-weight: 700; font-size: .95rem; }
 .toggle-sub { font-size: .8rem; color: #8080a0; margin-top: 2px; }
-.toggle { position: relative; width: 50px; height: 28px; flex-shrink: 0; }
-.toggle input { opacity: 0; width: 0; height: 0; }
+.toggle { position: relative; width: 50px; height: 28px; flex-shrink: 0; display: inline-block; }
+.toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
 .toggle-slider { position: absolute; inset: 0; background: #2e2e4e; border-radius: 28px; transition: .3s; cursor: pointer; }
 .toggle-slider::before { content: ''; position: absolute; left: 4px; top: 4px; width: 20px; height: 20px; background: #fff; border-radius: 50%; transition: .3s; }
 .toggle input:checked + .toggle-slider { background: #7c3aed; }
@@ -122,14 +122,59 @@ html, body { height: 100%; font-family: -apple-system, BlinkMacSystemFont, 'Sego
 .narrator-status { margin-top: 10px; font-size: .85rem; color: #a0a0c0; font-weight: 700; }
 #ww-role-rows { display: flex; flex-direction: column; gap: 0; }
 
-/* role-row: Klasse die werwolf.js für Sonderrollen-Zeilen verwendet */
-.role-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+/* role-row: Sonderrollen-Zeile mit Emoji, Text und Toggle nebeneinander */
+.role-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
 .role-row:last-child { border-bottom: none; }
-.role-row-left { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
-.role-row-emoji { font-size: 1.5rem; flex-shrink: 0; }
-.role-row-text { display: flex; flex-direction: column; min-width: 0; }
-.role-row-text strong { font-size: .95rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.role-row-text span { font-size: .75rem; color: #8080a0; line-height: 1.3; }
+.role-row-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+.role-row-emoji {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.role-row-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+.role-row-text strong {
+  font-size: .9rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #f0f0f0;
+}
+.role-row-text span {
+  font-size: .75rem;
+  color: #8080a0;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* Toggle innerhalb role-row fix */
+.role-row > .toggle {
+  flex-shrink: 0;
+  width: 50px;
+  height: 28px;
+}
 
 .ww-role-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,.06); }
 .ww-role-row:last-child { border-bottom: none; }
