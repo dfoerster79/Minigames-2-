@@ -47,18 +47,51 @@ let ws = {
 };
 
 // ===================== ERZÄHLER (TTS) =====================
+
+// Beste deutsche Stimme wählen – bevorzuge natürlich klingende Online-Stimmen
+function getBestGermanVoice() {
+  const voices = window.speechSynthesis.getVoices();
+  if (!voices.length) return null;
+
+  // Priorität 1: Google Deutsch (klingt sehr natürlich)
+  const googleDE = voices.find(v => v.lang.startsWith('de') && v.name.includes('Google'));
+  if (googleDE) return googleDE;
+
+  // Priorität 2: Online/Remote-Stimmen auf Deutsch (z.B. Microsoft Anna, Hedda etc.)
+  const onlineDE = voices.find(v => v.lang.startsWith('de') && !v.localService);
+  if (onlineDE) return onlineDE;
+
+  // Priorität 3: Beste lokale deutsche Stimme
+  const localDE = voices.find(v => v.lang === 'de-DE') ||
+                  voices.find(v => v.lang.startsWith('de'));
+  return localDE || null;
+}
+
 function speak(text) {
   if (!ws.narrator) return;
   if (!window.speechSynthesis) return;
   window.speechSynthesis.cancel();
+
   const utt = new SpeechSynthesisUtterance(text);
   utt.lang = 'de-DE';
-  utt.rate = 0.92;
-  utt.pitch = 1.0;
-  const voices = window.speechSynthesis.getVoices();
-  const deVoice = voices.find(v => v.lang.startsWith('de') && !v.name.includes('Google')) ||
-                  voices.find(v => v.lang.startsWith('de'));
-  if (deVoice) utt.voice = deVoice;
+  // Langsamere, entspanntere Rate klingt menschlicher
+  utt.rate  = 0.88;
+  // Etwas tiefere Tonlage wirkt ruhiger und natürlicher
+  utt.pitch = 0.95;
+  utt.volume = 1.0;
+
+  // Stimme sofort setzen falls verfügbar, sonst nach onvoiceschanged
+  const voice = getBestGermanVoice();
+  if (voice) {
+    utt.voice = voice;
+  } else {
+    window.speechSynthesis.onvoiceschanged = () => {
+      const v = getBestGermanVoice();
+      if (v) utt.voice = v;
+      window.speechSynthesis.onvoiceschanged = null;
+    };
+  }
+
   window.speechSynthesis.speak(utt);
 }
 
@@ -79,10 +112,12 @@ function speakSleepThen(rollenText, fn) {
   if (!ws.narrator || !window.speechSynthesis) { fn(); return; }
   window.speechSynthesis.cancel();
   const utt = new SpeechSynthesisUtterance(rollenText + ', schließ die Augen und schlaf ein.');
-  utt.lang = 'de-DE'; utt.rate = 0.92;
-  const voices = window.speechSynthesis.getVoices();
-  const deVoice = voices.find(v => v.lang.startsWith('de') && !v.name.includes('Google')) || voices.find(v => v.lang.startsWith('de'));
-  if (deVoice) utt.voice = deVoice;
+  utt.lang = 'de-DE';
+  utt.rate  = 0.88;
+  utt.pitch = 0.95;
+  utt.volume = 1.0;
+  const voice = getBestGermanVoice();
+  if (voice) utt.voice = voice;
   utt.onend = () => fn();
   window.speechSynthesis.speak(utt);
 }
