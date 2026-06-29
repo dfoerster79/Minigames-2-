@@ -133,7 +133,6 @@ function wbiToggleCat(key, el) {
       wbi.activeCats = wbi.activeCats.filter(c => c !== key);
       if (label) label.classList.remove('active-cat');
     } else {
-      // prevent unchecking last
       if (el) el.checked = true;
     }
   } else {
@@ -261,12 +260,15 @@ function wbiFallbackButtons() {
   document.getElementById('wbi-manual-btns').classList.remove('hidden');
 }
 
+// Handy an die STIRN halten = beta ≈ 75–90° (aufrecht, Display nach vorne)
+// Nach hinten kippen (Richtig) = beta sinkt unter ~40°
+// Nach vorne kippen (Überspringen) = beta steigt über ~110°
 function wbiHandleTilt(e) {
   if (wbi.state !== 'playing' || wbi.tiltLock) return;
-  const beta = e.beta;
+  const beta = e.beta; // -180..180, aufrecht ≈ 90
   if (beta === null) return;
-  if (beta < -20) wbiCorrect();
-  else if (beta > 50) wbiSkip();
+  if (beta < 40) wbiCorrect();     // nach hinten kippen → Richtig
+  else if (beta > 110) wbiSkip();  // nach vorne kippen → Überspringen
 }
 
 function wbiDetachGyro() {
@@ -316,6 +318,14 @@ function resetWBI() {
   document.getElementById('wbi-game').classList.add('hidden');
   document.getElementById('wbi-result').classList.add('hidden');
   document.getElementById('wbi-setup').classList.remove('hidden');
+}
+
+function toggleWBIHowTo() {
+  const body = document.getElementById('wbi-howto-body');
+  const arrow = document.getElementById('wbi-howto-arrow');
+  const isOpen = !body.classList.contains('hidden');
+  body.classList.toggle('hidden', isOpen);
+  arrow.textContent = isOpen ? '▶' : '▼';
 }
 
 document.addEventListener('DOMContentLoaded', wbiInit);
