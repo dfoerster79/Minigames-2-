@@ -16,28 +16,6 @@
 <body>
 <div id="app">
 
-  <!-- INSTALL POPUP -->
-  <div id="install-popup" class="install-popup hidden">
-    <div class="install-popup-box">
-      <button class="install-close" onclick="closeInstallPopup()">&#x2715;</button>
-      <div class="install-icon">🎮</div>
-      <h3>Als App installieren</h3>
-      <div id="install-ios" class="hidden">
-        <p>Tippe auf <strong>📤 Teilen</strong> und wähle dann<br><strong>"Zum Home-Bildschirm"</strong></p>
-        <div class="install-steps">
-          <div class="install-step"><span>1</span> Tippe auf das Teilen-Symbol unten in Safari</div>
-          <div class="install-step"><span>2</span> Scrolle runter und tippe „Zum Home-Bildschirm"</div>
-          <div class="install-step"><span>3</span> Tippe oben rechts auf „Hinzufügen"</div>
-        </div>
-      </div>
-      <div id="install-android" class="hidden">
-        <p>Installiere die App für das beste Spielerlebnis!</p>
-        <button class="btn-primary install-android-btn" onclick="triggerAndroidInstall()">✚ Zum Homebildschirm hinzufügen</button>
-      </div>
-      <button class="btn-ghost" onclick="closeInstallPopup()">Später</button>
-    </div>
-  </div>
-
   <!-- HOME -->
   <div id="home-screen" class="screen active">
     <div class="home-header">
@@ -87,12 +65,6 @@
       <button class="icon-btn" onclick="showHome()">‹</button>
       <h2>⚙️ Einstellungen</h2>
       <div></div>
-    </div>
-
-    <div class="section-card">
-      <div class="section-title">App installieren</div>
-      <p style="font-size:.9rem;color:#888;margin-bottom:12px;line-height:1.5">Füge die App zum Home-Bildschirm hinzu für das beste Erlebnis!</p>
-      <button class="btn-primary" onclick="showInstallPopup()">📲 App installieren</button>
     </div>
 
     <div class="section-card">
@@ -279,9 +251,6 @@
 function showSettings() {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById('settings-screen').classList.add('active');
-}
-function showInstallPopup() {
-  document.getElementById('install-popup').classList.remove('hidden');
 }
 function saveSetting(key, val) {
   localStorage.setItem('setting_' + key, val);
