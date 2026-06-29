@@ -12,6 +12,13 @@
   <meta name="apple-mobile-web-app-title" content="Minigames" />
   <link rel="apple-touch-icon" href="icon.jpg" />
   <link rel="stylesheet" href="style.css" />
+  <script>
+    // Theme sofort anwenden (verhindert Flackern)
+    (function(){
+      var t = localStorage.getItem('app_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
 </head>
 <body>
 <div id="app">
@@ -65,6 +72,20 @@
       <button class="icon-btn" onclick="showHome()">‹</button>
       <h2>⚙️ Einstellungen</h2>
       <div></div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-title">🎨 Design</div>
+      <div class="theme-selector">
+        <button class="theme-btn theme-btn-light" id="theme-btn-light" onclick="setTheme('light')">
+          <span class="theme-btn-emoji">☀️</span>
+          <span>Hell</span>
+        </button>
+        <button class="theme-btn theme-btn-dark" id="theme-btn-dark" onclick="setTheme('dark')">
+          <span class="theme-btn-emoji">🌙</span>
+          <span>Dunkel</span>
+        </button>
+      </div>
     </div>
 
     <div class="section-card">
@@ -251,10 +272,23 @@
 function showSettings() {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById('settings-screen').classList.add('active');
+  updateThemeBtns();
 }
 function saveSetting(key, val) {
   localStorage.setItem('setting_' + key, val);
 }
+function setTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('app_theme', theme);
+  updateThemeBtns();
+}
+function updateThemeBtns() {
+  var current = document.documentElement.getAttribute('data-theme') || 'light';
+  document.getElementById('theme-btn-light').classList.toggle('active', current === 'light');
+  document.getElementById('theme-btn-dark').classList.toggle('active', current === 'dark');
+}
+// Init
+updateThemeBtns();
 </script>
 </body>
 </html>
