@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Minigames</title>
   <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#7c3aed" />
+  <meta name="theme-color" content="#ff2233" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -41,7 +41,10 @@
   <!-- HOME -->
   <div id="home-screen" class="screen active">
     <div class="home-header">
-      <h1>🎮 Minigames</h1>
+      <div class="home-topbar">
+        <h1>🎮 Minigames</h1>
+        <button class="settings-btn" onclick="showSettings()" aria-label="Einstellungen">⚙️</button>
+      </div>
       <p class="subtitle">Wähle ein Spiel</p>
     </div>
     <div class="splash-game-grid">
@@ -78,17 +81,56 @@
     </div>
   </div>
 
+  <!-- EINSTELLUNGEN -->
+  <div id="settings-screen" class="screen">
+    <div class="top-bar">
+      <button class="icon-btn" onclick="showHome()">‹</button>
+      <h2>⚙️ Einstellungen</h2>
+      <div></div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-title">App installieren</div>
+      <p style="font-size:.9rem;color:#888;margin-bottom:12px;line-height:1.5">Füge die App zum Home-Bildschirm hinzu für das beste Erlebnis!</p>
+      <button class="btn-primary" onclick="showInstallPopup()">📲 App installieren</button>
+    </div>
+
+    <div class="section-card">
+      <div class="section-title">Über die App</div>
+      <div class="settings-info-row"><span>Version</span><span class="settings-info-val">1.0.0</span></div>
+      <div class="settings-info-row"><span>Spiele</span><span class="settings-info-val">5 Spiele</span></div>
+      <div class="settings-info-row"><span>Entwickler</span><span class="settings-info-val">Minigames Team</span></div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-title">Feedback & Kontakt</div>
+      <p style="font-size:.9rem;color:#888;margin-bottom:12px;line-height:1.5">Hast du Ideen für neue Spiele oder Verbesserungen?</p>
+      <button class="btn-secondary" onclick="window.open('mailto:feedback@minigames.app','_blank')">✉️ Feedback senden</button>
+    </div>
+
+    <div class="section-card">
+      <div class="section-title">Daten</div>
+      <div class="toggle-row">
+        <div>
+          <div class="toggle-label">Soundeffekte</div>
+          <div class="toggle-sub">Töne beim Spielen</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="settings-sound" onchange="saveSetting('sound', this.checked)" />
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <button class="btn-ghost" onclick="showHome()">← Zurück zur Startseite</button>
+  </div>
+
   <!-- IMPOSTER -->
   <div id="imposter-screen" class="screen">
     <div id="imposter-setup">
       <div class="top-bar"><button class="icon-btn" onclick="showHome()">‹</button><h2>🕵️ Imposter</h2><div></div></div>
-
-      <!-- Anleitung Akkordeon -->
       <div class="howto-card" onclick="toggleHowTo('imposter')">
-        <div class="howto-header">
-          <span>📖 Spielanleitung</span>
-          <span class="howto-arrow" id="imposter-arrow">▶</span>
-        </div>
+        <div class="howto-header"><span>📖 Spielanleitung</span><span class="howto-arrow" id="imposter-arrow">▶</span></div>
         <div class="howto-body hidden" id="imposter-howto">
           <div class="howto-step"><span class="howto-num">1</span><span>Jeder Spieler bekommt heimlich das <strong>gleiche Wort</strong> – außer dem Imposter!</span></div>
           <div class="howto-step"><span class="howto-num">2</span><span>Reihum beschreibt jeder das Wort mit einem Satz – ohne es direkt zu nennen.</span></div>
@@ -97,7 +139,6 @@
           <div class="howto-tip">💡 Tipp: Nicht zu eindeutig beschreiben – sonst ist der Imposter sofort gewarnt!</div>
         </div>
       </div>
-
       <div class="section-card"><div class="section-title">Kategorien (max. 3)</div><div class="splash-cat-grid"><label class="splash-cat-card splash-cat-alltag"><input type="checkbox" id="cat-alltag" checked onchange="toggleCat('alltag')" /><span class="scc-emoji">🏠</span><span class="scc-label">Alltag</span></label><label class="splash-cat-card splash-cat-tiere"><input type="checkbox" id="cat-tiere" onchange="toggleCat('tiere')" /><span class="scc-emoji">🐾</span><span class="scc-label">Tiere</span></label><label class="splash-cat-card splash-cat-sehenswuerdigkeiten"><input type="checkbox" id="cat-sehenswuerdigkeiten" onchange="toggleCat('sehenswuerdigkeiten')" /><span class="scc-emoji">🏙️</span><span class="scc-label">Sehenswürd.</span></label><label class="splash-cat-card splash-cat-essen"><input type="checkbox" id="cat-essen" onchange="toggleCat('essen')" /><span class="scc-emoji">🍕</span><span class="scc-label">Essen</span></label><label class="splash-cat-card splash-cat-sport"><input type="checkbox" id="cat-sport" onchange="toggleCat('sport')" /><span class="scc-emoji">⚽</span><span class="scc-label">Sport</span></label><label class="splash-cat-card splash-cat-filme"><input type="checkbox" id="cat-filme" onchange="toggleCat('filme')" /><span class="scc-emoji">🎬</span><span class="scc-label">Filme</span></label><label class="splash-cat-card splash-cat-urlaub"><input type="checkbox" id="cat-urlaub" onchange="toggleCat('urlaub')" /><span class="scc-emoji">✈️</span><span class="scc-label">Urlaub</span></label><label class="splash-cat-card splash-cat-berufe"><input type="checkbox" id="cat-berufe" onchange="toggleCat('berufe')" /><span class="scc-emoji">🛠️</span><span class="scc-label">Berufe</span></label><label class="splash-cat-card splash-cat-musik"><input type="checkbox" id="cat-musik" onchange="toggleCat('musik')" /><span class="scc-emoji">🎸</span><span class="scc-label">Musik</span></label><label class="splash-cat-card splash-cat-wissenschaft"><input type="checkbox" id="cat-wissenschaft" onchange="toggleCat('wissenschaft')" /><span class="scc-emoji">🔬</span><span class="scc-label">Wissenschaft</span></label><label class="splash-cat-card splash-cat-technik"><input type="checkbox" id="cat-technik" onchange="toggleCat('technik')" /><span class="scc-emoji">📱</span><span class="scc-label">Technik</span></label><label class="splash-cat-card splash-cat-fortnite"><input type="checkbox" id="cat-fortnite" onchange="toggleCat('fortnite')" /><span class="scc-emoji">🎮</span><span class="scc-label">Fortnite</span></label><label class="splash-cat-card splash-cat-brawl"><input type="checkbox" id="cat-brawlstars" onchange="toggleCat('brawlstars')" /><span class="scc-emoji">🌟</span><span class="scc-label">Brawl Stars</span></label><label class="splash-cat-card splash-cat-spicy"><input type="checkbox" id="cat-spicy" onchange="toggleCat('spicy')" /><span class="scc-emoji">🌶️</span><span class="scc-label">Spicy 18+</span></label></div></div>
       <div class="section-card"><div class="section-title">Tipp für den Imposter</div><div class="toggle-row"><div><div class="toggle-label">Tipp aktivieren</div><div class="toggle-sub">Der Imposter erhält ein Stichwort</div></div><label class="toggle"><input type="checkbox" id="hint-toggle" /><span class="toggle-slider"></span></label></div></div>
       <div class="section-card"><div class="section-title">Spielzeit (Minuten)</div><div class="counter"><button class="cnt-btn" onclick="changeTime(-1)">−</button><span id="game-time">3</span><button class="cnt-btn" onclick="changeTime(1)">+</button></div></div>
@@ -113,13 +154,8 @@
   <div id="werwolf-screen" class="screen">
     <div id="werwolf-setup">
       <div class="top-bar"><button class="icon-btn" onclick="showHome()">‹</button><h2>🐺 Werwolf</h2><div></div></div>
-
-      <!-- Anleitung Akkordeon -->
       <div class="howto-card" onclick="toggleHowTo('werwolf')">
-        <div class="howto-header">
-          <span>📖 Spielanleitung</span>
-          <span class="howto-arrow" id="werwolf-arrow">▶</span>
-        </div>
+        <div class="howto-header"><span>📖 Spielanleitung</span><span class="howto-arrow" id="werwolf-arrow">▶</span></div>
         <div class="howto-body hidden" id="werwolf-howto">
           <div class="howto-step"><span class="howto-num">1</span><span>Jeder bekommt heimlich eine <strong>Rolle</strong>: Werwolf, Dorfbewohner oder Sonderrolle.</span></div>
           <div class="howto-step"><span class="howto-num">2</span><span>🌙 <strong>Nacht:</strong> Alle schlafen. Werwölfe wachen auf und wählen ein Opfer. Sonderrollen handeln.</span></div>
@@ -129,7 +165,6 @@
           <div class="howto-tip">💡 Sonderrollen: Seher schaut heimlich, Hexe heilt/vergiftet, Jäger schießt beim Tod.</div>
         </div>
       </div>
-
       <div class="section-card narrator-card"><div class="toggle-row"><div><div class="toggle-label">🔊 Erzähler</div><div class="toggle-sub">Liest jeden Schritt automatisch vor</div></div><label class="toggle"><input type="checkbox" id="ww-narrator-toggle" onchange="toggleNarrator()" /><span class="toggle-slider"></span></label></div><div id="ww-narrator-label" class="narrator-status">🔇 Erzähler aus</div></div>
       <div class="section-card"><div class="section-title">🐺 Werwölfe</div><div class="counter"><button class="cnt-btn" onclick="changeWWWolves(-1)">−</button><span id="ww-wolf-count">1</span><button class="cnt-btn" onclick="changeWWWolves(1)">+</button></div></div>
       <div class="section-card"><div class="section-title">Sonderrollen</div><div id="ww-role-rows"></div></div>
@@ -146,14 +181,9 @@
   <!-- TIC TAC TOE -->
   <div id="tictactoe-screen" class="screen">
     <div class="top-bar"><button class="icon-btn" onclick="showHome()">‹</button><h2>❌⭕ Tic Tac Toe</h2><div></div></div>
-
     <div id="ttt-setup">
-      <!-- Anleitung Akkordeon -->
       <div class="howto-card" onclick="toggleHowTo('ttt')">
-        <div class="howto-header">
-          <span>📖 Spielanleitung</span>
-          <span class="howto-arrow" id="ttt-arrow">▶</span>
-        </div>
+        <div class="howto-header"><span>📖 Spielanleitung</span><span class="howto-arrow" id="ttt-arrow">▶</span></div>
         <div class="howto-body hidden" id="ttt-howto">
           <div class="howto-step"><span class="howto-num">1</span><span>Zwei Spieler wechseln sich ab – einer spielt ✖, der andere ◯.</span></div>
           <div class="howto-step"><span class="howto-num">2</span><span>Tippe auf ein freies Feld um dein Symbol zu setzen.</span></div>
@@ -162,7 +192,6 @@
           <div class="howto-tip">💡 Gegen Bot: Schwer-Modus nutzt Minimax-KI – fast unbesiegbar!</div>
         </div>
       </div>
-
       <div class="section-card"><div class="section-title">Spielfeldgröße</div><div style="display:flex;gap:10px;margin-top:4px"><button id="ttt-size-3" class="ttt-size-btn ttt-size-active" onclick="setTTTSize(3)">3×3</button><button id="ttt-size-5" class="ttt-size-btn" onclick="setTTTSize(5)">5×5 (4 in Reihe)</button></div></div>
       <div class="section-card"><div class="toggle-row"><div><div class="toggle-label">🤖 Gegen Bot spielen</div><div class="toggle-sub">Spiele alleine gegen den Computer</div></div><label class="toggle"><input type="checkbox" id="ttt-bot-toggle" onchange="toggleTTTBot()" /><span class="toggle-slider"></span></label></div><div id="ttt-diff-row" class="ttt-diff-row hidden"><div class="ttt-diff-label">Schwierigkeit:</div><div class="ttt-diff-btns"><button id="ttt-diff-easy" class="ttt-diff-btn ttt-diff-easy" onclick="setTTTDifficulty('easy')">😊 Leicht</button><button id="ttt-diff-medium" class="ttt-diff-btn ttt-diff-medium ttt-diff-active" onclick="setTTTDifficulty('medium')">🧠 Mittel</button><button id="ttt-diff-hard" class="ttt-diff-btn ttt-diff-hard" onclick="setTTTDifficulty('hard')">💀 Schwer</button></div></div></div>
       <div class="section-card"><div class="section-title">Spielernamen</div><div class="name-row"><label>✖ Spieler X</label><input type="text" id="ttt-name-x" placeholder="Spieler X" maxlength="16" /></div><div class="name-row" id="ttt-name-o-row"><label>◯ Spieler O</label><input type="text" id="ttt-name-o" placeholder="Spieler O" maxlength="16" /></div></div>
@@ -175,13 +204,8 @@
   <div id="werbinich-screen" class="screen">
     <div id="wbi-setup">
       <div class="top-bar"><button class="icon-btn" onclick="showHome()">‹</button><h2>🎭 Wer bin ich?</h2><div></div></div>
-
-      <!-- Anleitung Akkordeon -->
       <div class="howto-card" onclick="toggleHowTo('wbi')">
-        <div class="howto-header">
-          <span>📖 Spielanleitung</span>
-          <span class="howto-arrow" id="wbi-arrow">▶</span>
-        </div>
+        <div class="howto-header"><span>📖 Spielanleitung</span><span class="howto-arrow" id="wbi-arrow">▶</span></div>
         <div class="howto-body hidden" id="wbi-howto">
           <div class="howto-step"><span class="howto-num">1</span><span>Halte das Handy <strong>quer an deine Stirn</strong> – Display zeigt nach außen, du siehst nichts.</span></div>
           <div class="howto-step"><span class="howto-num">2</span><span>Die anderen sehen den Begriff auf dem Display und geben dir <strong>Hinweise</strong>.</span></div>
@@ -190,14 +214,11 @@
           <div class="howto-tip">💡 Ziel: Möglichst viele Begriffe in der Zeit erraten!</div>
         </div>
       </div>
-
       <div class="section-card"><div class="section-title">Dein Name</div><div class="name-row"><label>Name</label><input type="text" id="wbi-player-name" placeholder="z.B. Anna" maxlength="16" /></div></div>
       <div class="section-card"><div class="section-title">Kategorien</div><div class="splash-cat-grid" id="wbi-cat-checks"></div></div>
       <div class="section-card"><div class="section-title">⏱ Zeit pro Runde</div><div class="counter"><button class="cnt-btn" onclick="wbiChangeTimer(-10)">−</button><span id="wbi-timer-val">60s</span><button class="cnt-btn" onclick="wbiChangeTimer(10)">+</button></div></div>
       <button class="btn-primary" onclick="startWBI()">Los geht's! 🎭</button>
     </div>
-
-    <!-- GAME -->
     <div id="wbi-game" class="hidden wbi-game-landscape">
       <div id="wbi-countdown-wrap" class="wbi-countdown-wrap">
         <div class="wbi-countdown-emoji">📱</div>
@@ -219,7 +240,6 @@
         <button class="wbi-ls-abort" onclick="resetWBI()">✕</button>
       </div>
     </div>
-
     <div id="wbi-result" class="hidden"><div class="top-bar"><div></div><h2>🎉 Ergebnis</h2><div></div></div><div class="win-card"><div class="win-emoji">🎭</div><div class="win-title" id="wbi-result-name"></div><div class="win-sub" style="font-size:1rem;margin-top:12px"><span style="font-size:2rem;font-weight:900;color:#6ee7b7" id="wbi-result-score">0</span> richtig erraten</div><div class="win-sub" style="margin-top:8px"><span id="wbi-result-skipped">0</span> übersprungen</div></div><button class="btn-primary" onclick="startWBI()">🔄 Nochmal</button><button class="btn-ghost" onclick="resetWBI()">⚙️ Einstellungen</button><button class="btn-ghost" onclick="showHome()">🏠 Hauptmenü</button></div>
   </div>
 
@@ -227,13 +247,8 @@
   <div id="wdl-screen" class="screen">
     <div id="wdl-setup">
       <div class="top-bar"><button class="icon-btn" onclick="showHome()">‹</button><h2>🤔 Würdest du eher</h2><div></div></div>
-
-      <!-- Anleitung Akkordeon -->
       <div class="howto-card" onclick="toggleHowTo('wdl')">
-        <div class="howto-header">
-          <span>📖 Spielanleitung</span>
-          <span class="howto-arrow" id="wdl-arrow">▶</span>
-        </div>
+        <div class="howto-header"><span>📖 Spielanleitung</span><span class="howto-arrow" id="wdl-arrow">▶</span></div>
         <div class="howto-body hidden" id="wdl-howto">
           <div class="howto-step"><span class="howto-num">1</span><span>Ihr bekommt zwei Optionen angezeigt – <strong>A</strong> oder <strong>B</strong>.</span></div>
           <div class="howto-step"><span class="howto-num">2</span><span>Jeder tippt auf die Option, die er <strong>eher wählen würde</strong>.</span></div>
@@ -242,7 +257,6 @@
           <div class="howto-tip">💡 Kein richtiges oder falsches – es geht ums Gespräch!</div>
         </div>
       </div>
-
       <div class="section-card"><div class="section-title">Kategorien</div><div class="splash-cat-grid" id="wdl-cat-checks"></div></div>
       <button class="btn-primary" onclick="startWDL()">Los geht's! 🤔</button>
     </div>
@@ -267,5 +281,17 @@
 <script src="werbinich.js"></script>
 <script src="wuerdstulieber.js"></script>
 <script src="app.js"></script>
+<script>
+function showSettings() {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('settings-screen').classList.add('active');
+}
+function showInstallPopup() {
+  document.getElementById('install-popup').classList.remove('hidden');
+}
+function saveSetting(key, val) {
+  localStorage.setItem('setting_' + key, val);
+}
+</script>
 </body>
 </html>
