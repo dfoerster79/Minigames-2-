@@ -121,10 +121,10 @@
           <span id="wbi-howto-arrow" style="font-size:0.85rem;opacity:0.7">▶</span>
         </div>
         <div id="wbi-howto-body" class="hidden" style="margin-top:10px">
-          <div class="wbi-how-step"><span>1️⃣</span> Handy an die <strong>Stirn halten</strong> – Display zeigt nach außen</div>
+          <div class="wbi-how-step"><span>1️⃣</span> Halte das Handy <strong>quer</strong> an deine <strong>Stirn</strong> – Display zeigt nach außen</div>
           <div class="wbi-how-step"><span>2️⃣</span> Andere sehen den Begriff – du nicht!</div>
-          <div class="wbi-how-step"><span>↩️</span> Handy nach <strong>hinten kippen</strong> = ✅ Richtig erraten</div>
-          <div class="wbi-how-step"><span>⏩</span> Handy nach <strong>vorne kippen</strong> = ⏭️ Überspringen</div>
+          <div class="wbi-how-step"><span>✅</span> Tippe <strong>Richtig</strong> wenn du es erraten hast</div>
+          <div class="wbi-how-step"><span>⏭️</span> Tippe <strong>Weiter</strong> um den Begriff zu überspringen</div>
         </div>
       </div>
 
@@ -133,14 +133,43 @@
       <div class="section-card"><div class="section-title">⏱ Zeit pro Runde</div><div class="counter"><button class="cnt-btn" onclick="wbiChangeTimer(-10)">−</button><span id="wbi-timer-val">60s</span><button class="cnt-btn" onclick="wbiChangeTimer(10)">+</button></div></div>
       <button class="btn-primary" onclick="startWBI()">Los geht's! 🎭</button>
     </div>
-    <div id="wbi-game" class="hidden wbi-game-fullscreen"><div id="wbi-countdown-wrap" class="wbi-countdown-wrap"><div class="wbi-countdown-emoji">📱</div><div class="wbi-countdown-instruction">Handy jetzt an<br>deine <strong>Stirn halten!</strong></div><div class="wbi-countdown-hint">Display zeigt nach außen</div><div class="wbi-countdown-num wbi-cd-pop" id="wbi-countdown-num">3</div></div><div class="wbi-game-timer-bar hidden" id="wbi-game-timer-bar"><div class="wbi-game-timer-val" id="wbi-game-timer">60s</div><div class="wbi-score-inline">✅ <span id="wbi-score-val">0</span></div></div><div class="wbi-splash-center hidden" id="wbi-splash-center"><div class="wbi-splash-term" id="wbi-splash-term">Begriff</div></div><div class="wbi-tilt-overlay" id="wbi-tilt-overlay"></div><div class="wbi-manual-btns hidden" id="wbi-manual-btns"><button class="wbi-ans-btn wbi-ans-no" onclick="wbiSkip()">⏭️ Weiter</button><button class="wbi-ans-btn wbi-ans-yes" onclick="wbiCorrect()">✅ Richtig</button></div><button class="btn-ghost" style="margin:16px 16px 0" onclick="resetWBI()">✕ Abbrechen</button></div>
+
+    <!-- GAME: Querformat-Layout -->
+    <div id="wbi-game" class="hidden wbi-game-landscape">
+      <!-- Countdown -->
+      <div id="wbi-countdown-wrap" class="wbi-countdown-wrap">
+        <div class="wbi-countdown-emoji">📱</div>
+        <div class="wbi-countdown-instruction">Handy <strong>quer</strong> an deine <strong>Stirn halten!</strong></div>
+        <div class="wbi-countdown-hint">Display zeigt nach außen</div>
+        <div class="wbi-countdown-num wbi-cd-pop" id="wbi-countdown-num">3</div>
+      </div>
+
+      <!-- Spielfeld -->
+      <div class="wbi-landscape-game hidden" id="wbi-splash-center">
+        <!-- Timer + Score oben mittig -->
+        <div class="wbi-ls-topbar hidden" id="wbi-game-timer-bar">
+          <span class="wbi-game-timer-val" id="wbi-game-timer">60s</span>
+          <span class="wbi-ls-score">✅ <span id="wbi-score-val">0</span></span>
+        </div>
+        <!-- Begriff groß in der Mitte -->
+        <div class="wbi-ls-term" id="wbi-splash-term">Begriff</div>
+        <!-- Overlay (kurze Einblendung nach Aktion) -->
+        <div class="wbi-tilt-overlay" id="wbi-tilt-overlay"></div>
+        <!-- Zwei große Buttons links/rechts -->
+        <div class="wbi-ls-buttons">
+          <button class="wbi-ls-btn wbi-ls-skip" onclick="wbiSkip()">⏭️<br><span>Weiter</span></button>
+          <button class="wbi-ls-btn wbi-ls-correct" onclick="wbiCorrect()">✅<br><span>Richtig</span></button>
+        </div>
+        <!-- Abbrechen -->
+        <button class="wbi-ls-abort" onclick="resetWBI()">✕</button>
+      </div>
+    </div>
+
     <div id="wbi-result" class="hidden"><div class="top-bar"><div></div><h2>🎉 Ergebnis</h2><div></div></div><div class="win-card"><div class="win-emoji">🎭</div><div class="win-title" id="wbi-result-name"></div><div class="win-sub" style="font-size:1rem;margin-top:12px"><span style="font-size:2rem;font-weight:900;color:#6ee7b7" id="wbi-result-score">0</span> richtig erraten</div><div class="win-sub" style="margin-top:8px"><span id="wbi-result-skipped">0</span> übersprungen</div></div><button class="btn-primary" onclick="startWBI()">🔄 Nochmal</button><button class="btn-ghost" onclick="resetWBI()">⚙️ Einstellungen</button><button class="btn-ghost" onclick="showHome()">🏠 Hauptmenü</button></div>
   </div>
 
   <!-- WÜRDEST DU EHER -->
   <div id="wdl-screen" class="screen">
-
-    <!-- SETUP -->
     <div id="wdl-setup">
       <div class="top-bar"><button class="icon-btn" onclick="showHome()">‹</button><h2>🤔 Würdest du eher</h2><div></div></div>
       <div class="wdl-how-to">
@@ -148,48 +177,20 @@
         <div class="wbi-how-step"><span>🗣️</span> Diskutiert eure Antworten!</div>
         <div class="wbi-how-step"><span>➡️</span> Tippe auf <strong>Nächste Frage</strong> zum Weitermachen</div>
       </div>
-      <div class="section-card">
-        <div class="section-title">Kategorien</div>
-        <div class="splash-cat-grid" id="wdl-cat-checks"></div>
-      </div>
+      <div class="section-card"><div class="section-title">Kategorien</div><div class="splash-cat-grid" id="wdl-cat-checks"></div></div>
       <button class="btn-primary" onclick="startWDL()">Los geht's! 🤔</button>
     </div>
-
-    <!-- GAME -->
     <div id="wdl-game" class="hidden">
-      <div class="top-bar">
-        <button class="icon-btn" onclick="resetWDL()">‹</button>
-        <div class="wdl-top-info">
-          <span id="wdl-cat-badge" class="wdl-cat-badge">😅 Klassik</span>
-          <span class="wdl-counter-wrap">Frage <span id="wdl-counter">1</span></span>
-        </div>
-        <div></div>
-      </div>
-
+      <div class="top-bar"><button class="icon-btn" onclick="resetWDL()">‹</button><div class="wdl-top-info"><span id="wdl-cat-badge" class="wdl-cat-badge">😅 Klassik</span><span class="wdl-counter-wrap">Frage <span id="wdl-counter">1</span></span></div><div></div></div>
       <p class="wdl-headline">Würdest du eher…</p>
-
       <div class="wdl-card" id="wdl-card">
-        <!-- Option A -->
-        <button class="wdl-option-card wdl-option-a" id="wdl-opt-a" onclick="wdlChoose('a')">
-          <span class="wdl-option-letter">A</span>
-          <span class="wdl-option-text" id="wdl-opt-a-text">Option A</span>
-          <span class="wdl-option-check">✔️</span>
-        </button>
-
+        <button class="wdl-option-card wdl-option-a" id="wdl-opt-a" onclick="wdlChoose('a')"><span class="wdl-option-letter">A</span><span class="wdl-option-text" id="wdl-opt-a-text">Option A</span><span class="wdl-option-check">✔️</span></button>
         <div class="wdl-or-badge">ODER</div>
-
-        <!-- Option B -->
-        <button class="wdl-option-card wdl-option-b" id="wdl-opt-b" onclick="wdlChoose('b')">
-          <span class="wdl-option-letter">B</span>
-          <span class="wdl-option-text" id="wdl-opt-b-text">Option B</span>
-          <span class="wdl-option-check">✔️</span>
-        </button>
+        <button class="wdl-option-card wdl-option-b" id="wdl-opt-b" onclick="wdlChoose('b')"><span class="wdl-option-letter">B</span><span class="wdl-option-text" id="wdl-opt-b-text">Option B</span><span class="wdl-option-check">✔️</span></button>
       </div>
-
       <button class="btn-primary hidden" id="wdl-next-btn" onclick="wdlNextQuestion()">➡️ Nächste Frage</button>
       <button class="btn-ghost" style="margin-top:8px" onclick="resetWDL()">🏠 Zurück</button>
     </div>
-
     <div id="wdl-result" class="hidden"></div>
   </div>
 

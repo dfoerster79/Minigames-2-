@@ -1,8 +1,7 @@
-// ========== WER BIN ICH – SPLASH-MODUS ==========
+// ========== WER BIN ICH – BUTTON-MODUS (QUERFORMAT) ==========
 const WBI_CATS = {
   personen: {
-    label: '🎭 Personen',
-    emoji: '🎭',
+    label: '🎭 Personen', emoji: '🎭',
     words: ['Albert Einstein','Napoleon Bonaparte','Cleopatra','Mozart','Leonardo da Vinci',
       'Marie Curie','Shakespeare','Beethoven','Columbus','Gandhi','Harry Potter',
       'Sherlock Holmes','Superman','Batman','SpongeBob','Mickey Mouse','Darth Vader',
@@ -11,8 +10,7 @@ const WBI_CATS = {
       'Elvis Presley','Marilyn Monroe','Bruce Lee','Jackie Chan','Ronaldo','Messi','LeBron James']
   },
   tiere: {
-    label: '🐾 Tiere',
-    emoji: '🐾',
+    label: '🐾 Tiere', emoji: '🐾',
     words: ['Elefant','Giraffe','Pinguin','Delfin','Koalabär','Gorilla','Flamingo',
       'Krokodil','Nashorn','Gepard','Panda','Polarfuchs','Chamäleon','Oktopus',
       'Axolotl','Qualle','Fledermaus','Pfau','Seepferdchen','Mantarochen',
@@ -20,24 +18,21 @@ const WBI_CATS = {
       'Hammerhai','Leguan','Schnabeltier','Wombat','Lama']
   },
   berufe: {
-    label: '🛠️ Berufe',
-    emoji: '🛠️',
+    label: '🛠️ Berufe', emoji: '🛠️',
     words: ['Feuerwehrmann','Astronaut','Zauberer','Pirat','Ritter','Ninja','Cowboy',
       'Detektiv','Koch','Arzt','Lehrer','Pilot','Taucher','Clown','Zirkusdirektor',
       'Schatzsucher','Superheld','Roboter','Zeitreisender','Meerjungfrau',
       'Drache','Einhorn','Geist','Zombie','Vampir','Bürgermeister','Rockstar','Influencer']
   },
   essen: {
-    label: '🍕 Essen',
-    emoji: '🍕',
+    label: '🍕 Essen', emoji: '🍕',
     words: ['Pizza','Sushi','Hamburger','Eis','Donut','Brezel','Spaghetti','Pommes',
       'Waffel','Croissant','Taco','Hot Dog','Schnitzel','Currywurst','Erdbeere',
       'Wassermelone','Ananas','Avocado','Banane','Kiwi','Broccoli','Tomate',
       'Käse','Schokolade','Gummibär','Ramen','Gyros','Pulled Pork','Cheesecake']
   },
   filme: {
-    label: '🎬 Filme',
-    emoji: '🎬',
+    label: '🎬 Filme', emoji: '🎬',
     words: ['Titanic','Star Wars','Jurassic Park','Der König der Löwen','Frozen',
       'Spider-Man','Iron Man','Captain America','Thor','Hulk','Shrek','Toy Story',
       'Findet Nemo','Moana','Coco','Up','WALL-E','Ratatouille','Die Incredibles',
@@ -45,16 +40,14 @@ const WBI_CATS = {
       'The Dark Knight','Gladiator','Forrest Gump','Matrix','Pulp Fiction']
   },
   sport: {
-    label: '⚽ Sport',
-    emoji: '⚽',
+    label: '⚽ Sport', emoji: '⚽',
     words: ['Fußball','Tennis','Basketball','Schwimmen','Boxen','Skifahren','Surfen',
       'Klettern','Golf','Baseball','Volleyball','Tischtennis','Badminton','Reiten',
       'Turnen','Leichtathletik','Radfahren','Eishockey','Rugby','Fechten',
       'Sumo','Curling','Bogenschießen','Triathlon','Breakdance']
   },
   fortnite: {
-    label: '🎮 Fortnite',
-    emoji: '🎮',
+    label: '🎮 Fortnite', emoji: '🎮',
     words: ['Tilted Towers','Loot Lake','Pleasant Park','Salty Springs','Dusty Divot',
       'Retail Row','Lazy Lake','The Mothership','Jonesy','Peely','Fishstick','Meowscles',
       'Midas','The Mandalorian','Master Chief','Ariana Grande','Travis Scott',
@@ -64,8 +57,7 @@ const WBI_CATS = {
       'Building','Edit Course','Creative Mode','Chapter 1','Zero Point','Omni Sword']
   },
   brawlstars: {
-    label: '🌟 Brawl Stars',
-    emoji: '🌟',
+    label: '🌟 Brawl Stars', emoji: '🌟',
     words: ['Shelly','Colt','Bull','Brock','El Primo','Barley','Poco','Rosa',
       'Jessie','Dynamike','Tick','8-Bit','Rico','Darryl','Penny','Carl',
       'Jacky','Gus','Bo','Emz','Stu','Piper','Pam','Frank','Bibi','Bea',
@@ -76,8 +68,7 @@ const WBI_CATS = {
       'Siege','Trophy Road','Power League','Club League','Starr Park']
   },
   spicy: {
-    label: '🌶️ Spicy 18+',
-    emoji: '🌶️',
+    label: '🌶️ Spicy 18+', emoji: '🌶️',
     words: ['Dildo','Vibrator','Striptease','Lap Dance','Kondom','Nackt','One-Night-Stand',
       'Sextape','Orgie','Fetisch','BDSM','Handschellen','Whirlpool','Sauna nackt',
       'Fremdgehen','Schmusen','Po klatschen','Nutte','Stripper','Erotikkino',
@@ -98,8 +89,6 @@ let wbi = {
   pool: [],
   poolIndex: 0,
   state: 'idle',
-  gyroActive: false,
-  tiltLock: false,
   playerName: '',
 };
 
@@ -174,8 +163,12 @@ function startWBI() {
   document.getElementById('wbi-game').classList.remove('hidden');
   document.getElementById('wbi-countdown-wrap').classList.remove('hidden');
   document.getElementById('wbi-splash-center').classList.add('hidden');
-  document.getElementById('wbi-manual-btns').classList.add('hidden');
   document.getElementById('wbi-game-timer-bar').classList.add('hidden');
+
+  // Querformat anfordern
+  if (screen.orientation && screen.orientation.lock) {
+    screen.orientation.lock('landscape').catch(() => {});
+  }
 
   wbiStartCountdown();
 }
@@ -204,7 +197,6 @@ function wbiLaunchGame() {
   document.getElementById('wbi-countdown-wrap').classList.add('hidden');
   document.getElementById('wbi-splash-center').classList.remove('hidden');
   document.getElementById('wbi-game-timer-bar').classList.remove('hidden');
-  wbiRequestGyro();
   wbiNextTerm();
   wbiStartTimer();
 }
@@ -212,7 +204,6 @@ function wbiLaunchGame() {
 function wbiNextTerm() {
   if (wbi.poolIndex >= wbi.pool.length) wbi.pool = wbiBuildPool(), wbi.poolIndex = 0;
   wbi.currentTerm = wbi.pool[wbi.poolIndex++];
-  wbi.tiltLock = false;
   const termEl = document.getElementById('wbi-splash-term');
   const overlay = document.getElementById('wbi-tilt-overlay');
   if (termEl) termEl.textContent = wbi.currentTerm;
@@ -236,73 +227,34 @@ function wbiRenderTimer() {
   el.className = 'wbi-game-timer-val' + (wbi.timerLeft <= 10 ? ' urgent' : '');
 }
 
-function wbiRequestGyro() {
-  if (typeof DeviceOrientationEvent !== 'undefined' &&
-      typeof DeviceOrientationEvent.requestPermission === 'function') {
-    DeviceOrientationEvent.requestPermission()
-      .then(state => { if (state === 'granted') wbiAttachGyro(); else wbiFallbackButtons(); })
-      .catch(() => wbiFallbackButtons());
-  } else if (window.DeviceOrientationEvent) {
-    wbiAttachGyro();
-  } else {
-    wbiFallbackButtons();
-  }
-}
-
-function wbiAttachGyro() {
-  wbi.gyroActive = true;
-  document.getElementById('wbi-manual-btns').classList.add('hidden');
-  window.addEventListener('deviceorientation', wbiHandleTilt);
-}
-
-function wbiFallbackButtons() {
-  wbi.gyroActive = false;
-  document.getElementById('wbi-manual-btns').classList.remove('hidden');
-}
-
-// Handy an die STIRN halten = beta ≈ 75–90° (aufrecht, Display nach vorne)
-// Nach hinten kippen (Richtig) = beta sinkt unter ~40°
-// Nach vorne kippen (Überspringen) = beta steigt über ~110°
-function wbiHandleTilt(e) {
-  if (wbi.state !== 'playing' || wbi.tiltLock) return;
-  const beta = e.beta; // -180..180, aufrecht ≈ 90
-  if (beta === null) return;
-  if (beta < 40) wbiCorrect();     // nach hinten kippen → Richtig
-  else if (beta > 110) wbiSkip();  // nach vorne kippen → Überspringen
-}
-
-function wbiDetachGyro() {
-  window.removeEventListener('deviceorientation', wbiHandleTilt);
-}
-
 function wbiCorrect() {
   if (wbi.state !== 'playing') return;
-  wbi.tiltLock = true;
   wbi.score++;
   document.getElementById('wbi-score-val').textContent = wbi.score;
   wbiShowOverlay('✅', 'richtig', wbi.currentTerm);
-  setTimeout(wbiNextTerm, 900);
+  setTimeout(wbiNextTerm, 700);
 }
 
 function wbiSkip() {
   if (wbi.state !== 'playing') return;
-  wbi.tiltLock = true;
   wbi.skipped++;
   wbiShowOverlay('⏭️', 'skip', wbi.currentTerm);
-  setTimeout(wbiNextTerm, 700);
+  setTimeout(wbiNextTerm, 500);
 }
 
 function wbiShowOverlay(icon, type, term) {
   const overlay = document.getElementById('wbi-tilt-overlay');
   if (!overlay) return;
-  overlay.textContent = '';
   overlay.className = 'wbi-tilt-overlay wbi-overlay-' + type;
   overlay.innerHTML = `<span class="wbi-overlay-icon">${icon}</span><span class="wbi-overlay-term">${term}</span>`;
 }
 
 function wbiEndGame() {
   wbi.state = 'result';
-  wbiDetachGyro();
+  // Hochformat wieder freigeben
+  if (screen.orientation && screen.orientation.unlock) {
+    screen.orientation.unlock();
+  }
   document.getElementById('wbi-game').classList.add('hidden');
   document.getElementById('wbi-result').classList.remove('hidden');
   document.getElementById('wbi-result-score').textContent = wbi.score;
@@ -313,7 +265,7 @@ function wbiEndGame() {
 function resetWBI() {
   clearInterval(wbi.timerInterval);
   clearInterval(wbi.countdownInterval);
-  wbiDetachGyro();
+  if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
   wbi.state = 'idle';
   document.getElementById('wbi-game').classList.add('hidden');
   document.getElementById('wbi-result').classList.add('hidden');
