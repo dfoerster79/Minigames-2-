@@ -29,7 +29,6 @@ function triggerAndroidInstall() {
     deferredPrompt.prompt();
     deferredPrompt.userChoice.then(() => { deferredPrompt = null; closeInstallPopup(); });
   } else {
-    // Fallback: manuelle Anleitung anzeigen
     const androidDiv = document.getElementById('install-android');
     androidDiv.innerHTML = `
       <p style="color:#a0a0c0;font-size:.9rem;margin-bottom:12px">Tippe auf die <strong>drei Punkte ⋮</strong> oben rechts im Browser und wähle:</p>
@@ -47,6 +46,16 @@ function closeInstallPopup() {
   document.getElementById('install-popup').classList.add('hidden');
 }
 
+// ===== Anleitung Akkordeon (alle Spiele) =====
+function toggleHowTo(game) {
+  const body = document.getElementById(game + '-howto');
+  const arrow = document.getElementById(game + '-arrow');
+  if (!body || !arrow) return;
+  const isOpen = !body.classList.contains('hidden');
+  body.classList.toggle('hidden', isOpen);
+  arrow.textContent = isOpen ? '▶' : '▼';
+}
+
 window.addEventListener('load', () => {
   setTimeout(showInstallPopup, 3000);
 });
@@ -60,7 +69,6 @@ function showHome() {
   if (typeof state !== 'undefined') clearInterval(state.timerInterval);
   if (typeof werwolfState !== 'undefined') clearInterval(werwolfState.timerInterval);
   if (typeof wbi !== 'undefined') { clearInterval(wbi.timerInterval); clearInterval(wbi.countdownInterval); }
-  // Querformat-Klasse entfernen falls aktiv
   document.body.classList.remove('wbi-force-landscape');
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById('home-screen').classList.add('active');
